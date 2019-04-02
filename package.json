@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "test",
 		"client": "cd client && npm run build && npm run start",
-		"start": "npm run client && node server"
+		"start": "npm run start client && node server"
 	},
 	"author": "",
 	"license": "ISC",
