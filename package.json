@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_PATH=sever node sever"
+    "start": "NODE_PATH=server node server"
   },
   "dependencies": {},
   "devDependencies": {}
