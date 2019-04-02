@@ -7,6 +7,9 @@
     "build": "NODE_PATH=src next build src",
     "start": "NODE_PATH=src next start src -p 3000"
   },
+  "engines": {
+    "node": "10"
+  },
   "dependencies": {
     "@types/react": "^16.8.10",
     "@types/react-dom": "^16.8.3",
