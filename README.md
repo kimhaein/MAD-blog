@@ -2,8 +2,6 @@
 
 ### Client
 
-Following items are core frontend technologies used in this project:
-
 - React +) Context-api,react-hook
 - Next (https://nextjs.org/) : Router, SSR, CodeSplit
 - TypeScript
@@ -21,3 +19,22 @@ Following items are core frontend technologies used in this project:
 
 1. https://poiemaweb.com/typescript-introduction
 2. https://github.com/velopert/typescript-react-sample
+
+### open API
+
+1. https://unsplash.com/developers : images
+
+
+## memo
+
+// "start": "npm run server-start && npm run client-start",
+// "server-start": "cd server && npm start"
+// "client-start": "cd client && npm start"
+
+{
+    "scripts": {
+        "client-install"  : "cd client && npm install",
+        "server-install"  : "cd server && npm install",
+        "install-all-deps": "concurrently \"npm run server-install\" \"npm run client-install\""
+    }
+}

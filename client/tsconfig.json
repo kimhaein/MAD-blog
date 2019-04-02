@@ -1,22 +1,19 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "jsx": "preserve",
-    "lib": ["dom", "es2017"],
+    "target": "esnext",
     "module": "esnext",
+    "jsx": "preserve",
+    "allowJs": true,
     "moduleResolution": "node",
-    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "preserveConstEnums": true,
     "removeComments": false,
-    "skipLibCheck": true,
+    "preserveConstEnums": true,
     "sourceMap": true,
-    "strict": true,
-    "target": "esnext",
-    "locale": "ko"
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "lib": ["dom", "es2016"]
+  }
 }
