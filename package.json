@@ -1,21 +1,21 @@
 {
-	"name": "mad-project",
-	"version": "1.0.0",
-	"description": "mad-project",
-	"main": "index.js",
-	"scripts": {
-		"test": "test",
-		"client": "cd client && npm run build && npm run start",
-		"start": "npm run client && node server"
-	},
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"koa": "^2.7.0",
-		"koa-router": "^7.4.0"
-	},
-	"devDependencies": {
-		"eslint": "^5.16.0",
-		"eslint-config-google": "^0.12.0"
-	}
+  "name": "mad-project",
+  "version": "1.0.0",
+  "description": "mad-project",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "client": "cd client && npm run build && npm run start",
+    "start": "npm run client"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.12.0"
+  }
 }
