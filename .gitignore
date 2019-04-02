@@ -2,6 +2,7 @@
 
 # add gitignore
 .vscode
+.next
 
 
 # dependencies
