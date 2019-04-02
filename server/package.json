@@ -1,11 +1,11 @@
 {
-	"name": "mad-project",
+	"name": "server",
 	"version": "1.0.0",
-	"description": "mad-project",
+	"description": "MAD server",
 	"main": "index.js",
 	"scripts": {
 		"test": "test",
-		"start": "NODE_PATH=client npm run"
+		"start": "node index.js"
 	},
 	"author": "",
 	"license": "ISC",
@@ -13,8 +13,8 @@
 		"koa": "^2.7.0",
 		"koa-router": "^7.4.0"
 	},
-	"devDependencies": {
-		"eslint": "^5.16.0",
-		"eslint-config-google": "^0.12.0"
+	"devDependencies": {},
+	"repository": {
+		"private": true
 	}
 }
