@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "test",
-		"start": "NODE_PATH=client next build"
+		"start": "NODE_PATH=client npm run"
 	},
 	"author": "",
 	"license": "ISC",
