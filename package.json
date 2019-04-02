@@ -7,7 +7,7 @@
     "test": "test",
     "start": "npm run client-start",
     "server-start": "cd server && npm start",
-    "client-start": "cd client && npm build && npm build"
+    "client-start": "cd client && npm build && npm start"
   },
   "author": "",
   "license": "ISC",
