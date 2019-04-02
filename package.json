@@ -2,9 +2,9 @@
   "name": "blog-client",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "NODE_PATH=sever/src node src"
+    "start": "NODE_PATH=src node src"
   },
   "dependencies": {},
   "devDependencies": {}
