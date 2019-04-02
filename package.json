@@ -4,7 +4,7 @@
   "description": "mad-project",
   "scripts": {
     "test": "test",
-    "client": "cd client && npm run build && npm run start",
+    "client": "cd client && npm run dev",
     "start": "npm run client"
   },
   "author": "",
