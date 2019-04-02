@@ -1,11 +1,17 @@
 {
-  "name": "blog-client",
+  "name": "mad-project",
   "version": "1.0.0",
-  "license": "MIT",
+  "description": "mad-project",
   "main": "index.js",
   "scripts": {
+    "test": "test",
     "start": "NODE_PATH=server node server"
   },
-  "dependencies": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0"
+  },
   "devDependencies": {}
 }
