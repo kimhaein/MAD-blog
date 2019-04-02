@@ -2,7 +2,6 @@
   "name": "mad-project",
   "version": "1.0.0",
   "description": "mad-project",
-  "main": "index.js",
   "scripts": {
     "test": "test",
     "client": "cd client && npm run build && npm run start",
