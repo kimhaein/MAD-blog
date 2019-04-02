@@ -4,9 +4,7 @@
 	"description": "mad-project",
 	"main": "index.js",
 	"scripts": {
-		"test": "test",
-		"client": "cd client && npm run build && npm run start",
-		"start": "npm run start client && node server"
+		"start": "npm run script client"
 	},
 	"author": "",
 	"license": "ISC",
