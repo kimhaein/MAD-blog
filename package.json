@@ -13,5 +13,8 @@
     "koa": "^2.7.0",
     "koa-router": "^7.4.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.12.0"
+  }
 }
