@@ -1,2 +1,2 @@
-require('./client/pages');
+// require('./client/pages');
 require('./server');
