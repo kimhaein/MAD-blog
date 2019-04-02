@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "npm run client-start",
-    "server-start": "node server",
-    "client-start": "client && npm build && npm start"
+    "start": "node client && npm build && npm start"
   },
   "author": "",
   "license": "ISC",
