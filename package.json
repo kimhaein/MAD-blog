@@ -3,18 +3,15 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_PATH=src next src",
-    "build": "NODE_PATH=src next build src",
-    "start": "NODE_PATH=src next start src"
-  },
-  "engines": {
-    "node": "10"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "now-build": "next build"
   },
   "dependencies": {
     "@types/react": "^16.8.10",
     "@types/react-dom": "^16.8.3",
     "@zeit/next-typescript": "^1.1.1",
-    "koa": "^2.7.0",
     "next": "^8.0.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

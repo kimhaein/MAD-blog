@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Link from "next/link";
 
 interface Props {}
 
@@ -8,7 +9,12 @@ class Index extends Component<Props, State> {
   state: State = {};
 
   render() {
-    return <div>Index</div>;
+    return (
+      <div>
+        <Link href="/about"> 어바웃</Link>
+        <Link href="/ssr-test"> 어바웃</Link>
+      </div>
+    );
   }
 }
 
