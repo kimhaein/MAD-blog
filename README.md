@@ -1,5 +1,7 @@
 ## Project Stack
 
+mad-blog : https://mad-blog.kimhaein.now.sh/
+
 ### Client
 
 - React +) Context-api,react-hook
@@ -20,21 +22,6 @@
 1. https://poiemaweb.com/typescript-introduction
 2. https://github.com/velopert/typescript-react-sample
 
-### open API
+## open API
 
 1. https://unsplash.com/developers : images
-
-
-## memo
-
-// "start": "npm run server-start && npm run client-start",
-// "server-start": "cd server && npm start"
-// "client-start": "cd client && npm start"
-
-{
-    "scripts": {
-        "client-install"  : "cd client && npm install",
-        "server-install"  : "cd server && npm install",
-        "install-all-deps": "concurrently \"npm run server-install\" \"npm run client-install\""
-    }
-}

@@ -1,21 +1,15 @@
-import React, { Component } from "react";
-import Link from "next/link";
+import HeaderContainer from "../containers/common/HeaderContainer";
+import PostContainer from "../containers/post/PostContainer";
+import FooterContainer from "../containers/common/FooterContainer";
 
-interface Props {}
-
-interface State {}
-
-class Index extends Component<Props, State> {
-  state: State = {};
-
-  render() {
-    return (
-      <div>
-        <Link href="/about"> 어바웃</Link>
-        <Link href="/ssr-test"> 어바웃</Link>
-      </div>
-    );
-  }
-}
+const Index = () => {
+  return (
+    <div>
+      <HeaderContainer />
+      <PostContainer />
+      <FooterContainer />
+    </div>
+  );
+};
 
 export default Index;

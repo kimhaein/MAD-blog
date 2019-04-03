@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-
 interface Props {}
-
 interface State {}
-
-class Post extends Component<Props, State> {
+class PostContainer extends Component<Props, State> {
   state: State = {};
-
   render() {
-    return <div>POST</div>;
+    return <div>PostContainer</div>;
   }
 }
 
-export default Post;
+export default PostContainer;
