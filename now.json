@@ -1,10 +1,17 @@
 {
   "version": 2,
   "name": "mad-blog",
+  "alias": ["mad-blog"],
   "builds": [
     {
-      "src": "package.json",
+      "src": "src/package.json",
       "use": "@now/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/src/$1"
     }
   ]
 }
