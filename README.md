@@ -1,6 +1,6 @@
 ## Project Stack
 
-mad-blog : https://mad-blog.kimhaein.now.sh/
+mad-blog : https://mad-blog.now.sh/
 
 ### Client
 

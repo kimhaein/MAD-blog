@@ -12,6 +12,7 @@ class HeaderContainer extends Component<Props, State> {
     return (
       <div>
         <Header />
+        <img src="/static/images/test.jpg" alt="my image" />
       </div>
     );
   }
