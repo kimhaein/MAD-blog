@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { WriteProvider } from "../contexts/writeContext";
+import EditorConatiner from "../containers/write/EditorConatiner";
+import PreviewContainer from "../containers/write/PreviewContainer";
 
 interface Props {}
 
@@ -8,7 +11,13 @@ class Write extends Component<Props, State> {
   state: State = {};
 
   render() {
-    return <div>Write</div>;
+    return (
+      <WriteProvider>
+        <div>Write</div>
+        <EditorConatiner />
+        <PreviewContainer />
+      </WriteProvider>
+    );
   }
 }
 

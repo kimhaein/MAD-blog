@@ -1,8 +1,8 @@
 import React, { Component, createContext } from "react";
 
 const Context = createContext({}); // Context 를 만듭니다.
-const { Provider, Consumer: PostConsumer } = Context;
-class PostProvider extends Component {
+const { Provider, Consumer: WriteConsumer } = Context;
+class WriteProvider extends Component {
   state = {
     value: ""
   };
@@ -21,4 +21,4 @@ class PostProvider extends Component {
 }
 
 // 내보내줍니다.
-export { PostProvider, PostConsumer };
+export { WriteProvider, WriteConsumer };

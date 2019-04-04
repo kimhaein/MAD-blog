@@ -1,1 +1,2 @@
-export default "./Post";
+import Post from "./Post";
+export default Post;
