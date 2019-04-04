@@ -13,7 +13,7 @@ class Write extends Component<Props, State> {
   render() {
     return (
       <WriteProvider>
-        <div>Write</div>
+        <div>Write121212</div>
         <EditorConatiner />
         <PreviewContainer />
       </WriteProvider>

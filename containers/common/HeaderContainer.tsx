@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Link from "next/link";
+import Header from "../../components/common/Header/Header";
 
 interface Props {}
 
@@ -11,9 +11,7 @@ class HeaderContainer extends Component<Props, State> {
   render() {
     return (
       <div>
-        <Link href="/write">
-          <a>Write</a>
-        </Link>
+        <Header />
       </div>
     );
   }

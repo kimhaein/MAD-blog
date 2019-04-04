@@ -3,7 +3,7 @@
   "name": "mad-blog",
   "builds": [
     {
-      "src": "next.config.js",
+      "src": "package.json",
       "use": "@now/next"
     }
   ]
