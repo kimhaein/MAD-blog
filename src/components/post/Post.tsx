@@ -1,5 +1,7 @@
+import "./post.css";
+
 const Post = () => {
-  return <div>Post</div>;
+  return <div className="posthWrap">Post</div>;
 };
 
 export default Post;

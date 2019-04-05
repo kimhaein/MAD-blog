@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Header from "../../components/common/Header/Header";
 
 interface Props {}
@@ -10,10 +10,9 @@ class HeaderContainer extends Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <Header />
-        <img src="/static/images/test.jpg" alt="my image" />
-      </div>
+      </Fragment>
     );
   }
 }

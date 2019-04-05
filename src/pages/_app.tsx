@@ -6,6 +6,7 @@ import HeaderContainer from "../containers/common/HeaderContainer";
 import FooterContainer from "../containers/common/FooterContainer";
 // css
 import "antd/dist/antd.css";
+import "../static/style/common.css";
 
 interface Props {
   Component: any;
