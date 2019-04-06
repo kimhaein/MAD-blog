@@ -29,7 +29,7 @@ class PostContainer extends Component<Props, State> {
 
   render() {
     const style = {
-      backgroundImage: `url(/static/images/bg01.jpg)`
+      backgroundImage: `url(/static/images/bg03.jpg)`
     };
     return (
       <div className="postWrap" style={style}>
