@@ -20,12 +20,12 @@ const PostItem = ({ PostData }) => {
         <p>{PostData.title}</p>
         <div className="postInfo">
           <span>
-            <Avatar style={{ backgroundColor: "#130" }}>
+            <Avatar style={{ backgroundColor: "#130", marginRight: 10 }}>
               {PostData.user.substring(1)}
             </Avatar>
             <span>BY. {PostData.user}</span>
           </span>
-          <span>{PostData.createAt}</span>
+          <span className="postDate">{PostData.createAt}</span>
         </div>
       </div>
       <div className="postListBody" />
@@ -76,13 +76,13 @@ const Post = () => {
 
   const postList = PostDatas.map((PostData, index) => {
     return (
-      <Col span={12} key={index}>
+      <Col xs={24} md={24} lg={24} xl={12} key={index}>
         <PostItem PostData={PostData} />
       </Col>
     );
   });
   return (
-    <Row type="flex" justify="space-between" gutter={16} className="posthWrap">
+    <Row type="flex" justify="space-between" gutter={32} className="posthWrap">
       {postList}
     </Row>
   );
