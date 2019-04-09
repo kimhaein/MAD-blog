@@ -1,6 +1,8 @@
 import { Col, Row, Avatar } from "antd";
+
 import Tags from "../../components/common/Tags";
 import Likes from "../../components/common/Likes";
+
 import "./post.css";
 
 type PostItem = {
@@ -28,7 +30,7 @@ const PostItem = ({ PostData }) => {
           <span className="postDate">{PostData.createAt}</span>
         </div>
       </div>
-      <div className="postListBody" />
+      <div className="postListBody">{11}</div>
       <div className="postListfooter">
         <Tags tagDatas={PostData.tag} />
         <Likes likeDatas={PostData.totalLikes} />
