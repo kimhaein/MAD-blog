@@ -35,26 +35,6 @@
   height: 350px;
   padding: 16px;
 }
-.posthWrap .postList .postListBody h1 {
-  padding: 5px 0;
-  border-bottom: 2px solid #ccc;
-}
-.posthWrap .postList .postListBody h2 {
-  padding: 5px 0;
-  border-bottom: 1px solid #ccc;
-}
-.posthWrap .postList .postListBody p {
-  line-height: 26px;
-}
-.posthWrap .postList .postListBody a {
-  text-decoration: underline;
-  color: #0366d6;
-}
-.posthWrap .postList .postListBody blockquote p {
-  padding: 16px;
-  background: #eee;
-  border-radius: 3px;
-}
 .posthWrap .postList .postListfooter {
   overflow: hidden;
   padding: 8px 16px;

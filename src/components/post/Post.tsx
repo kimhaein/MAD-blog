@@ -4,10 +4,7 @@ import moment from "moment";
 // components
 import Tags from "../common/Tags";
 import Likes from "../common/Likes";
-import Preview from "../common/CodeView/CodeView";
-
-import "codemirror/lib/codemirror.css";
-import "codemirror/theme/material.css";
+import CodeView from "../common/CodeView/CodeView";
 
 import "./post.css";
 
@@ -39,7 +36,7 @@ const PostItem = ({ PostData }) => {
         </div>
       </div>
       <div className="postListBody">
-        <Preview markdown={PostData.body} />
+        <CodeView markdown={PostData.body} />
       </div>
       <div className="postListfooter">
         <Tags tagDatas={PostData.tag} />

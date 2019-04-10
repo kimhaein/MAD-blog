@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import marked from "marked";
+import "./codeView.css";
 
 // prism 관련 코드 불러오기
 import Prism from "prismjs";
@@ -70,7 +71,7 @@ class CodeView extends Component<Props, State> {
     };
 
     // 그리고, dangerouslySetInnerHTML 값에 해당 객체를 넣어주면 됩니다.
-    return <div dangerouslySetInnerHTML={markup} />;
+    return <div className="codeView" dangerouslySetInnerHTML={markup} />;
   }
 }
 

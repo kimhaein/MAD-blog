@@ -30,7 +30,7 @@ const Registor = () => {
   );
 };
 
-const Header = () => {
+const MainHeader = () => {
   return (
     <header>
       <MenuBtn />
@@ -41,4 +41,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default MainHeader;

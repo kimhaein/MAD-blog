@@ -29,13 +29,14 @@ p {
   min-height: 100%;
 }
 
-.postWrap {
+.contentsWrap {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   padding-top: 80px;
-
+}
+.postWrap {
   background-size: cover;
   background-repeat: no-repeat;
 }
