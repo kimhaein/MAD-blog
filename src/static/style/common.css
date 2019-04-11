@@ -34,7 +34,8 @@ p {
   top: 0;
   left: 0;
   width: 100%;
-  padding-top: 80px;
+  min-height: calc(100% - 80px);
+  margin-top: 80px;
 }
 .postWrap {
   background-size: cover;

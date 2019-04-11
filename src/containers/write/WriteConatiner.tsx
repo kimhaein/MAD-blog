@@ -14,7 +14,7 @@ class WriteConatiner extends Component<Props, State> {
     return (
       <div className="contentsWrap">
         <Write />
-        <CodeView markdown={this.state.markdown} />
+        <CodeView markdown={this.state.markdown} type="write" />
       </div>
     );
   }
