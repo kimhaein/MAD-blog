@@ -21,6 +21,10 @@ a {
   color: inherit;
 }
 
+:focus {
+  outline: 0;
+}
+
 p {
   margin: 0;
 }

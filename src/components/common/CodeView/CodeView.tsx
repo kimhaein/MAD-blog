@@ -14,10 +14,12 @@ interface Props {
   type: string;
   markdown: string;
 }
-interface State {}
+interface State {
+  html: string;
+}
 
 class CodeView extends Component<Props, State> {
-  state = {
+  state: State = {
     html: ""
   };
 

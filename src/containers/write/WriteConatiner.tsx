@@ -10,10 +10,18 @@ class WriteConatiner extends Component<Props, State> {
   state: State = {
     markdown: "# 1234"
   };
+
+  _onEditTxt(markdown) {
+    console.log(markdown);
+    this.setState({
+      markdown
+    });
+  }
+
   render() {
     return (
       <div className="contentsWrap">
-        <Write />
+        <Write onEditTxt={this._onEditTxt} />
         <CodeView markdown={this.state.markdown} type="write" />
       </div>
     );
