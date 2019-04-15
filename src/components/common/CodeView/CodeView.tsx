@@ -19,11 +19,17 @@ interface State {
 }
 
 class CodeView extends Component<Props, State> {
-  state: State = {
-    html: ""
-  };
-
-  renderMarkdown = () => {
+  constructor(props) {
+    super(props);
+    const { markdown } = props;
+    // 서버사이드 렌더링에서도 마크다운 처리가 되도록 constructor 쪽에서도 구현합니다.
+    this.state = {
+      html: markdown
+        ? marked(props.markdown, { breaks: true, sanitize: true })
+        : ""
+    };
+  }
+  _renderMarkdown = () => {
     const { markdown } = this.props;
     // 마크다운이 존재하지 않는다면 공백처리
     if (!markdown) {
@@ -38,20 +44,10 @@ class CodeView extends Component<Props, State> {
     });
   };
 
-  constructor(props) {
-    super(props);
-    const { markdown } = props;
-    // 서버사이드 렌더링에서도 마크다운 처리가 되도록 constructor 쪽에서도 구현합니다.
-    this.state = {
-      html: markdown
-        ? marked(props.markdown, { breaks: true, sanitize: true })
-        : ""
-    };
-  }
   componentDidUpdate(prevProps, prevState) {
     // markdown 값이 변경되면 renderMarkdown을 호출합니다.
     if (prevProps.markdown !== this.props.markdown) {
-      this.renderMarkdown();
+      this._renderMarkdown();
     }
     console.log(prevProps, prevState);
     // state가 바뀌면 코드 하이라이팅

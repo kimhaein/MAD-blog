@@ -3,14 +3,14 @@ import { Modal, Icon } from "antd";
 const confirm = Modal.confirm;
 import "./header.css";
 
-const _historyBack = () => {
+const historyBack = () => {
   Router.back();
 };
-const _postOk = () => {
+const postOk = () => {
   console.log("확인");
 };
 
-const _showConfirm = (content, onOk) => {
+const showConfirm = (content, onOk) => {
   confirm({
     title: "mad-blog",
     content: content,
@@ -25,9 +25,9 @@ const BackBtn = () => {
     <div
       className="backBtn"
       onClick={() => {
-        _showConfirm(
+        showConfirm(
           "작성중이던 포스트가 있습니다. 정말로 나가시겠습니까?",
-          _historyBack
+          historyBack
         );
       }}
     >
@@ -49,7 +49,7 @@ const PostBtn = () => {
     <div
       className="postBtn"
       onClick={() => {
-        _showConfirm("글을 등록하시겠습니까?", _postOk);
+        showConfirm("글을 등록하시겠습니까?", postOk);
       }}
     >
       Post

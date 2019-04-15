@@ -14,7 +14,7 @@ class PostContainer extends Component<Props, State> {
     // this.getImgUrl();
   }
 
-  getImgUrl = () => {
+  _getImgUrl = () => {
     const imgArray = ["bg01", "bg02", "bg03", "bg04", "bg05", "bg06", "bg07"];
     const imgNum = Math.round(Math.random() * 6);
     console.log(imgArray[imgNum]);
@@ -23,7 +23,7 @@ class PostContainer extends Component<Props, State> {
     });
   };
 
-  onChange = e => {
+  _onChange = e => {
     console.log(e);
   };
 
@@ -33,7 +33,7 @@ class PostContainer extends Component<Props, State> {
     };
     return (
       <div className="contentsWrap postWrap" style={style}>
-        <Search onChange={this.onChange} />
+        <Search onChange={this._onChange} />
         <Post />
       </div>
     );
