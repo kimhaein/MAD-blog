@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { WriteConsumer } from "../../../contexts/writeContext";
 import marked from "marked";
 import "./codeView.css";
 
@@ -13,12 +14,13 @@ require("prismjs/components/prism-css.min.js");
 interface Props {
   type: string;
   markdown: string;
+  setValue?: any;
 }
 interface State {
   html: string;
 }
 
-class CodeView extends Component<Props, State> {
+export class Code extends Component<Props, State> {
   constructor(props) {
     super(props);
     const { markdown } = props;
@@ -49,7 +51,7 @@ class CodeView extends Component<Props, State> {
     if (prevProps.markdown !== this.props.markdown) {
       this._renderMarkdown();
     }
-    console.log(prevProps, prevState);
+    // console.log(prevProps, prevState);
     // state가 바뀌면 코드 하이라이팅
     if (prevState.html !== this.state.html) {
       Prism.highlightAll();
@@ -76,5 +78,15 @@ class CodeView extends Component<Props, State> {
     );
   }
 }
+
+const CodeView = () => (
+  <WriteConsumer>
+    {({ state, actions }: any) => {
+      return (
+        <Code markdown={state.value} setValue={actions.setValue} type="write" />
+      );
+    }}
+  </WriteConsumer>
+);
 
 export default CodeView;

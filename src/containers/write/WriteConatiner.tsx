@@ -1,29 +1,17 @@
 import React, { Component } from "react";
 import Write from "../../components/write";
 import CodeView from "../../components/common/CodeView";
+import { WriteProvider } from "../../contexts/writeContext";
 
-interface Props {}
-interface State {
-  markdown: string;
-}
-class WriteConatiner extends Component<Props, State> {
-  state: State = {
-    markdown: "# 1234"
-  };
-
-  _onEditTxt(markdown) {
-    console.log(markdown);
-    this.setState({
-      markdown
-    });
-  }
-
+class WriteConatiner extends Component {
   render() {
     return (
-      <div className="contentsWrap">
-        <Write onEditTxt={this._onEditTxt} />
-        <CodeView markdown={this.state.markdown} type="write" />
-      </div>
+      <WriteProvider>
+        <div className="contentsWrap">
+          <Write />
+          <CodeView />
+        </div>
+      </WriteProvider>
     );
   }
 }

@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { WriteProvider } from "../contexts/writeContext";
+import React, { Component, Fragment } from "react";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import WriteConatiner from "../containers/write/WriteConatiner";
 
@@ -14,10 +13,10 @@ class Write extends Component<Props, State> {
 
   render() {
     return (
-      <WriteProvider>
+      <Fragment>
         <HeaderContainer type="post" />
         <WriteConatiner />
-      </WriteProvider>
+      </Fragment>
     );
   }
 }

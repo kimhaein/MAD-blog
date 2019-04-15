@@ -4,7 +4,7 @@ import moment from "moment";
 // components
 import Tags from "../common/Tags";
 import Likes from "../common/Likes";
-import CodeView from "../common/CodeView/CodeView";
+import { Code } from "../common/CodeView/CodeView";
 
 import "./post.css";
 
@@ -36,7 +36,7 @@ const PostItem = ({ PostData }) => {
         </div>
       </div>
       <div className="postListBody">
-        <CodeView markdown={PostData.body} type="post" />
+        <Code markdown={PostData.body} type="post" />
       </div>
       <div className="postListfooter">
         <Tags tagDatas={PostData.tag} />

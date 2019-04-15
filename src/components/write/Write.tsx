@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { WriteConsumer } from "../../contexts/writeContext";
 import { Controlled as CodeMirror } from "react-codemirror2";
 import "./write.css";
 // CodeMirror를 위한 CSS 스타일
@@ -6,13 +7,14 @@ import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 
 interface Props {
-  onEditTxt: any;
+  value: string;
+  setValue: any;
 }
 interface State {
   markdown: string;
 }
 
-class Write extends Component<Props, State> {
+class Editor extends Component<Props, State> {
   state: State = {
     markdown: "# 1234"
   };
@@ -31,11 +33,20 @@ class Write extends Component<Props, State> {
             this.setState({
               markdown: value
             });
+            this.props.setValue(this.state.markdown);
           }}
         />
       </div>
     );
   }
 }
+
+const Write = () => (
+  <WriteConsumer>
+    {({ state, actions }: any) => (
+      <Editor value={state.value} setValue={actions.setValue} />
+    )}
+  </WriteConsumer>
+);
 
 export default Write;
