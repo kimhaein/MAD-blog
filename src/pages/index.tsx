@@ -12,11 +12,13 @@ const Index = ({ data }) => {
   );
 };
 
-Index.getInitialProps = async ({ err }) => {
+Index.getInitialProps = async function() {
   const res: any = await axios.get(
     "https://mad-server.herokuapp.com/api/post/list"
   );
-  const data = await res.json();
+  console.log(res);
+  const data = res.data;
+
   return { data };
 };
 
