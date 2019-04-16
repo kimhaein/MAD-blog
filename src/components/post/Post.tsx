@@ -9,16 +9,18 @@ import { Code } from "../common/CodeView/CodeView";
 import "./post.css";
 
 type PostItem = {
-  title: string;
-  user: string;
-  createAt: string;
-  updateAt: string;
-  body: string;
-  tag: Array<string>;
-  totalLikes: number;
+  PostData: {
+    title: string;
+    user: string;
+    createAt: string;
+    updateAt: string;
+    body: string;
+    tag: Array<string>;
+    totalLikes: number;
+  };
 };
 
-const PostItem = ({ PostData }) => {
+const PostItem = ({ PostData }: PostItem) => {
   return (
     <div className="postList">
       <div className="postListHeader">
@@ -49,7 +51,7 @@ const PostItem = ({ PostData }) => {
 const Post = () => {
   const PostDatas = [
     {
-      title: "title",
+      title: "1",
       user: "김혜인",
       createAt: "2019-01-03",
       updateAt: "2019-01-03",

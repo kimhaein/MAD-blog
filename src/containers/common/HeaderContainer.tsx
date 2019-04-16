@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
-import MainHeader from "../../components/common/Header";
-import { PostHeader } from "../../components/common/Header";
+import { MainHeader, PostHeader } from "../../components/common/Header";
 
 interface Props {
   type: string;
