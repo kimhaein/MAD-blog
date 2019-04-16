@@ -1,9 +1,9 @@
 import { Tag, Tooltip } from "antd";
 import "./tags.css";
 
-type TagItem = {
+interface TagItem {
   tagList: Array<number>;
-};
+}
 
 const TagItem = ({ tagList }: TagItem) => {
   const tagColor = ["#87d068", "#f55f55", "#108ee9", "#deaddd", "#aaddee"];

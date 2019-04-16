@@ -5,11 +5,7 @@ interface Props {
   type: string;
 }
 
-interface State {}
-
-class HeaderContainer extends Component<Props, State> {
-  state: State = {};
-
+class HeaderContainer extends Component<Props, {}> {
   render() {
     const { type } = this.props;
     return (

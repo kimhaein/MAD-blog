@@ -1,14 +1,23 @@
 // Container
 import HeaderContainer from "../containers/common/HeaderContainer";
 import PostContainer from "../containers/post/PostContainer";
+import axios from "axios";
 
-const Index = () => {
+const Index = ({ data }) => {
   return (
     <div>
       <HeaderContainer type="common" />
-      <PostContainer />
+      <PostContainer postDatas={data} />
     </div>
   );
+};
+
+Index.getInitialProps = async ({ err }) => {
+  const res: any = await axios.get(
+    "https://mad-server.herokuapp.com/api/post/list"
+  );
+  const data = await res.json();
+  return { data };
 };
 
 export default Index;
