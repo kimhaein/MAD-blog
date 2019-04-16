@@ -94,6 +94,7 @@ p {
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
   background-repeat: no-repeat;
+  background-image: url("/static/images/bg06.jpg");
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: cover;
