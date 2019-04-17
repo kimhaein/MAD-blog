@@ -9,9 +9,14 @@ interface Props {
 const LoginModal = ({ isOpen, onModal }: Props) => {
   const view = isOpen ? "" : "hidden";
   return (
-    <div className={`modalWrap ${view}`} onClick={onModal}>
+    <div className={`modalWrap ${view}`}>
       <div className="modal">
-        <h1>SNS로 로그인</h1>
+        <h1>
+          SNS로 로그인{" "}
+          <span className="modalClose" onClick={onModal}>
+            닫기
+          </span>
+        </h1>
         <ul className="loginBtn">
           <li className="kakao-login-btn" />
           <li>
