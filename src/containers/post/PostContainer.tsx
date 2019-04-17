@@ -2,17 +2,36 @@ import React, { Component } from "react";
 import Search from "../../components/common/Search";
 import Post from "../../components/post";
 
-interface Props {
-  postDatas: Array<object>;
-}
+import axios from "axios";
 
 interface State {
   imgUrl: string;
+  postDatas: Array<object>;
 }
 
-class PostContainer extends Component<Props, State> {
+class PostContainer extends Component<{}, State> {
   state: State = {
-    imgUrl: "bg01"
+    imgUrl: "bg01",
+    postDatas: []
+  };
+
+  componentWillMount() {
+    this._getPostDatas();
+  }
+
+  _getPostDatas = async () => {
+    const postDatas = await this._callPostDatasApi();
+    if (!postDatas) return false;
+    this.setState({
+      postDatas
+    });
+  };
+
+  _callPostDatasApi = () => {
+    return axios
+      .get("https://mad-server.herokuapp.com/api/post/list")
+      .then(res => res.data)
+      .catch(err => console.log(err));
   };
 
   _onChange = e => {
@@ -21,7 +40,7 @@ class PostContainer extends Component<Props, State> {
 
   render() {
     const style = { backgroundImage: `url(/static/images/bg06.jpg)` };
-    const { postDatas } = this.props;
+    const { postDatas } = this.state;
     return (
       <div className="contentsWrap postWrap" style={style}>
         <Search onChange={this._onChange} />

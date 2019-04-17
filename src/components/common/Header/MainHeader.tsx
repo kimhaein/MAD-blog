@@ -25,7 +25,7 @@ const Registor = ({ onModal }) => {
   return (
     <div className="loginWrap">
       <div className="login" onClick={onModal}>
-        login
+        SNS login
       </div>
     </div>
   );
