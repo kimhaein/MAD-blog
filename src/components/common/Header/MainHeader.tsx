@@ -2,13 +2,7 @@ import Link from "next/link";
 import "./header.css";
 
 const MenuBtn = () => {
-  return (
-    <div className="menuBtn">
-      <a href="https://kauth.kakao.com/oauth/authorize?client_id=6524057de9740a3a5e7e82bbaaf94679&redirect_uri=https://mad-server.herokuapp.com/kakaologin&response_type=code">
-        Menu
-      </a>
-    </div>
-  );
+  return <div className="menuBtn">Menu</div>;
 };
 
 const Logo = () => {
@@ -27,21 +21,22 @@ const PostBtn = () => {
   );
 };
 
-const Registor = () => {
+const Registor = ({ onModal }) => {
   return (
     <div className="loginWrap">
-      <div className="registor">registor</div>
-      <div className="login">login</div>
+      <div className="login" onClick={onModal}>
+        login
+      </div>
     </div>
   );
 };
 
-const MainHeader = () => {
+const MainHeader = ({ onModal }) => {
   return (
     <header>
-      <MenuBtn />
+      {/* <MenuBtn /> */}
       <Logo />
-      <Registor />
+      <Registor onModal={onModal} />
       <PostBtn />
     </header>
   );
