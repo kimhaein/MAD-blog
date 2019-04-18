@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Icon } from "antd";
 import "./modal.css";
 
 interface Props {
@@ -11,16 +11,26 @@ const LoginModal = ({ isOpen, onModal }: Props) => {
   return (
     <div className={`modalWrap ${view}`}>
       <div className="modal">
-        <h1>
-          SNS로 로그인
-          <span className="modalClose" onClick={onModal}>
-            닫기
-          </span>
-        </h1>
-        <div className="loginBtn">
-          <div className="kakao-login-btn" />
-          <div> 구글 로그인</div>
-          <div> 깃허브 로그인</div>
+        <div className="modalHeader">
+          <h2>
+            지금 mad-blog를 시작해보세요 :-)
+            <span className="modalClose" onClick={onModal}>
+              <Icon type="close" />
+            </span>
+          </h2>
+        </div>
+        <div className="modalBody">
+          <div className="loginBtn">
+            <div className="kakao-login-btn" />
+            <div className="google-login-btn">
+              <Icon type="google" style={{ marginRight: 12, fontSize: 22 }} />
+              구글 계정으로 로그인
+            </div>
+            <div className="github-login-btn">
+              <Icon type="github" style={{ marginRight: 12, fontSize: 22 }} />
+              깃허브 계정으로 로그인
+            </div>
+          </div>
         </div>
       </div>
     </div>
