@@ -3,7 +3,7 @@ import { MainHeader, PostHeader } from "../../components/common/Header";
 
 interface Props {
   type: string;
-  onModal: any;
+  onModal?: any;
 }
 
 class HeaderContainer extends Component<Props, {}> {

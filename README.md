@@ -1,6 +1,9 @@
-## Project Stack
+## Project
 
 mad-blog : https://mad-blog.now.sh/
+mad-sever : https://github.com/ellapresso/mad_server
+
+## Project Stack
 
 ### Client
 

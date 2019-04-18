@@ -4,12 +4,16 @@ const Context = createContext({}); // Context 를 만듭니다.
 const { Provider, Consumer: WriteConsumer } = Context;
 class WriteProvider extends Component {
   state = {
-    value: "# 1234"
+    titl: "",
+    contents: "# 1234"
   };
 
   actions = {
-    setValue: value => {
-      this.setState({ value });
+    setContents: contents => {
+      this.setState({ contents });
+    },
+    setTitle: title => {
+      this.setState({ title });
     }
   };
 

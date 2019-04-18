@@ -14,7 +14,7 @@ require("prismjs/components/prism-css.min.js");
 interface Props {
   type: string;
   markdown: string;
-  setValue?: any;
+  setContents?: any;
 }
 interface State {
   html: string;
@@ -77,7 +77,11 @@ const CodeView = () => (
   <WriteConsumer>
     {({ state, actions }: any) => {
       return (
-        <Code markdown={state.value} setValue={actions.setValue} type="write" />
+        <Code
+          markdown={state.contents}
+          setContents={actions.setContents}
+          type="write"
+        />
       );
     }}
   </WriteConsumer>

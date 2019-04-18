@@ -8,7 +8,7 @@ import "codemirror/theme/material.css";
 
 interface Props {
   value: string;
-  setValue: any;
+  setContents: any;
 }
 interface State {
   markdown: string;
@@ -33,7 +33,7 @@ class Editor extends Component<Props, State> {
             this.setState({
               markdown: value
             });
-            this.props.setValue(this.state.markdown);
+            this.props.setContents(this.state.markdown);
           }}
         />
       </div>
@@ -44,7 +44,7 @@ class Editor extends Component<Props, State> {
 const Write = () => (
   <WriteConsumer>
     {({ state, actions }: any) => (
-      <Editor value={state.value} setValue={actions.setValue} />
+      <Editor value={state.contents} setContents={actions.setContents} />
     )}
   </WriteConsumer>
 );
