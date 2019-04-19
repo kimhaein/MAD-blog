@@ -6,16 +6,17 @@ interface TagItem {
 }
 
 const TagItem = ({ tagList }: TagItem) => {
-  const tagColor = ["#87d068", "#f55f55", "#108ee9", "#deaddd", "#aaddee"];
-  const tagNum = Math.round(Math.random() * (tagColor.length - 1));
-  return (
-    <Tooltip placement="top" title={tagList}>
-      <Tag color="#108ee9">{tagList}</Tag>
-    </Tooltip>
+  const isLongTag = tagList.length > 6;
+  const tag = (
+    <Tag color="#108ee9">
+      {isLongTag ? `${tagList.slice(0, 6)}...` : tagList}
+    </Tag>
   );
+  return isLongTag ? <Tooltip title={tagList}>{tag}</Tooltip> : tag;
 };
 
 const Tags = ({ tagDatas }) => {
+  console.log(tagDatas);
   const tagList = tagDatas.map((tagData, index) => {
     return <TagItem tagList={tagData} key={index} />;
   });

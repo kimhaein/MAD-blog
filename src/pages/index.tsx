@@ -19,19 +19,18 @@ class Index extends Component<{}, State> {
     window.Kakao.init(KAKAO_API_KEY);
     window.Kakao.Auth.createLoginButton({
       container: ".kakao-login-btn",
-      success: function(authObj) {
+      success: authObj => {
         // console.log(JSON.stringify(authObj.access_token));
         axios
           .post("https://mad-server.herokuapp.com/kakaologin", {
             headers: { "Content-type": "application/x-www-form-urlencoded" },
             Authorization: `Bearer ${authObj.access_token}`
           })
-          .then(function(response) {
-            console.log(11, response);
-          });
+          .then(res => console.log("KakaoLogin", res))
+          .catch(err => console.log(err));
       },
-      fail: function(err) {
-        alert(JSON.stringify(err));
+      fail: err => {
+        console.log(err);
       }
     });
   }
