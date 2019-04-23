@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import { KAKAO_API_KEY } from "../key/API_KEY";
+
 // Container
 import HeaderContainer from "../containers/common/HeaderContainer";
 import PostContainer from "../containers/post/PostContainer";
@@ -26,7 +27,17 @@ class Index extends Component<{}, State> {
             headers: { "Content-type": "application/x-www-form-urlencoded" },
             Authorization: `Bearer ${authObj.access_token}`
           })
-          .then(res => console.log("KakaoLogin", res))
+          .then(res => {
+            localStorage.setItem(
+              "loginUser",
+              res.data.response.properties.nickname
+            );
+            localStorage.setItem(
+              "loginEmail",
+              res.data.response.kakao_account.email
+            );
+            localStorage.setItem("loginId", res.data.response.id);
+          })
           .catch(err => console.log(err));
       },
       fail: err => {
@@ -41,11 +52,22 @@ class Index extends Component<{}, State> {
     });
   };
 
+  onLogOut = () => {
+    window.Kakao.Auth.logout();
+    localStorage.removeItem("loginUser");
+    localStorage.removeItem("loginEmail");
+    localStorage.removeItem("loginId");
+  };
+
   render() {
     const { isOpen } = this.state;
     return (
       <Fragment>
-        <HeaderContainer type="common" onModal={this._onModal} />
+        <HeaderContainer
+          type="common"
+          onModal={this._onModal}
+          onLogOut={this.onLogOut}
+        />
         <PostContainer />
         <LoginModal isOpen={isOpen} onModal={this._onModal} />
       </Fragment>

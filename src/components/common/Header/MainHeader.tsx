@@ -21,22 +21,32 @@ const PostBtn = () => {
   );
 };
 
-const Registor = ({ onModal }) => {
+const Login = ({ onModal }) => {
   return (
-    <div className="loginWrap">
+    <div className="menuBtn">
       <div className="login" onClick={onModal}>
-        SNS login
+        login
       </div>
     </div>
   );
 };
 
-const MainHeader = ({ onModal }) => {
+const Logout = ({ onLogOut }) => {
+  return (
+    <div className="loginWrap">
+      <div className="login" onClick={onLogOut}>
+        logOut
+      </div>
+    </div>
+  );
+};
+
+const MainHeader = ({ onModal, onLogOut }) => {
   return (
     <header>
-      {/* <MenuBtn /> */}
+      {/* <Logout onLogOut={onLogOut} /> */}
+      <Login onModal={onModal} />
       <Logo />
-      <Registor onModal={onModal} />
       <PostBtn />
     </header>
   );

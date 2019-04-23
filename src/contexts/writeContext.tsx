@@ -14,17 +14,20 @@ interface State {
 class WriteProvider extends Component<{}, State> {
   state = {
     title: "",
-    writer: "김혜인",
+    writer: "",
     contents: "",
     hash: []
   };
 
   actions = {
-    setContents: contents => {
-      this.setState({ contents });
-    },
     setTitle: title => {
       this.setState({ title });
+    },
+    setWriter: writer => {
+      this.setState({ writer });
+    },
+    setContents: contents => {
+      this.setState({ contents });
     },
     setHash: hash => {
       this.setState({ hash });
@@ -35,6 +38,7 @@ class WriteProvider extends Component<{}, State> {
         return false;
       }
 
+      // post 등록
       axios
         .post("https://mad-server.herokuapp.com/api/post", {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },

@@ -16,7 +16,6 @@ const TagItem = ({ tagList }: TagItem) => {
 };
 
 const Tags = ({ tagDatas }) => {
-  console.log(tagDatas);
   const tagList = tagDatas.map((tagData, index) => {
     return <TagItem tagList={tagData} key={index} />;
   });
