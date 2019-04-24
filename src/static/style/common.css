@@ -6,6 +6,7 @@ body {
   box-sizing: border-box;
   font-family: "Noto Sans KR", sans-serif;
   color: #000;
+  background: #000;
 }
 
 /* box-sizing 일괄 설정 */

@@ -8,9 +8,7 @@ interface TagItem {
 const TagItem = ({ tagList }: TagItem) => {
   const isLongTag = tagList.length > 6;
   const tag = (
-    <Tag color="#108ee9">
-      {isLongTag ? `${tagList.slice(0, 6)}...` : tagList}
-    </Tag>
+    <Tag color="#000">{isLongTag ? `${tagList.slice(0, 6)}...` : tagList}</Tag>
   );
   return isLongTag ? <Tooltip title={tagList}>{tag}</Tooltip> : tag;
 };
