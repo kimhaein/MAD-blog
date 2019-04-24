@@ -1,6 +1,6 @@
 import React, { Component, createContext } from "react";
-import axios from "axios";
 import { KAKAO_API_KEY } from "../key/API_KEY";
+import axios from "axios";
 
 const Context = createContext({}); // Context 를 만듭니다.
 const { Provider, Consumer: AuthConsumer } = Context;
@@ -12,26 +12,31 @@ interface State {
 }
 
 class AuthProvider extends Component<{}, State> {
+  constructor(props) {
+    super(props);
+  }
   state: State = {
     isOpen: false,
     isLogin: false,
     loading: false
   };
   componentDidMount() {
-    if (localStorage.getItem("loginId")) {
-      this.setState({
-        isLogin: !this.state.isLogin
-      });
-    }
-
     window.Kakao.init(KAKAO_API_KEY);
+
+    window.Kakao.Auth.getStatus(
+      function(statusObj) {
+        if (statusObj.status === "connected") {
+          console.log(statusObj.status);
+          this.setState({
+            isLogin: true
+          });
+        }
+      }.bind(this)
+    );
+
     window.Kakao.Auth.createLoginButton({
       container: ".kakao-login-btn",
       success: authObj => {
-        this.setState({
-          loading: true
-        });
-
         axios
           .post("https://mad-server.herokuapp.com/kakaologin", {
             headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -41,8 +46,7 @@ class AuthProvider extends Component<{}, State> {
             localStorage.setItem("loginId", res.data.response.id);
             this.setState({
               isLogin: true,
-              isOpen: false,
-              loading: false
+              isOpen: false
             });
           })
           .catch(err => console.log(err));
@@ -65,7 +69,6 @@ class AuthProvider extends Component<{}, State> {
     onLogOut: () => {
       window.Kakao.Auth.logout();
       localStorage.removeItem("loginId");
-
       this.setState({
         isLogin: false
       });
@@ -75,7 +78,6 @@ class AuthProvider extends Component<{}, State> {
   render() {
     const { state, actions } = this;
     const value = { state, actions };
-    console.log(state);
     return <Provider value={value}>{this.props.children}</Provider>;
   }
 }

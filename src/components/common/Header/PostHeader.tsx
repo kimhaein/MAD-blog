@@ -18,7 +18,8 @@ const showConfirm = (content: string, onOk: any) => {
 // 뒤로가기
 const BackBtn = () => {
   const historyBack = () => {
-    Router.push("/");
+    const isClient = typeof document !== "undefined";
+    isClient && Router.replace("/");
   };
   return (
     <div
