@@ -53,10 +53,9 @@ const TitleInput = ({ value, setTitle }) => {
 };
 
 // 글 등록
-const PostBtn = ({ onSubmitPost, setWriter }) => {
+const PostBtn = ({ onSubmitPost }) => {
   const postOk = () => {
     onSubmitPost();
-    setWriter(localStorage.getItem("loginUser"));
   };
   return (
     <div
@@ -77,10 +76,7 @@ const PostHeader = () => {
         <header className="postHeader">
           <BackBtn />
           <TitleInput value={state.title} setTitle={actions.setTitle} />
-          <PostBtn
-            onSubmitPost={actions.onSubmitPost}
-            setWriter={actions.setWriter}
-          />
+          <PostBtn onSubmitPost={actions.onSubmitPost} />
         </header>
       )}
     </WriteConsumer>

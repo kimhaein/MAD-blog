@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import { KAKAO_API_KEY } from "../key/API_KEY";
+import { withRouter } from "next/router";
 
 // Container
 import HeaderContainer from "../containers/common/HeaderContainer";
@@ -12,6 +13,10 @@ interface State {
 }
 
 class Index extends Component<{}, State> {
+  // static async getInitialProps(ctx) {
+  //   console.log(ctx);
+  //   return { ctx };
+  // }
   state: State = {
     isOpen: false
   };

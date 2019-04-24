@@ -1,53 +1,46 @@
 import Link from "next/link";
 import "./header.css";
 
-const MenuBtn = () => {
-  return <div className="menuBtn">Menu</div>;
-};
-
-const Logo = () => {
-  return (
-    <Link href="/">
-      <div className="logo">MAD;</div>
-    </Link>
-  );
-};
-
-const PostBtn = () => {
-  return (
-    <Link href="/write">
-      <div className="postBtn">Post</div>
-    </Link>
-  );
-};
-
 const Login = ({ onModal }) => {
   return (
-    <div className="menuBtn">
-      <div className="login" onClick={onModal}>
-        login
-      </div>
+    <div className="login" onClick={onModal}>
+      login
     </div>
   );
 };
 
 const Logout = ({ onLogOut }) => {
   return (
-    <div className="loginWrap">
-      <div className="login" onClick={onLogOut}>
-        logOut
-      </div>
+    <div className="login" onClick={onLogOut}>
+      logout
     </div>
   );
 };
 
-const MainHeader = ({ onModal, onLogOut }) => {
+const PostBtn = () => {
+  return <div className="postBtn">Post1</div>;
+};
+
+const MainHeader = ({ onModal, onLogOut, isLogin }) => {
   return (
     <header>
-      {/* <Logout onLogOut={onLogOut} /> */}
-      <Login onModal={onModal} />
-      <Logo />
-      <PostBtn />
+      <div className="LeftBtn">
+        {isLogin ? <Logout onLogOut={onLogOut} /> : <Login onModal={onModal} />}
+      </div>
+      <div className="logo">
+        <Link href="/">
+          <a>MAD;</a>
+        </Link>
+      </div>
+      <div className="postBtn">
+        {isLogin ? (
+          <Link href="/write">
+            <a>Post</a>
+          </Link>
+        ) : (
+          <PostBtn />
+        )}
+      </div>
     </header>
   );
 };

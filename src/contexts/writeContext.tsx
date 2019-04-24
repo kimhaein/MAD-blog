@@ -6,15 +6,13 @@ const { Provider, Consumer: WriteConsumer } = Context;
 
 interface State {
   title: string;
-  writer: string;
   contents: string;
   hash: Array<string>;
 }
 
 class WriteProvider extends Component<{}, State> {
-  state = {
+  state: State = {
     title: "",
-    writer: "",
     contents: "",
     hash: []
   };
@@ -22,9 +20,6 @@ class WriteProvider extends Component<{}, State> {
   actions = {
     setTitle: title => {
       this.setState({ title });
-    },
-    setWriter: writer => {
-      this.setState({ writer });
     },
     setContents: contents => {
       this.setState({ contents });
@@ -38,14 +33,16 @@ class WriteProvider extends Component<{}, State> {
         return false;
       }
 
-      // post 등록
+      const hash = this.state.hash.join(",");
+
+      //post 등록
       axios
         .post("https://mad-server.herokuapp.com/api/post", {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           title: this.state.title,
           contents: this.state.contents,
-          writer: this.state.writer,
-          hash: this.state.writer
+          writer: localStorage.getItem("loginId"),
+          hash: hash
         })
         .then(response => {
           console.log("WriteProvider", response);

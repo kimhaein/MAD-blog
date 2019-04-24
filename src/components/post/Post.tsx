@@ -2,10 +2,9 @@ import { Col, Row, Avatar } from "antd";
 import moment from "moment";
 
 // components
-// import Tags from "../common/Tags";
+import Tags from "../common/Tags";
 import Likes from "../common/Likes";
 import { Code } from "../common/CodeView/CodeView";
-import None from "../common/None";
 
 import "./post.css";
 
@@ -16,25 +15,26 @@ interface PostItem {
     wrDate: string;
     upDate: string;
     contents: string;
-    hash?: Array<string>;
+    hashes?: string;
     likes: number;
   };
 }
 
 const PostItem = ({ postData }: PostItem) => {
+  const hashArry = postData.hashes.split(",");
   return (
     <div className="postList">
       <div className="postListHeader">
         <p>{postData.title}</p>
         <div className="postInfo">
           <span>
-            <Avatar style={{ backgroundColor: "#130", marginRight: 10 }}>
+            <Avatar style={{ backgroundColor: "#000", marginRight: 10 }}>
               {postData.writer.substring(1)}
             </Avatar>
             <span>BY. {postData.writer}</span>
           </span>
           <span className="postDate">
-            {moment(postData.wrDate).format("MMM Do YY")}
+            {moment(postData.wrDate).format("ll")}
           </span>
         </div>
       </div>
@@ -42,7 +42,7 @@ const PostItem = ({ postData }: PostItem) => {
         <Code markdown={postData.contents} type="post" />
       </div>
       <div className="postListfooter">
-        {/* <Tags tagDatas={postData.hash} /> */}
+        <Tags tagDatas={hashArry} />
         <Likes likeDatas={postData.likes} />
       </div>
     </div>
@@ -60,7 +60,8 @@ const Post = ({ postDatas }) => {
 
   return (
     <Row type="flex" justify="space-between" gutter={32} className="posthWrap">
-      {postList.length > 0 ? postList : <None dataTitle="포스트" />}
+      {/* {postList.length > 0 ? postList : <None dataTitle="포스트" />} */}
+      {postList}
     </Row>
   );
 };
