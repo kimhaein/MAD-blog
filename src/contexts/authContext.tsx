@@ -9,31 +9,36 @@ interface State {
   isOpen: boolean;
   isLogin: boolean;
   loading: boolean;
+  postDatas: Array<object>;
 }
 
 class AuthProvider extends Component<{}, State> {
-  constructor(props) {
-    super(props);
-  }
   state: State = {
     isOpen: false,
     isLogin: false,
-    loading: false
+    loading: false,
+    postDatas: []
   };
+
   componentDidMount() {
     window.Kakao.init(KAKAO_API_KEY);
 
+    // 토큰 연결 여부
     window.Kakao.Auth.getStatus(
       function(statusObj) {
+        console.log(statusObj);
         if (statusObj.status === "connected") {
-          console.log(statusObj.status);
+          localStorage.setItem("loginId", statusObj.user.id);
           this.setState({
             isLogin: true
           });
+        } else {
+          localStorage.removeItem("loginId");
         }
       }.bind(this)
     );
 
+    //로그인
     window.Kakao.Auth.createLoginButton({
       container: ".kakao-login-btn",
       success: authObj => {
@@ -60,6 +65,8 @@ class AuthProvider extends Component<{}, State> {
         console.log(err);
       }
     });
+
+    this.setPostDatas();
   }
 
   actions = {
@@ -78,6 +85,26 @@ class AuthProvider extends Component<{}, State> {
         isLogin: false
       });
     }
+  };
+
+  setPostDatas = async () => {
+    const postDatas = await this.callPostDatasApi();
+    if (!postDatas) return false;
+    this.setState({
+      postDatas
+    });
+  };
+
+  callPostDatasApi = () => {
+    const params = {
+      userId: localStorage.getItem("loginId")
+    };
+    return axios
+      .post("https://mad-server.herokuapp.com/api/post/list", {
+        userId: localStorage.getItem("loginId")
+      })
+      .then(res => res.data)
+      .catch(err => console.log(err));
   };
 
   render() {

@@ -10,7 +10,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>My page title</title>
+          <title>MAD_BLOG</title>
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"

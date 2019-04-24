@@ -1,7 +1,7 @@
 import Link from "next/link";
+import { AuthConsumer } from "../../../contexts/authContext";
 import { Modal, notification } from "antd";
 const confirm = Modal.confirm;
-import { AuthConsumer } from "../../../contexts/authContext";
 import "./header.css";
 
 // confirm
