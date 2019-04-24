@@ -52,12 +52,14 @@ class AuthProvider extends Component<{}, State> {
             Authorization: `Bearer ${authObj.access_token}`
           })
           .then(res => {
-            localStorage.setItem("loginId", res.data.response.id);
+            console.log(res);
+            // localStorage.setItem("loginId", res.data.response.id);
             this.setState({
               isLogin: true,
               isOpen: false,
               loading: false
             });
+            this.setPostDatas();
           })
           .catch(err => console.log(err));
       },
@@ -84,6 +86,7 @@ class AuthProvider extends Component<{}, State> {
       this.setState({
         isLogin: false
       });
+      this.setPostDatas();
     }
   };
 
@@ -96,9 +99,8 @@ class AuthProvider extends Component<{}, State> {
   };
 
   callPostDatasApi = () => {
-    const params = {
-      userId: localStorage.getItem("loginId")
-    };
+    console.log(localStorage.getItem("loginId"));
+
     return axios
       .post("https://mad-server.herokuapp.com/api/post/list", {
         userId: localStorage.getItem("loginId")

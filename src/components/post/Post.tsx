@@ -17,6 +17,7 @@ interface PostItem {
     contents: string;
     hashes: string;
     thumbnail_image: string;
+    nowUser?: number;
     likes: number;
   };
 }
@@ -26,7 +27,14 @@ const PostItem = ({ postData }: PostItem) => {
   return (
     <div className="postList">
       <div className="postListHeader">
-        <p>{postData.title}</p>
+        <p>
+          {postData.title}{" "}
+          {postData.nowUser ? (
+            <span style={{ float: "right", fontSize: 14 }}>수정 / 삭제</span>
+          ) : (
+            ""
+          )}
+        </p>
         <div className="postInfo">
           <span>
             <Avatar
@@ -64,7 +72,6 @@ const Post = ({ postDatas }) => {
 
   return (
     <Row type="flex" justify="space-between" gutter={32} className="posthWrap">
-      {/* {postList.length > 0 ? postList : <None dataTitle="포스트" />} */}
       {postList}
     </Row>
   );
