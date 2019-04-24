@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button, notification, Icon } from "antd";
 import "./header.css";
 
 const Login = ({ onModal }) => {
@@ -18,7 +19,18 @@ const Logout = ({ onLogOut }) => {
 };
 
 const PostBtn = () => {
-  return <div className="postBtn">Post1</div>;
+  const alertEvt = () => {
+    notification["info"]({
+      message: "mad-blog",
+      description: "로그인 후 이용해 주세요",
+      duration: 0
+    });
+  };
+  return (
+    <div className="postBtn" onClick={alertEvt}>
+      Post
+    </div>
+  );
 };
 
 const MainHeader = ({ onModal, onLogOut, isLogin }) => {
