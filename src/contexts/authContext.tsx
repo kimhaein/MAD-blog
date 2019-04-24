@@ -37,6 +37,10 @@ class AuthProvider extends Component<{}, State> {
     window.Kakao.Auth.createLoginButton({
       container: ".kakao-login-btn",
       success: authObj => {
+        this.setState({
+          loading: true
+        });
+
         axios
           .post("https://mad-server.herokuapp.com/kakaologin", {
             headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -46,7 +50,8 @@ class AuthProvider extends Component<{}, State> {
             localStorage.setItem("loginId", res.data.response.id);
             this.setState({
               isLogin: true,
-              isOpen: false
+              isOpen: false,
+              loading: false
             });
           })
           .catch(err => console.log(err));

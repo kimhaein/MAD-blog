@@ -15,7 +15,8 @@ interface PostItem {
     wrDate: string;
     upDate: string;
     contents: string;
-    hashes?: string;
+    hashes: string;
+    thumbnail_image: string;
     likes: number;
   };
 }
@@ -28,7 +29,10 @@ const PostItem = ({ postData }: PostItem) => {
         <p>{postData.title}</p>
         <div className="postInfo">
           <span>
-            <Avatar style={{ backgroundColor: "#000", marginRight: 10 }}>
+            <Avatar
+              src={postData.thumbnail_image}
+              style={{ backgroundColor: "#000", marginRight: 10 }}
+            >
               {postData.writer.substring(1)}
             </Avatar>
             <span>BY. {postData.writer}</span>
