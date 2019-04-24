@@ -3,39 +3,13 @@ import { MainHeader, PostHeader } from "../../components/common/Header";
 
 interface Props {
   type: string;
-  onModal?: any;
-  onLogOut?: any;
-}
-interface State {
-  isLogin: boolean;
 }
 
-class HeaderContainer extends Component<Props, State> {
-  state: State = {
-    isLogin: false
-  };
-  componentDidMount() {
-    const isLogin = localStorage.getItem("loginUser");
-    if (isLogin) {
-      this.setState({
-        isLogin: !this.state.isLogin
-      });
-    }
-  }
+class HeaderContainer extends Component<Props, {}> {
   render() {
-    const { type, onModal, onLogOut } = this.props;
+    const { type } = this.props;
     return (
-      <Fragment>
-        {type === "common" ? (
-          <MainHeader
-            onModal={onModal}
-            onLogOut={onLogOut}
-            isLogin={this.state.isLogin}
-          />
-        ) : (
-          <PostHeader />
-        )}
-      </Fragment>
+      <Fragment>{type === "common" ? <MainHeader /> : <PostHeader />}</Fragment>
     );
   }
 }

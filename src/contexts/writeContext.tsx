@@ -1,4 +1,5 @@
 import React, { Component, createContext } from "react";
+import moment from "moment";
 import axios from "axios";
 
 const Context = createContext({}); // Context 를 만듭니다.
@@ -41,6 +42,7 @@ class WriteProvider extends Component<{}, State> {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           title: this.state.title,
           contents: this.state.contents,
+          wrDate: moment().format("YYYY-MM-DD H:mm:ss"),
           writer: localStorage.getItem("loginId"),
           hash: hash
         })

@@ -1,6 +1,19 @@
 import Link from "next/link";
-import { Button, notification, Icon } from "antd";
+import { Modal, notification } from "antd";
+const confirm = Modal.confirm;
+import { AuthConsumer } from "../../../contexts/authContext";
 import "./header.css";
+
+// confirm
+const showConfirm = (content: string, onOk: any) => {
+  confirm({
+    title: "mad-blog",
+    content: content,
+    onOk() {
+      onOk();
+    }
+  });
+};
 
 const Login = ({ onModal }) => {
   return (
@@ -12,7 +25,12 @@ const Login = ({ onModal }) => {
 
 const Logout = ({ onLogOut }) => {
   return (
-    <div className="login" onClick={onLogOut}>
+    <div
+      className="login"
+      onClick={() => {
+        showConfirm("로그아웃 하시겠습니까?", onLogOut);
+      }}
+    >
       logout
     </div>
   );
@@ -33,27 +51,35 @@ const PostBtn = () => {
   );
 };
 
-const MainHeader = ({ onModal, onLogOut, isLogin }) => {
+const MainHeader = () => {
   return (
-    <header>
-      <div className="LeftBtn">
-        {isLogin ? <Logout onLogOut={onLogOut} /> : <Login onModal={onModal} />}
-      </div>
-      <div className="logo">
-        <Link href="/">
-          <a>MAD;</a>
-        </Link>
-      </div>
-      <div className="postBtn">
-        {isLogin ? (
-          <Link href="/write">
-            <a>Post</a>
-          </Link>
-        ) : (
-          <PostBtn />
-        )}
-      </div>
-    </header>
+    <AuthConsumer>
+      {({ state, actions }: any) => (
+        <header>
+          <div className="LeftBtn">
+            {state.isLogin ? (
+              <Logout onLogOut={actions.onLogOut} />
+            ) : (
+              <Login onModal={actions.onModal} />
+            )}
+          </div>
+          <div className="logo">
+            <Link href="/">
+              <a>MAD;</a>
+            </Link>
+          </div>
+          <div className="postBtn">
+            {state.isLogin ? (
+              <Link href="/write">
+                <a>Post</a>
+              </Link>
+            ) : (
+              <PostBtn />
+            )}
+          </div>
+        </header>
+      )}
+    </AuthConsumer>
   );
 };
 
