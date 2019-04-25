@@ -18,7 +18,7 @@ const PostMenu = ({ pno, writer }) => {
         <Popconfirm
           title="수정하시겠습니까?"
           onConfirm={() => {
-            Router.replace("/write?mode=edit");
+            Router.replace(`/write?mode=edit&pno=${pno}`);
           }}
           okText="네"
           cancelText="아니오"

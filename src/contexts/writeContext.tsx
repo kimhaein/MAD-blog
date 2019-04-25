@@ -7,6 +7,7 @@ const Context = createContext({}); // Context 를 만듭니다.
 const { Provider, Consumer: WriteConsumer } = Context;
 
 interface State {
+  pno: string;
   isEdit: boolean;
   title: string;
   contents: string;
@@ -14,10 +15,12 @@ interface State {
 }
 interface Props {
   mode: string;
+  pno: string;
 }
 
 class WriteProvider extends Component<Props, State> {
   state: State = {
+    pno: "",
     isEdit: false,
     title: "",
     contents: "",
@@ -26,10 +29,9 @@ class WriteProvider extends Component<Props, State> {
 
   componentDidMount() {
     if (this.props.mode == "edit") {
+      this.getPostData(this.props.pno);
       this.setState({
-        isEdit: true,
-        title: "1111",
-        contents: "123"
+        pno: this.props.pno
       });
     }
   }
@@ -67,41 +69,39 @@ class WriteProvider extends Component<Props, State> {
           Router.replace("/");
         });
     },
-    onEdit: pno => {
+    onEdit: () => {
       console.log("@onEdit");
-      //   axios
-      //     .post("https://mad-server.herokuapp.com/api/post/edit", {
-      //       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      //       pno,
-      //       title: this.state.title,
-      //       contents: this.state.contents,
-      //       upDate: moment().format("YYYY-MM-DD H:mm:ss"),
-      //       writer: localStorage.getItem("loginId")
-      //     })
-      //     .then(res => {
-      //       console.log("@onEdit", res);
-      //       Router.replace("/");
-      //     });
+      axios
+        .post("https://mad-server.herokuapp.com/api/post/edit", {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          pno: this.state.pno,
+          title: this.state.title,
+          contents: this.state.contents,
+          upDate: moment().format("YYYY-MM-DD H:mm:ss"),
+          writer: localStorage.getItem("loginId")
+        })
+        .then(res => {
+          console.log("@onEdit", res);
+          Router.replace("/");
+        });
     }
   };
 
   getPostData = pno => {
     console.log("@getPostData");
-    this.setState({
-      title: "1111",
-      contents: "123"
-    });
-    console.log(this.state.title);
-    // axios
-    //   .get("https://mad-server.herokuapp.com/api/post/edit", {
-    //     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    //     pno,
-    //     writer: localStorage.getItem("loginId")
-    //   })
-    //   .then(res => {
-    //   this.setState({ isEdit:true,title,contents,hash });
-    //     console.log("@onEdit", res);
-    //   });
+    axios
+      .post("https://mad-server.herokuapp.com/api/post/contents", {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        pno,
+        userId: localStorage.getItem("loginId")
+      })
+      .then(res => {
+        this.setState({
+          isEdit: true,
+          title: res.data.getContent[0].title,
+          contents: res.data.getContent[0].contents
+        });
+      });
   };
 
   render() {

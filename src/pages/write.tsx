@@ -5,11 +5,11 @@ import { WriteProvider } from "../contexts/writeContext";
 
 class Write extends Component<{}, {}> {
   static async getInitialProps({ query }) {
-    return { mode: query.mode };
+    return { mode: query.mode, pno: query.pno };
   }
   render() {
     return (
-      <WriteProvider mode={this.props.mode}>
+      <WriteProvider mode={this.props.mode} pno={this.props.pno}>
         <HeaderContainer type="post" />
         <WriteConatiner />
       </WriteProvider>

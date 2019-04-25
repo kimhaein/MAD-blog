@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { AuthConsumer } from "../../../contexts/authContext";
-import { Modal, notification } from "antd";
+import { Modal, message } from "antd";
 const confirm = Modal.confirm;
 import "./header.css";
 
@@ -38,11 +38,7 @@ const Logout = ({ onLogOut }) => {
 
 const PostBtn = () => {
   const alertEvt = () => {
-    notification["info"]({
-      message: "mad-blog",
-      description: "로그인 후 이용해 주세요",
-      duration: 0
-    });
+    message.warning("로그인 후 이용해 주세요");
   };
   return (
     <div className="postBtn" onClick={alertEvt}>

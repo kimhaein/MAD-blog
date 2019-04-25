@@ -1,12 +1,17 @@
 import { AuthConsumer } from "../../../contexts/authContext";
-import { Statistic, Icon } from "antd";
+import { Statistic, Icon, message } from "antd";
 import "./likes.css";
 
 const Likes = ({ likeDatas, love, pno }) => {
   const color = love === 1 ? "#f92672" : "#ccc";
   const likeEvt = actions => {
-    return love === 1 ? actions.offLike(pno) : actions.onLike(pno);
+    if (localStorage.getItem("loginId")) {
+      return love === 1 ? actions.offLike(pno) : actions.onLike(pno);
+    } else {
+      return message.warning("로그인 후 이용해 주세요");
+    }
   };
+
   return (
     <AuthConsumer>
       {({ actions }: any) => (
