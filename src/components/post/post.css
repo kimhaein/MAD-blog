@@ -14,9 +14,13 @@
   padding: 0 16px;
   border-bottom: 1px solid #ddd;
 }
-.posthWrap .postList .postListHeader > p {
+.posthWrap .postList .postListHeader .postListTitle {
   padding-top: 16px;
   font-size: 20px;
+}
+.posthWrap .postList .postListHeader .postListTitle > div {
+  float: right;
+  cursor: pointer;
 }
 .posthWrap .postList .postListHeader .postInfo {
   overflow: hidden;

@@ -1,4 +1,4 @@
-import { Col, Row, Avatar } from "antd";
+import { Col, Row, Avatar, Dropdown, Icon, Menu } from "antd";
 import moment from "moment";
 
 // components
@@ -22,19 +22,37 @@ interface PostItem {
   };
 }
 
+const menu = aaa => {
+  return (
+    <Menu>
+      <Menu.Item key="0">
+        <div>수정</div>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <div>삭제</div>
+      </Menu.Item>
+    </Menu>
+  );
+};
+
+const PostMenu = () => {
+  return (
+    <Dropdown overlay={menu}>
+      <div>
+        <Icon type="more" />
+      </div>
+    </Dropdown>
+  );
+};
+
 const PostItem = ({ postData }: PostItem) => {
   const hashArry = postData.hashes.split(",");
   return (
     <div className="postList">
       <div className="postListHeader">
-        <p>
-          {postData.title}{" "}
-          {postData.nowUser ? (
-            <span style={{ float: "right", fontSize: 14 }}>수정 / 삭제</span>
-          ) : (
-            ""
-          )}
-        </p>
+        <div className="postListTitle">
+          {postData.title} {postData.nowUser ? <PostMenu /> : ""}
+        </div>
         <div className="postInfo">
           <span>
             <Avatar
@@ -61,7 +79,7 @@ const PostItem = ({ postData }: PostItem) => {
   );
 };
 
-const Post = ({ postDatas }) => {
+const Post = ({ postDatas, onRemove, onEdit }) => {
   let postList = postDatas.map((postData, index) => {
     return (
       <Col xs={24} md={24} lg={24} xl={12} key={index}>

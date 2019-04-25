@@ -24,19 +24,7 @@ class AuthProvider extends Component<{}, State> {
     window.Kakao.init(KAKAO_API_KEY);
 
     // 토큰 연결 여부
-    window.Kakao.Auth.getStatus(
-      function(statusObj) {
-        console.log(statusObj);
-        if (statusObj.status === "connected") {
-          localStorage.setItem("loginId", statusObj.user.id);
-          this.setState({
-            isLogin: true
-          });
-        } else {
-          localStorage.removeItem("loginId");
-        }
-      }.bind(this)
-    );
+    this.getLoginStatus();
 
     //로그인
     window.Kakao.Auth.createLoginButton({
@@ -52,14 +40,14 @@ class AuthProvider extends Component<{}, State> {
             Authorization: `Bearer ${authObj.access_token}`
           })
           .then(res => {
-            console.log(res);
-            // localStorage.setItem("loginId", res.data.response.id);
+            console.log("4.KakaoLogin", res);
+            // 토큰 연결 여부
+            this.getLoginStatus();
+            //모달 및 로딩 제거
             this.setState({
-              isLogin: true,
               isOpen: false,
               loading: false
             });
-            this.setPostDatas();
           })
           .catch(err => console.log(err));
       },
@@ -67,8 +55,6 @@ class AuthProvider extends Component<{}, State> {
         console.log(err);
       }
     });
-
-    this.setPostDatas();
   }
 
   actions = {
@@ -77,35 +63,62 @@ class AuthProvider extends Component<{}, State> {
         isOpen: !this.state.isOpen
       });
     },
-    getLogin: () => {
+    onLogin: () => {
       return this.state.isLogin;
     },
     onLogOut: () => {
       window.Kakao.Auth.logout();
-      localStorage.removeItem("loginId");
-      this.setState({
-        isLogin: false
-      });
-      this.setPostDatas();
+      this.getLoginStatus();
+    },
+    onRemove: () => {
+      console.log(111);
+    },
+    onEdit: () => {
+      console.log(222);
     }
   };
 
-  setPostDatas = async () => {
+  // 로그인 상태 체크
+  getLoginStatus = () => {
+    window.Kakao.Auth.getStatus(
+      function(statusObj) {
+        console.log("1.getLoginStatus", statusObj);
+        if (statusObj.status === "connected") {
+          localStorage.setItem("loginId", statusObj.user.id);
+          this.setState({
+            isLogin: true
+          });
+        } else {
+          localStorage.removeItem("loginId");
+          this.setState({
+            isLogin: false
+          });
+        }
+        //post 데이터 가져오기
+        this.getPostDatas();
+      }.bind(this)
+    );
+  };
+
+  //post 데이터 가져오기
+  getPostDatas = async () => {
+    console.log("2.getPostDatas - userId :", localStorage.getItem("loginId"));
     const postDatas = await this.callPostDatasApi();
     if (!postDatas) return false;
     this.setState({
       postDatas
     });
   };
-
+  //post API 호출
   callPostDatasApi = () => {
-    console.log(localStorage.getItem("loginId"));
-
     return axios
       .post("https://mad-server.herokuapp.com/api/post/list", {
         userId: localStorage.getItem("loginId")
       })
-      .then(res => res.data)
+      .then(res => {
+        console.log("3.callPostDatasApi :", res.data);
+        return res.data;
+      })
       .catch(err => console.log(err));
   };
 
@@ -116,5 +129,4 @@ class AuthProvider extends Component<{}, State> {
   }
 }
 
-// 내보내줍니다.
 export { AuthProvider, AuthConsumer };
