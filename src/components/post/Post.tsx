@@ -1,4 +1,5 @@
-import { Col, Row, Avatar, Dropdown, Icon, Menu } from "antd";
+import { AuthConsumer } from "../../contexts/authContext";
+import { Col, Row, Avatar, Icon } from "antd";
 import moment from "moment";
 
 // components
@@ -8,8 +9,37 @@ import { Code } from "../common/CodeView/CodeView";
 
 import "./post.css";
 
+const PostMenu = ({ pno, writer }) => {
+  return (
+    <AuthConsumer>
+      {({ actions }: any) => (
+        <div className="postMenuBtn">
+          <Icon type="more" />
+          <ul className="postMenu">
+            <li
+              onClick={() => {
+                actions.onEdit(pno, writer);
+              }}
+            >
+              수정
+            </li>
+            <li
+              onClick={() => {
+                actions.onDelete(pno);
+              }}
+            >
+              삭제
+            </li>
+          </ul>
+        </div>
+      )}
+    </AuthConsumer>
+  );
+};
+
 interface PostItem {
   postData: {
+    pno: number;
     title: string;
     writer: string;
     wrDate: string;
@@ -22,36 +52,16 @@ interface PostItem {
   };
 }
 
-const menu = aaa => {
-  return (
-    <Menu>
-      <Menu.Item key="0">
-        <div>수정</div>
-      </Menu.Item>
-      <Menu.Item key="1">
-        <div>삭제</div>
-      </Menu.Item>
-    </Menu>
-  );
-};
-
-const PostMenu = () => {
-  return (
-    <Dropdown overlay={menu}>
-      <div>
-        <Icon type="more" />
-      </div>
-    </Dropdown>
-  );
-};
-
 const PostItem = ({ postData }: PostItem) => {
   const hashArry = postData.hashes.split(",");
   return (
     <div className="postList">
       <div className="postListHeader">
         <div className="postListTitle">
-          {postData.title} {postData.nowUser ? <PostMenu /> : ""}
+          {postData.title}
+          {postData.nowUser ? (
+            <PostMenu pno={postData.pno} writer={postData.writer} />
+          ) : null}
         </div>
         <div className="postInfo">
           <span>
@@ -79,7 +89,7 @@ const PostItem = ({ postData }: PostItem) => {
   );
 };
 
-const Post = ({ postDatas, onRemove, onEdit }) => {
+const Post = ({ postDatas }) => {
   let postList = postDatas.map((postData, index) => {
     return (
       <Col xs={24} md={24} lg={24} xl={12} key={index}>

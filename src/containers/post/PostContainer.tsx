@@ -19,14 +19,10 @@ class PostContainer extends Component<{}, State> {
     const style = { backgroundImage: `url(/static/images/bg06.jpg)` };
     return (
       <AuthConsumer>
-        {({ state, actions }: any) => (
+        {({ state }: any) => (
           <div className="contentsWrap postWrap" style={style}>
             <Search onChange={this._onChange} />
-            <Post
-              postDatas={state.postDatas}
-              onRemove={actions.onRemove}
-              onEdit={actions.onEdit}
-            />
+            <Post postDatas={state.postDatas} />
           </div>
         )}
       </AuthConsumer>

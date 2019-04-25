@@ -18,9 +18,42 @@
   padding-top: 16px;
   font-size: 20px;
 }
-.posthWrap .postList .postListHeader .postListTitle > div {
+.posthWrap .postList .postListHeader .postListTitle .postMenuBtn {
+  position: relative;
   float: right;
   cursor: pointer;
+}
+.posthWrap .postList .postListHeader .postListTitle .postMenuBtn .postMenu {
+  display: none;
+  position: absolute;
+  bottom: -90px;
+  left: -40px;
+  width: 50px;
+  background: #000;
+  border-radius: 5px;
+}
+.posthWrap
+  .postList
+  .postListHeader
+  .postListTitle
+  .postMenuBtn:hover
+  .postMenu {
+  display: block;
+}
+.posthWrap .postList .postListHeader .postListTitle .postMenuBtn .postMenu li {
+  margin: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+}
+.posthWrap
+  .postList
+  .postListHeader
+  .postListTitle
+  .postMenuBtn
+  .postMenu
+  li:hover {
+  text-decoration: underline #fff;
 }
 .posthWrap .postList .postListHeader .postInfo {
   overflow: hidden;

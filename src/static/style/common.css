@@ -9,6 +9,13 @@ body {
   background: #000;
 }
 
+ul,
+ol,
+li {
+  padding: 0;
+  list-style: none;
+}
+
 /* box-sizing 일괄 설정 */
 *,
 *:before,
@@ -104,7 +111,7 @@ p {
 
 .notfound h2 {
   font-family: "Montserrat", sans-serif;
-  color: #000;
+  color: #fff;
   font-size: 24px;
   font-weight: 700;
   text-transform: uppercase;

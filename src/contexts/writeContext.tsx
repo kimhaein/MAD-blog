@@ -1,4 +1,5 @@
 import React, { Component, createContext } from "react";
+import Router from "next/router";
 import moment from "moment";
 import axios from "axios";
 
@@ -39,15 +40,16 @@ class WriteProvider extends Component<{}, State> {
       //post 등록
       axios
         .post("https://mad-server.herokuapp.com/api/post", {
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          // headers: { "Content-Type": "application/x-www-form-urlencoded" },
           title: this.state.title,
           contents: this.state.contents,
           wrDate: moment().format("YYYY-MM-DD H:mm:ss"),
           writer: localStorage.getItem("loginId"),
           hash: hash
         })
-        .then(response => {
-          console.log("WriteProvider", response);
+        .then(res => {
+          console.log("@onSubmitPost", res);
+          Router.replace("/");
         });
     }
   };

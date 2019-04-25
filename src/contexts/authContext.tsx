@@ -1,5 +1,6 @@
 import React, { Component, createContext } from "react";
 import { KAKAO_API_KEY } from "../key/API_KEY";
+import moment from "moment";
 import axios from "axios";
 
 const Context = createContext({}); // Context 를 만듭니다.
@@ -21,6 +22,9 @@ class AuthProvider extends Component<{}, State> {
   };
 
   componentDidMount() {
+    //Kakao SDK에서 사용한 리소스를 해제합니다.
+    window.Kakao.cleanup();
+    //Kakao SDK를 초기화합니다.
     window.Kakao.init(KAKAO_API_KEY);
 
     // 토큰 연결 여부
@@ -40,7 +44,7 @@ class AuthProvider extends Component<{}, State> {
             Authorization: `Bearer ${authObj.access_token}`
           })
           .then(res => {
-            console.log("4.KakaoLogin", res);
+            console.log("@KakaoLogin", res);
             // 토큰 연결 여부
             this.getLoginStatus();
             //모달 및 로딩 제거
@@ -70,11 +74,22 @@ class AuthProvider extends Component<{}, State> {
       window.Kakao.Auth.logout();
       this.getLoginStatus();
     },
-    onRemove: () => {
-      console.log(111);
+    onDelete: pno => {
+      axios
+        .post("https://mad-server.herokuapp.com/api/post/del", {
+          headers: { "Content-type": "application/x-www-form-urlencoded" },
+          pno,
+          writer: localStorage.getItem("loginId"),
+          upDate: moment().format("YYYY-MM-DD H:mm:ss")
+        })
+        .then(res => {
+          console.log("@onDelete", res);
+          this.getPostDatas();
+        })
+        .catch(err => console.log(err));
     },
     onEdit: () => {
-      console.log(222);
+      console.log("@onEdit");
     }
   };
 
@@ -109,10 +124,12 @@ class AuthProvider extends Component<{}, State> {
       postDatas
     });
   };
+
   //post API 호출
   callPostDatasApi = () => {
     return axios
       .post("https://mad-server.herokuapp.com/api/post/list", {
+        headers: { "Content-type": "application/x-www-form-urlencoded" },
         userId: localStorage.getItem("loginId")
       })
       .then(res => {
