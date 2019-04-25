@@ -91,7 +91,11 @@ const PostItem = ({ postData }: PostItem) => {
       </div>
       <div className="postListfooter">
         <Tags tagDatas={hashArry} />
-        <Likes likeDatas={postData.likes} love={postData.love} />
+        <Likes
+          likeDatas={postData.likes}
+          love={postData.love}
+          pno={postData.pno}
+        />
       </div>
     </div>
   );

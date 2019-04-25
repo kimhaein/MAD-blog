@@ -76,21 +76,44 @@ class AuthProvider extends Component<{}, State> {
     },
     onDelete: pno => {
       console.log("@onDelete");
-      // axios
-      //   .post("https://mad-server.herokuapp.com/api/post/del", {
-      //     headers: { "Content-type": "application/x-www-form-urlencoded" },
-      //     pno,
-      //     writer: localStorage.getItem("loginId"),
-      //     upDate: moment().format("YYYY-MM-DD H:mm:ss")
-      //   })
-      //   .then(res => {
-      //     console.log("@onDelete", res);
-      //     this.getPostDatas();
-      //   })
-      //   .catch(err => console.log(err));
+      axios
+        .post("https://mad-server.herokuapp.com/api/post/del", {
+          headers: { "Content-type": "application/x-www-form-urlencoded" },
+          pno,
+          writer: localStorage.getItem("loginId"),
+          upDate: moment().format("YYYY-MM-DD H:mm:ss")
+        })
+        .then(res => {
+          console.log("@onDelete", res);
+          this.getPostDatas();
+        })
+        .catch(err => console.log(err));
     },
-    onEdit: () => {
-      console.log("@onEdit");
+    onLike: pno => {
+      console.log("@onLike");
+      axios
+        .post("https://mad-server.herokuapp.com/api/like", {
+          headers: { "Content-type": "application/x-www-form-urlencoded" },
+          pno,
+          userId: localStorage.getItem("loginId")
+        })
+        .then(res => {
+          this.getPostDatas();
+        })
+        .catch(err => console.log(err));
+    },
+    offLike: pno => {
+      console.log("@offLike");
+      axios
+        .post("https://mad-server.herokuapp.com/api/unlike", {
+          headers: { "Content-type": "application/x-www-form-urlencoded" },
+          pno,
+          userId: localStorage.getItem("loginId")
+        })
+        .then(res => {
+          this.getPostDatas();
+        })
+        .catch(err => console.log(err));
     }
   };
 
