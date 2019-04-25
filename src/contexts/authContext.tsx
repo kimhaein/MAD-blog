@@ -75,18 +75,19 @@ class AuthProvider extends Component<{}, State> {
       this.getLoginStatus();
     },
     onDelete: pno => {
-      axios
-        .post("https://mad-server.herokuapp.com/api/post/del", {
-          headers: { "Content-type": "application/x-www-form-urlencoded" },
-          pno,
-          writer: localStorage.getItem("loginId"),
-          upDate: moment().format("YYYY-MM-DD H:mm:ss")
-        })
-        .then(res => {
-          console.log("@onDelete", res);
-          this.getPostDatas();
-        })
-        .catch(err => console.log(err));
+      console.log("@onDelete");
+      // axios
+      //   .post("https://mad-server.herokuapp.com/api/post/del", {
+      //     headers: { "Content-type": "application/x-www-form-urlencoded" },
+      //     pno,
+      //     writer: localStorage.getItem("loginId"),
+      //     upDate: moment().format("YYYY-MM-DD H:mm:ss")
+      //   })
+      //   .then(res => {
+      //     console.log("@onDelete", res);
+      //     this.getPostDatas();
+      //   })
+      //   .catch(err => console.log(err));
     },
     onEdit: () => {
       console.log("@onEdit");

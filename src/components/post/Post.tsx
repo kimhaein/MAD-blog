@@ -1,4 +1,5 @@
 import { AuthConsumer } from "../../contexts/authContext";
+import Router from "next/router";
 import { Col, Row, Avatar, Icon, Popconfirm } from "antd";
 import moment from "moment";
 
@@ -11,21 +12,21 @@ import "./post.css";
 
 const PostMenu = ({ pno, writer }) => {
   return (
-    <AuthConsumer>
-      {({ actions }: any) => (
-        <div className="postMenuBtn">
-          <Icon type="more" />
-          <div className="postMenu">
-            <Popconfirm
-              title="수정하시겠습니까?"
-              onConfirm={() => {
-                actions.onEdit(pno);
-              }}
-              okText="네"
-              cancelText="아니오"
-            >
-              <span>수정</span>
-            </Popconfirm>
+    <div className="postMenuBtn">
+      <Icon type="more" />
+      <div className="postMenu">
+        <Popconfirm
+          title="수정하시겠습니까?"
+          onConfirm={() => {
+            Router.replace("/write?mode=edit");
+          }}
+          okText="네"
+          cancelText="아니오"
+        >
+          <span>수정</span>
+        </Popconfirm>
+        <AuthConsumer>
+          {({ state, actions }: any) => (
             <Popconfirm
               title="삭제하시겠습니까?"
               onConfirm={() => {
@@ -36,10 +37,10 @@ const PostMenu = ({ pno, writer }) => {
             >
               <span>삭제</span>
             </Popconfirm>
-          </div>
-        </div>
-      )}
-    </AuthConsumer>
+          )}
+        </AuthConsumer>
+      </div>
+    </div>
   );
 };
 
@@ -55,11 +56,12 @@ interface PostItem {
     thumbnail_image: string;
     nowUser?: number;
     likes: number;
+    love: number;
   };
 }
 
 const PostItem = ({ postData }: PostItem) => {
-  const hashArry = postData.hashes.split(",");
+  const hashArry = postData.hashes ? postData.hashes.split(",") : [];
   return (
     <div className="postList">
       <div className="postListHeader">
@@ -89,7 +91,7 @@ const PostItem = ({ postData }: PostItem) => {
       </div>
       <div className="postListfooter">
         <Tags tagDatas={hashArry} />
-        <Likes likeDatas={postData.likes} />
+        <Likes likeDatas={postData.likes} love={postData.love} />
       </div>
     </div>
   );
