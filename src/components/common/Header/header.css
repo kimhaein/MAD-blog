@@ -72,6 +72,11 @@ header .postBtn {
   color: #fff;
   background: #000;
 }
+header .postBtn a {
+  display: inline-block;
+  width: 100%;
+  left: 100%;
+}
 
 .postHeader .backBtn {
   float: left;
