@@ -6,5 +6,5 @@
 /* antd custom */
 .ant-tag {
   border-radius: 10px;
-  cursor: auto;
+  cursor: default;
 }
