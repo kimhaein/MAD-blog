@@ -1,5 +1,5 @@
 import { AuthConsumer } from "../../contexts/authContext";
-import { Col, Row, Avatar, Icon } from "antd";
+import { Col, Row, Avatar, Icon, Popconfirm } from "antd";
 import moment from "moment";
 
 // components
@@ -15,22 +15,28 @@ const PostMenu = ({ pno, writer }) => {
       {({ actions }: any) => (
         <div className="postMenuBtn">
           <Icon type="more" />
-          <ul className="postMenu">
-            <li
-              onClick={() => {
-                actions.onEdit(pno, writer);
+          <div className="postMenu">
+            <Popconfirm
+              title="수정하시겠습니까?"
+              onConfirm={() => {
+                actions.onEdit(pno);
               }}
+              okText="네"
+              cancelText="아니오"
             >
-              수정
-            </li>
-            <li
-              onClick={() => {
+              <span>수정</span>
+            </Popconfirm>
+            <Popconfirm
+              title="삭제하시겠습니까?"
+              onConfirm={() => {
                 actions.onDelete(pno);
               }}
+              okText="네"
+              cancelText="아니오"
             >
-              삭제
-            </li>
-          </ul>
+              <span>삭제</span>
+            </Popconfirm>
+          </div>
         </div>
       )}
     </AuthConsumer>
@@ -69,7 +75,7 @@ const PostItem = ({ postData }: PostItem) => {
               src={postData.thumbnail_image}
               style={{ backgroundColor: "#000", marginRight: 10 }}
             >
-              {postData.writer.substring(1)}
+              {postData.writer}
             </Avatar>
             <span>BY. {postData.writer}</span>
           </span>

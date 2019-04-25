@@ -26,8 +26,8 @@
 .posthWrap .postList .postListHeader .postListTitle .postMenuBtn .postMenu {
   display: none;
   position: absolute;
-  bottom: -90px;
-  left: -40px;
+  bottom: -70px;
+  left: -30px;
   width: 50px;
   background: #000;
   border-radius: 5px;
@@ -40,7 +40,14 @@
   .postMenu {
   display: block;
 }
-.posthWrap .postList .postListHeader .postListTitle .postMenuBtn .postMenu li {
+.posthWrap
+  .postList
+  .postListHeader
+  .postListTitle
+  .postMenuBtn
+  .postMenu
+  span {
+  display: block;
   margin: 10px;
   font-size: 14px;
   text-align: center;
@@ -52,7 +59,7 @@
   .postListTitle
   .postMenuBtn
   .postMenu
-  li:hover {
+  span:hover {
   text-decoration: underline #fff;
 }
 .posthWrap .postList .postListHeader .postInfo {

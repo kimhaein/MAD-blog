@@ -70,8 +70,8 @@ class AuthProvider extends Component<{}, State> {
     onLogin: () => {
       return this.state.isLogin;
     },
-    onLogOut: () => {
-      window.Kakao.Auth.logout();
+    onLogOut: async () => {
+      await window.Kakao.Auth.logout();
       this.getLoginStatus();
     },
     onDelete: pno => {

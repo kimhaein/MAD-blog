@@ -115,7 +115,7 @@ class Editor extends Component<Props, State> {
           />
         </div>
         <div className="tagEditor">
-          <span>태그 입력 :</span>
+          <span>HASH 입력 :</span>
           {this.renderEditTag()}
         </div>
       </div>
