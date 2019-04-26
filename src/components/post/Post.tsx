@@ -1,42 +1,36 @@
 import { AuthConsumer } from "../../contexts/authContext";
 import Router from "next/router";
-import { Col, Row, Avatar, Icon, Popconfirm } from "antd";
+import { Col, Row, Avatar, Icon } from "antd";
 import moment from "moment";
 
 // components
-import Tags from "../common/Tags";
+import { Tags } from "../common/Tags";
 import Likes from "../common/Likes";
 import { Code } from "../common/CodeView/CodeView";
 
 import "./post.css";
 
-const PostMenu = ({ pno, writer }) => {
+const PostMenu = ({ pno }) => {
   return (
     <div className="postMenuBtn">
       <Icon type="more" />
       <div className="postMenu">
-        <Popconfirm
-          title="수정하시겠습니까?"
-          onConfirm={() => {
+        <span
+          onClick={() => {
             Router.replace(`/write?mode=edit&pno=${pno}`);
           }}
-          okText="네"
-          cancelText="아니오"
         >
-          <span>수정</span>
-        </Popconfirm>
+          수정
+        </span>
         <AuthConsumer>
-          {({ state, actions }: any) => (
-            <Popconfirm
-              title="삭제하시겠습니까?"
-              onConfirm={() => {
+          {({ actions }: any) => (
+            <span
+              onClick={() => {
                 actions.onDelete(pno);
               }}
-              okText="네"
-              cancelText="아니오"
             >
-              <span>삭제</span>
-            </Popconfirm>
+              삭제
+            </span>
           )}
         </AuthConsumer>
       </div>
@@ -67,9 +61,7 @@ const PostItem = ({ postData }: PostItem) => {
       <div className="postListHeader">
         <div className="postListTitle">
           {postData.title}
-          {postData.nowUser ? (
-            <PostMenu pno={postData.pno} writer={postData.writer} />
-          ) : null}
+          {postData.nowUser ? <PostMenu pno={postData.pno} /> : null}
         </div>
         <div className="postInfo">
           <span>

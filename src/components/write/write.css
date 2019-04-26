@@ -16,19 +16,3 @@
 .editor .codemirror {
   height: 95%;
 }
-.editor .tagEditor {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 5%;
-  padding: 7px 16px;
-  background: #fff;
-  border-right: 1px solid #263238;
-}
-.editor .tagEditor > * {
-  float: left;
-}
-.editor .tagEditor span {
-  margin-right: 10px;
-}

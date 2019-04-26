@@ -44,7 +44,7 @@ class AuthProvider extends Component<{}, State> {
             Authorization: `Bearer ${authObj.access_token}`
           })
           .then(res => {
-            console.log("@KakaoLogin", res);
+            // console.log("@KakaoLogin", res);
             // 토큰 연결 여부
             this.getLoginStatus();
             //모달 및 로딩 제거
@@ -75,7 +75,7 @@ class AuthProvider extends Component<{}, State> {
       this.getLoginStatus();
     },
     onDelete: pno => {
-      console.log("@onDelete");
+      // console.log("@onDelete");
       axios
         .post("https://mad-server.herokuapp.com/api/post/del", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -84,13 +84,13 @@ class AuthProvider extends Component<{}, State> {
           upDate: moment().format("YYYY-MM-DD H:mm:ss")
         })
         .then(res => {
-          console.log("@onDelete", res);
+          // console.log("@onDelete", res);
           this.getPostDatas();
         })
         .catch(err => console.log(err));
     },
     onLike: pno => {
-      console.log("@onLike");
+      // console.log("@onLike");
       axios
         .post("https://mad-server.herokuapp.com/api/like", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -103,7 +103,7 @@ class AuthProvider extends Component<{}, State> {
         .catch(err => console.log(err));
     },
     offLike: pno => {
-      console.log("@offLike");
+      // console.log("@offLike");
       axios
         .post("https://mad-server.herokuapp.com/api/unlike", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -141,7 +141,7 @@ class AuthProvider extends Component<{}, State> {
 
   //post 데이터 가져오기
   getPostDatas = async () => {
-    console.log("2.getPostDatas - userId :", localStorage.getItem("loginId"));
+    // console.log("2.getPostDatas - userId :", localStorage.getItem("loginId"));
     const postDatas = await this.callPostDatasApi();
     if (!postDatas) return false;
     this.setState({
@@ -157,7 +157,7 @@ class AuthProvider extends Component<{}, State> {
         userId: localStorage.getItem("loginId")
       })
       .then(res => {
-        console.log("3.callPostDatasApi :", res.data);
+        // console.log("3.callPostDatasApi :", res.data);
         return res.data;
       })
       .catch(err => console.log(err));

@@ -1,5 +1,5 @@
 import { Input, Icon } from "antd";
-import Tags from "../Tags";
+import { Tags } from "../Tags";
 import "./search.css";
 
 const Search = ({ onChange }) => {

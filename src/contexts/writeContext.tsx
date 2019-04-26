@@ -12,6 +12,7 @@ interface State {
   title: string;
   contents: string;
   hash: Array<string>;
+  beforeHash: Array<string>;
 }
 interface Props {
   mode: string;
@@ -24,10 +25,15 @@ class WriteProvider extends Component<Props, State> {
     isEdit: false,
     title: "",
     contents: "",
-    hash: []
+    hash: [], // 변경될 해시
+    beforeHash: [] // 기존 해시
   };
 
   componentDidMount() {
+    if (!localStorage.getItem("loginId")) {
+      Router.replace("/");
+      return false;
+    }
     if (this.props.mode == "edit") {
       this.getPostData(this.props.pno);
       this.setState({
@@ -52,7 +58,7 @@ class WriteProvider extends Component<Props, State> {
         return false;
       }
 
-      const hash = this.state.hash.join(",");
+      const hash = this.state.hash.toString();
 
       //post 등록
       axios
@@ -65,12 +71,22 @@ class WriteProvider extends Component<Props, State> {
           hash: hash
         })
         .then(res => {
-          console.log("@onSubmitPost", res);
+          // console.log("@onSubmitPost", res);
           Router.replace("/");
         });
     },
     onEdit: () => {
-      console.log("@onEdit");
+      // console.log("@onEdit");
+      let delHash = this.state.beforeHash.filter(
+        tag => !this.state.hash.includes(tag)
+      );
+
+      let addHash = this.state.hash.filter(
+        tag => !this.state.beforeHash.includes(tag)
+      );
+
+      console.log(delHash, addHash);
+
       axios
         .post("https://mad-server.herokuapp.com/api/post/edit", {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -78,10 +94,12 @@ class WriteProvider extends Component<Props, State> {
           title: this.state.title,
           contents: this.state.contents,
           upDate: moment().format("YYYY-MM-DD H:mm:ss"),
-          writer: localStorage.getItem("loginId")
+          writer: localStorage.getItem("loginId"),
+          delHash: delHash.toString(),
+          addHash: addHash.toString()
         })
         .then(res => {
-          console.log("@onEdit", res);
+          // console.log("@onEdit", res);
           Router.replace("/");
         });
     }
@@ -96,10 +114,15 @@ class WriteProvider extends Component<Props, State> {
         userId: localStorage.getItem("loginId")
       })
       .then(res => {
+        const hashArr = res.data.getContent[0].hashes
+          ? res.data.getContent[0].hashes.split(",")
+          : [];
         this.setState({
           isEdit: true,
           title: res.data.getContent[0].title,
-          contents: res.data.getContent[0].contents
+          contents: res.data.getContent[0].contents,
+          hash: hashArr,
+          beforeHash: hashArr
         });
       });
   };
