@@ -2,7 +2,7 @@ import { Input, Icon } from "antd";
 import { Tags } from "../Tags";
 import "./search.css";
 
-const Search = ({ onChange, tagDatas }) => {
+const Search = ({ onSearch, tagDatas }) => {
   return (
     <div className="searchWrap">
       <Tags styleClass="topTagWrap" tagDatas={tagDatas} />
@@ -11,7 +11,7 @@ const Search = ({ onChange, tagDatas }) => {
         prefix={<Icon type="search" style={{ color: "rgba(0,0,0,.25)" }} />}
         size={"large"}
         allowClear
-        onChange={onChange}
+        onPressEnter={onSearch}
       />
     </div>
   );

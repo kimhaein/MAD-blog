@@ -3,6 +3,7 @@ import axios from "axios";
 import { AuthConsumer } from "../../contexts/authContext";
 import Search from "../../components/common/Search";
 import Post from "../../components/post";
+import { message } from "antd";
 
 interface State {
   imgUrl: string;
@@ -38,7 +39,10 @@ class PostContainer extends Component<{}, State> {
       .catch(err => console.log(err));
   };
 
-  onChange = () => {};
+  onSearch = () => {
+    message.destroy();
+    message.loading("검색 기능은준비중입니다 빠빰!!!!!!!!");
+  };
 
   render() {
     const style = { backgroundImage: `url(/static/images/bg06.jpg)` };
@@ -46,7 +50,7 @@ class PostContainer extends Component<{}, State> {
       <AuthConsumer>
         {({ state }: any) => (
           <div className="contentsWrap postWrap" style={style}>
-            <Search onChange={this.onChange} tagDatas={this.state.hashLank} />
+            <Search onSearch={this.onSearch} tagDatas={this.state.hashLank} />
             <Post postDatas={state.postDatas} />
           </div>
         )}

@@ -3,7 +3,7 @@ import { Statistic, Icon, message } from "antd";
 import "./likes.css";
 
 const Likes = ({ likeDatas, love, pno }) => {
-  const color = love === 1 ? "#f92672" : "#ccc";
+  const color = love === 1 ? "#f5222d" : "#ccc";
   const likeEvt = actions => {
     if (localStorage.getItem("loginId")) {
       return love === 1 ? actions.offLike(pno) : actions.onLike(pno);
