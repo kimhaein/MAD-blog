@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tag, Icon, Input } from "antd";
+import { Tag, Icon, Input, message } from "antd";
 import "./tags.css";
 
 interface Props {
@@ -35,6 +35,10 @@ class TagsEdit extends Component<Props, State> {
 
   // 인풋 생성
   showInput = () => {
+    if (this.state.tags.length >= 10) {
+      message.warning("Hash는 10개까지 작성하실수 있습니다.");
+      return false;
+    }
     this.setState({ inputVisible: true }, () => this.input.focus());
   };
 
@@ -97,7 +101,7 @@ class TagsEdit extends Component<Props, State> {
             onClick={this.showInput}
             style={{ background: "#fff", borderStyle: "dashed" }}
           >
-            <Icon type="plus" /> New Tag
+            <Icon type="plus" /> New Hash
           </Tag>
         )}
       </div>

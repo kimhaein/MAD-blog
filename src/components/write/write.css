@@ -1,4 +1,4 @@
-.editor {
+.codemirror {
   overflow: auto;
   position: absolute;
   top: 0;
@@ -9,10 +9,10 @@
   background: #263238;
 }
 
-.editor .react-codemirror2,
-.editor .CodeMirror {
+.codemirror .react-codemirror2,
+.codemirror .CodeMirror {
   height: 100%;
 }
-.editor .codemirror {
+.codemirror .codemirror {
   height: 95%;
 }

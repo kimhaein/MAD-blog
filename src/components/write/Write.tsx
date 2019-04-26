@@ -15,21 +15,18 @@ interface State {}
 class Editor extends Component<Props, State> {
   render() {
     return (
-      <div className="editor">
-        <div className="codemirror">
-          <CodeMirror
-            value={this.props.contents}
-            options={{
-              mode: "xml",
-              theme: "material",
-              lineNumbers: true
-            }}
-            onBeforeChange={(editor, data, value) => {
-              this.props.setContents(value);
-            }}
-          />
-        </div>
-        {/* <div className="tagEditor">{this.renderEditTag()}</div> */}
+      <div className="codemirror">
+        <CodeMirror
+          value={this.props.contents}
+          options={{
+            mode: "xml",
+            theme: "material",
+            lineNumbers: true
+          }}
+          onBeforeChange={(editor, data, value) => {
+            this.props.setContents(value);
+          }}
+        />
       </div>
     );
   }
