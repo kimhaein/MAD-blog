@@ -6,6 +6,7 @@ const Search = ({ onChange }) => {
   return (
     <div className="searchWrap">
       <Tags
+        class="topTagWrap"
         tagDatas={["태그순위01", "태그02", "태그순위03", "태그순위태그순위04"]}
       />
       <Input

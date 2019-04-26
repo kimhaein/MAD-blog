@@ -5,6 +5,11 @@
   min-height: 64px;
 }
 
+.topTagWrap {
+  float: left;
+  margin: 10px 0;
+}
+
 /* antd custom */
 .ant-tag {
   margin-bottom: 10px;
@@ -20,14 +25,7 @@
   height: 5%;
   padding: 7px 16px;
   background: #fff;
-  border-right: 1px solid #263238;
   z-index: 1000000;
-}
-.editor .tagEditor > * {
-  float: left;
-}
-.editor .tagEditor span {
-  margin-right: 10px;
 }
 
 .ant-tag-hidden {

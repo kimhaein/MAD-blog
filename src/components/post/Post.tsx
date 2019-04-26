@@ -82,7 +82,7 @@ const PostItem = ({ postData }: PostItem) => {
         <Code markdown={postData.contents} type="post" />
       </div>
       <div className="postListfooter">
-        <Tags tagDatas={hashArry} />
+        <Tags tagDatas={hashArry} styleClass="tagWrap" />
         <Likes
           likeDatas={postData.likes}
           love={postData.love}

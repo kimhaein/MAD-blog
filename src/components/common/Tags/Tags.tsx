@@ -13,11 +13,11 @@ const TagItem = ({ tagList }: TagItem) => {
   return isLongTag ? <Tooltip title={tagList}>{tag}</Tooltip> : tag;
 };
 
-const Tags = ({ tagDatas }) => {
+const Tags = ({ tagDatas, styleClass }) => {
   const tagList = tagDatas.map((tagData, index) => {
     return <TagItem tagList={tagData} key={index} />;
   });
-  return <div className="tagWrap">{tagList}</div>;
+  return <div className={styleClass}>{tagList}</div>;
 };
 
 export default Tags;
