@@ -12,9 +12,8 @@
 
 /* antd custom */
 .tagWrap .ant-tag,
-.topTagWrap .ant-tags {
+.topTagWrap .ant-tag {
   margin-bottom: 10px;
-  border-radius: 10px;
   cursor: default;
 }
 

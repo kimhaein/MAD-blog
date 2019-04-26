@@ -21,46 +21,6 @@ class AuthProvider extends Component<{}, State> {
     postDatas: []
   };
 
-  componentDidMount() {
-    //Kakao SDK에서 사용한 리소스를 해제합니다.
-    window.Kakao.cleanup();
-    //Kakao SDK를 초기화합니다.
-    window.Kakao.init(KAKAO_API_KEY);
-
-    // 토큰 연결 여부
-    this.getLoginStatus();
-
-    //로그인
-    window.Kakao.Auth.createLoginButton({
-      container: ".kakao-login-btn",
-      success: authObj => {
-        this.setState({
-          loading: true
-        });
-
-        axios
-          .post("https://mad-server.herokuapp.com/kakaologin", {
-            headers: { "Content-type": "application/x-www-form-urlencoded" },
-            Authorization: `Bearer ${authObj.access_token}`
-          })
-          .then(res => {
-            // console.log("@KakaoLogin", res);
-            // 토큰 연결 여부
-            this.getLoginStatus();
-            //모달 및 로딩 제거
-            this.setState({
-              isOpen: false,
-              loading: false
-            });
-          })
-          .catch(err => console.log(err));
-      },
-      fail: err => {
-        console.log(err);
-      }
-    });
-  }
-
   actions = {
     onModal: () => {
       this.setState({
@@ -115,6 +75,49 @@ class AuthProvider extends Component<{}, State> {
         })
         .catch(err => console.log(err));
     }
+  };
+
+  componentDidMount() {
+    //Kakao SDK에서 사용한 리소스를 해제합니다.
+    window.Kakao.cleanup();
+    //Kakao SDK를 초기화합니다.
+    window.Kakao.init(KAKAO_API_KEY);
+
+    // 토큰 연결 여부
+    this.getLoginStatus();
+
+    //로그인
+    this.login();
+  }
+
+  login = () => {
+    window.Kakao.Auth.createLoginButton({
+      container: ".kakao-login-btn",
+      success: authObj => {
+        this.setState({
+          loading: true
+        });
+        axios
+          .post("https://mad-server.herokuapp.com/kakaologin", {
+            headers: { "Content-type": "application/x-www-form-urlencoded" },
+            Authorization: `Bearer ${authObj.access_token}`
+          })
+          .then(res => {
+            // console.log("@KakaoLogin", res);
+            // 토큰 연결 여부
+            this.getLoginStatus();
+            //모달 및 로딩 제거
+            this.setState({
+              isOpen: false,
+              loading: false
+            });
+          })
+          .catch(err => console.log(err));
+      },
+      fail: err => {
+        console.log(err);
+      }
+    });
   };
 
   // 로그인 상태 체크
