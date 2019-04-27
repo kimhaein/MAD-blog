@@ -69,7 +69,7 @@ const PostItem = ({ postData }: PostItem) => {
               src={postData.thumbnail_image}
               style={{ backgroundColor: "#000", marginRight: 10 }}
             >
-              {postData.writer.substring(1)}
+              {postData.writer.substring(0, 1).toUpperCase()}
             </Avatar>
             <span>BY. {postData.writer}</span>
           </span>
