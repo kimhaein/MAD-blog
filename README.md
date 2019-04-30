@@ -1,17 +1,20 @@
 ## Project
 
-mad-blog : https://mad-blog.now.sh/
-mad-sever : https://github.com/ellapresso/mad_server
+1. mad-blog : https://mad-blog.now.sh/
+2. mad-sever : https://github.com/ellapresso/mad_server
 
 ## Project Stack
 
 ### Client
 
-- React +) Context-api,react-hook
-- Next (https://nextjs.org/) : Router, SSR, CodeSplit
+- React 
+- Next
 - TypeScript
-- antd (https://ant.design/) : design
-- react-markdown (https://github.com/rexxars/react-markdown#readme) : markdown editor
+- antd 
+- axios
+- react-codemirror2
+- prismjs
+- moment
 
 ## ref
 
