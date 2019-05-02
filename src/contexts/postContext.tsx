@@ -11,11 +11,15 @@ interface Props {
 
 interface State {
   postDatas: Array<object>;
+  page: number;
+  isMoreBtn: Boolean;
 }
 
 class PostProvider extends Component<Props, State> {
   state: State = {
-    postDatas: []
+    postDatas: [],
+    page: 4,
+    isMoreBtn: true
   };
 
   actions = {
@@ -59,6 +63,16 @@ class PostProvider extends Component<Props, State> {
           this.getPostDatas();
         })
         .catch(err => console.log(err));
+    },
+    onMore: () => {
+      this.setState(
+        {
+          page: this.state.page + 4
+        },
+        () => {
+          this.getPostDatas();
+        }
+      );
     }
   };
 
@@ -74,7 +88,8 @@ class PostProvider extends Component<Props, State> {
     const postDatas = await this.callPostDatasApi();
     if (!postDatas) return false;
     this.setState({
-      postDatas
+      postDatas: postDatas.post,
+      isMoreBtn: this.state.page >= postDatas.totalPost.totalCnt ? false : true
     });
   };
 
@@ -83,7 +98,8 @@ class PostProvider extends Component<Props, State> {
     return axios
       .post("https://mad-server.herokuapp.com/api/post/list", {
         headers: { "Content-type": "application/x-www-form-urlencoded" },
-        userId: localStorage.getItem("loginId")
+        userId: localStorage.getItem("loginId"),
+        page: this.state.page
       })
       .then(res => {
         // console.log("3.callPostDatasApi :", res.data);

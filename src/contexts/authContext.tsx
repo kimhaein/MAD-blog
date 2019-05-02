@@ -109,7 +109,7 @@ class AuthProvider extends Component<Props, State> {
     // console.log("2.getPostDatas - userId :", localStorage.getItem("loginId"));
     const postDatas = await this.callPostDatasApi();
     if (!postDatas) return false;
-    this.props.postDatas(postDatas);
+    this.props.postDatas(postDatas.post);
   };
 
   //post API 호출

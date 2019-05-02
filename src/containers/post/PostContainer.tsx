@@ -3,6 +3,7 @@ import axios from "axios";
 import { PostConsumer } from "../../contexts/postContext";
 import Search from "../../components/common/Search";
 import Post from "../../components/post";
+import { MoreBtn } from "../../components/common/Button";
 import { message } from "antd";
 
 interface State {
@@ -50,6 +51,7 @@ class PostContainer extends Component<{}, State> {
           <div className="contentsWrap postWrap" style={style}>
             <Search onSearch={this.onSearch} tagDatas={this.state.hashLank} />
             <Post postDatas={state.postDatas} />
+            <MoreBtn />
           </div>
         )}
       </PostConsumer>

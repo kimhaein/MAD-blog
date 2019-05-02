@@ -3,7 +3,11 @@ import HeaderContainer from "../containers/common/HeaderContainer";
 import WriteConatiner from "../containers/write/WriteConatiner";
 import { WriteProvider } from "../contexts/writeContext";
 
-class Write extends Component<{}, {}> {
+interface Props {
+  mode: string;
+  pno: string;
+}
+class Write extends Component<Props, {}> {
   static async getInitialProps({ query }) {
     return { mode: query.mode, pno: query.pno };
   }
