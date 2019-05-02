@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { AuthConsumer } from "../../contexts/authContext";
+import { PostConsumer } from "../../contexts/postContext";
 import Search from "../../components/common/Search";
 import Post from "../../components/post";
 import { message } from "antd";
 
 interface State {
-  imgUrl: string;
   hashLank: Array<string>;
 }
 
 class PostContainer extends Component<{}, State> {
   state: State = {
-    imgUrl: "bg01",
     hashLank: []
   };
 
@@ -47,14 +45,14 @@ class PostContainer extends Component<{}, State> {
   render() {
     const style = { backgroundImage: `url(/static/images/bg06.jpg)` };
     return (
-      <AuthConsumer>
+      <PostConsumer>
         {({ state }: any) => (
           <div className="contentsWrap postWrap" style={style}>
             <Search onSearch={this.onSearch} tagDatas={this.state.hashLank} />
             <Post postDatas={state.postDatas} />
           </div>
         )}
-      </AuthConsumer>
+      </PostConsumer>
     );
   }
 }

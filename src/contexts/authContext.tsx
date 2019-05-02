@@ -1,10 +1,13 @@
 import React, { Component, createContext } from "react";
 import { KAKAO_API_KEY } from "../key/API_KEY";
-import moment from "moment";
 import axios from "axios";
 
 const Context = createContext({}); // Context 를 만듭니다.
 const { Provider, Consumer: AuthConsumer } = Context;
+
+interface Props {
+  postDatas: any;
+}
 
 interface State {
   isOpen: boolean;
@@ -13,7 +16,7 @@ interface State {
   postDatas: Array<object>;
 }
 
-class AuthProvider extends Component<{}, State> {
+class AuthProvider extends Component<Props, State> {
   state: State = {
     isOpen: false,
     isLogin: false,
@@ -33,47 +36,6 @@ class AuthProvider extends Component<{}, State> {
     onLogOut: async () => {
       await window.Kakao.Auth.logout();
       this.getLoginStatus();
-    },
-    onDelete: pno => {
-      // console.log("@onDelete");
-      axios
-        .post("https://mad-server.herokuapp.com/api/post/del", {
-          headers: { "Content-type": "application/x-www-form-urlencoded" },
-          pno,
-          writer: localStorage.getItem("loginId"),
-          upDate: moment().format("YYYY-MM-DD H:mm:ss")
-        })
-        .then(res => {
-          // console.log("@onDelete", res);
-          this.getPostDatas();
-        })
-        .catch(err => console.log(err));
-    },
-    onLike: pno => {
-      // console.log("@onLike");
-      axios
-        .post("https://mad-server.herokuapp.com/api/like", {
-          headers: { "Content-type": "application/x-www-form-urlencoded" },
-          pno,
-          userId: localStorage.getItem("loginId")
-        })
-        .then(res => {
-          this.getPostDatas();
-        })
-        .catch(err => console.log(err));
-    },
-    offLike: pno => {
-      // console.log("@offLike");
-      axios
-        .post("https://mad-server.herokuapp.com/api/unlike", {
-          headers: { "Content-type": "application/x-www-form-urlencoded" },
-          pno,
-          userId: localStorage.getItem("loginId")
-        })
-        .then(res => {
-          this.getPostDatas();
-        })
-        .catch(err => console.log(err));
     }
   };
 
@@ -147,9 +109,7 @@ class AuthProvider extends Component<{}, State> {
     // console.log("2.getPostDatas - userId :", localStorage.getItem("loginId"));
     const postDatas = await this.callPostDatasApi();
     if (!postDatas) return false;
-    this.setState({
-      postDatas
-    });
+    this.props.postDatas(postDatas);
   };
 
   //post API 호출
