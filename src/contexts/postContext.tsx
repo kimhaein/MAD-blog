@@ -13,13 +13,15 @@ interface State {
   postDatas: Array<object>;
   page: number;
   isMoreBtn: Boolean;
+  keyword: string;
 }
 
 class PostProvider extends Component<Props, State> {
   state: State = {
     postDatas: [],
     page: 4,
-    isMoreBtn: true
+    isMoreBtn: true,
+    keyword: ""
   };
 
   actions = {
@@ -73,6 +75,16 @@ class PostProvider extends Component<Props, State> {
           this.getPostDatas();
         }
       );
+    },
+    onSearch: e => {
+      this.setState(
+        {
+          keyword: e.target.value
+        },
+        () => {
+          this.getPostDatas();
+        }
+      );
     }
   };
 
@@ -89,7 +101,7 @@ class PostProvider extends Component<Props, State> {
     if (!postDatas) return false;
     this.setState({
       postDatas: postDatas.post,
-      isMoreBtn: this.state.page >= postDatas.totalPost.totalCnt ? false : true
+      isMoreBtn: this.state.page >= postDatas.totalCnt ? false : true
     });
   };
 
@@ -99,7 +111,8 @@ class PostProvider extends Component<Props, State> {
       .post("https://mad-server.herokuapp.com/api/post/list", {
         headers: { "Content-type": "application/x-www-form-urlencoded" },
         userId: localStorage.getItem("loginId"),
-        page: this.state.page
+        page: this.state.page,
+        search: this.state.keyword
       })
       .then(res => {
         // console.log("3.callPostDatasApi :", res.data);
