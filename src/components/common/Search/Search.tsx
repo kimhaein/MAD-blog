@@ -3,7 +3,7 @@ import { Input, Icon } from "antd";
 import { Tags } from "../Tags";
 import "./search.css";
 
-const Search = ({ onSearch, tagDatas }) => {
+const Search = ({ tagDatas }) => {
   return (
     <div className="searchWrap">
       <Tags styleClass="topTagWrap" tagDatas={tagDatas} />

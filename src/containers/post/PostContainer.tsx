@@ -38,18 +38,13 @@ class PostContainer extends Component<{}, State> {
       .catch(err => console.log(err));
   };
 
-  onSearch = () => {
-    message.destroy();
-    message.loading("검색 기능은준비중입니다 빠빰!!!!!!!!");
-  };
-
   render() {
     const style = { backgroundImage: `url(/static/images/bg06.jpg)` };
     return (
       <PostConsumer>
         {({ state }: any) => (
           <div className="contentsWrap postWrap" style={style}>
-            <Search onSearch={this.onSearch} tagDatas={this.state.hashLank} />
+            <Search tagDatas={this.state.hashLank} />
             <Post postDatas={state.postDatas} />
             <MoreBtn />
           </div>
