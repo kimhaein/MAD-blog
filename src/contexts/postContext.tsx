@@ -101,7 +101,7 @@ class PostProvider extends Component<Props, State> {
     if (!postDatas) return false;
     this.setState({
       postDatas: postDatas.post,
-      isMoreBtn: this.state.page >= postDatas.totalCnt ? false : true
+      isMoreBtn: this.state.page >= postDatas.totalPost.totalCnt ? false : true
     });
   };
 
