@@ -20,7 +20,7 @@ class PostProvider extends Component<Props, State> {
   state: State = {
     postDatas: [],
     page: 4,
-    isMoreBtn: true,
+    isMoreBtn: false,
     keyword: ""
   };
 
@@ -90,7 +90,8 @@ class PostProvider extends Component<Props, State> {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      postDatas: nextProps.postDatas
+      postDatas: nextProps.postDatas,
+      isMoreBtn: true
     });
   }
 
