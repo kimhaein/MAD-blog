@@ -10,7 +10,8 @@ const Context = createContext({});
 const { Provider, Consumer: AuthConsumer } = Context;
 
 /**
- * postDatas: post 관련 json 데이터
+ * setPostDatas: post 권한 적용 이벤트
+ * setLoading : 로딩 처리 이벤트
  * isModal: 모달 open 여부
  * isLogin: 로그인 여부
  * loading: 로딩 display 여부
@@ -93,14 +94,10 @@ class AuthProvider extends Component<Props, State> {
         console.log("1.getLoginStatus", statusObj);
         if (statusObj.status === "connected") {
           localStorage.setItem("loginId", statusObj.user.id);
-          this.setState({
-            isLogin: true
-          });
+          this.setState({ isLogin: true });
         } else {
           localStorage.removeItem("loginId");
-          this.setState({
-            isLogin: false
-          });
+          this.setState({ isLogin: false });
         }
         //post 데이터 가져오기
         this.getPostDatas();
@@ -128,8 +125,8 @@ class AuthProvider extends Component<Props, State> {
         headers: { "Content-type": "application/x-www-form-urlencoded" },
         userId: localStorage.getItem("loginId")
       })
-      .then(res => {
-        return res.data;
+      .then(({ data }) => {
+        return data;
       })
       .catch(err => console.log(err));
   };

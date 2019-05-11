@@ -11,6 +11,7 @@ const { Provider, Consumer: PostConsumer } = Context;
 
 /**
  * postDatas: post 관련 json 데이터
+ * setLoading : 로딩 처리 이벤트
  * postCnt: 보여줄 post 갯수
  * isMoreBtn: 더보기 display 여부
  * keyword: 검색 조건
@@ -112,9 +113,9 @@ class PostProvider extends Component<Props, State> {
   }
 
   //shouldComponentUpdate:prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드, true일때 만 리렌더링
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.postDatas === this.state.postDatas;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextProps.postDatas === this.state.postDatas;
+  // }
 
   /**
    * posts 관련 json 데이터 state 저장
@@ -135,15 +136,16 @@ class PostProvider extends Component<Props, State> {
    * posts 관련 데이터 조회
    */
   callPostDatasApi = () => {
+    const { postCnt, keyword } = this.state;
     return axios
       .post("https://mad-server.herokuapp.com/api/post/list", {
         headers: { "Content-type": "application/x-www-form-urlencoded" },
         userId: localStorage.getItem("loginId"),
-        page: this.state.postCnt,
-        search: this.state.keyword
+        page: postCnt,
+        search: keyword
       })
-      .then(res => {
-        return res.data;
+      .then(({ data }) => {
+        return data;
       })
       .catch(err => console.log(err));
   };

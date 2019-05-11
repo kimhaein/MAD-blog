@@ -21,9 +21,7 @@ class Index extends Component<{}, State> {
   };
 
   setPostDatas = postDatas => {
-    this.setState({
-      postDatas
-    });
+    this.setState({ postDatas });
   };
 
   setLoading = () => {
@@ -31,19 +29,17 @@ class Index extends Component<{}, State> {
   };
 
   render() {
+    const { loading, postDatas } = this.state;
     return (
       <Fragment>
         <AuthProvider
           setPostDatas={this.setPostDatas}
           setLoading={this.setLoading}
         >
-          {this.state.loading ? <LoadingBar /> : null}
+          {loading ? <LoadingBar /> : null}
           <HeaderContainer type="common" />
           <LoginModal />
-          <PostProvider
-            postDatas={this.state.postDatas}
-            setLoading={this.setLoading}
-          >
+          <PostProvider postDatas={postDatas} setLoading={this.setLoading}>
             <PostContainer />
           </PostProvider>
         </AuthProvider>

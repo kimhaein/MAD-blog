@@ -32,8 +32,8 @@ class PostContainer extends Component<{}, State> {
   callHashLankApi = () => {
     return axios
       .get("https://mad-server.herokuapp.com/api/hash/rank")
-      .then(res => {
-        return res.data.rankHash.rankHash;
+      .then(({ data }) => {
+        return data.rankHash.rankHash;
       })
       .catch(err => console.log(err));
   };

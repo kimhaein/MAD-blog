@@ -24,12 +24,9 @@ class Write extends Component<Props, {}> {
     this.setState({ loading: !this.state.loading });
   };
   render() {
+    const { mode, pno } = this.props;
     return (
-      <WriteProvider
-        mode={this.props.mode}
-        pno={this.props.pno}
-        setLoading={this.setLoading}
-      >
+      <WriteProvider mode={mode} pno={pno} setLoading={this.setLoading}>
         {this.state.loading ? <LoadingBar /> : null}
         <HeaderContainer type="post" />
         <WriteConatiner />
