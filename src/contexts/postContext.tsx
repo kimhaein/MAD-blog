@@ -111,6 +111,11 @@ class PostProvider extends Component<Props, State> {
     });
   }
 
+  //shouldComponentUpdate:prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드, true일때 만 리렌더링
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.postDatas === this.state.postDatas;
+  }
+
   /**
    * posts 관련 json 데이터 state 저장
    */
@@ -119,9 +124,10 @@ class PostProvider extends Component<Props, State> {
     this.props.setLoading();
     if (!postDatas) return false;
     this.setState({
-      postDatas: postDatas.post,
       isMoreBtn:
-        this.state.postCnt >= postDatas.totalPost.totalCnt ? false : true
+        this.state.postCnt >= postDatas.totalPost.totalCnt ? false : true,
+      postDatas: postDatas.post,
+      keyword: ""
     });
   };
 
