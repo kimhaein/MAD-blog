@@ -28,6 +28,7 @@ const { Provider, Consumer: WriteConsumer } = Context;
 interface Props {
   mode: string;
   pno: string;
+  setLoading: any;
 }
 
 interface State {
@@ -130,6 +131,7 @@ class WriteProvider extends Component<Props, State> {
    * @param {string} pno 게시글 id
    */
   getPostData = pno => {
+    this.props.setLoading();
     axios
       .post("https://mad-server.herokuapp.com/api/post/contents", {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -147,6 +149,7 @@ class WriteProvider extends Component<Props, State> {
           hash: hashArr,
           beforeHash: hashArr
         });
+        this.props.setLoading();
       });
   };
 

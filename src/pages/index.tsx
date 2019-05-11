@@ -7,29 +7,43 @@ import { PostProvider } from "../contexts/postContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import PostContainer from "../containers/post/PostContainer";
 import { LoginModal } from "../components/common/Modal";
+import LoadingBar from "../components/common/LoadingBar";
 
 interface State {
   postDatas: Array<object>;
+  loading: boolean;
 }
 
 class Index extends Component<{}, State> {
   state: State = {
-    postDatas: []
+    postDatas: [],
+    loading: false
   };
 
-  postDatas = postDatas => {
+  setPostDatas = postDatas => {
     this.setState({
       postDatas
     });
   };
 
+  setLoading = () => {
+    this.setState({ loading: !this.state.loading });
+  };
+
   render() {
     return (
       <Fragment>
-        <AuthProvider postDatas={this.postDatas}>
+        <AuthProvider
+          setPostDatas={this.setPostDatas}
+          setLoading={this.setLoading}
+        >
+          {this.state.loading ? <LoadingBar /> : null}
           <HeaderContainer type="common" />
           <LoginModal />
-          <PostProvider postDatas={this.state.postDatas}>
+          <PostProvider
+            postDatas={this.state.postDatas}
+            setLoading={this.setLoading}
+          >
             <PostContainer />
           </PostProvider>
         </AuthProvider>

@@ -11,7 +11,7 @@ const { Provider, Consumer: AuthConsumer } = Context;
 
 /**
  * postDatas: post 관련 json 데이터
- * isOpen: 모달 open 여부
+ * isModal: 모달 open 여부
  * isLogin: 로그인 여부
  * loading: 로딩 display 여부
  * onModal: 모달 이벤트
@@ -20,31 +20,31 @@ const { Provider, Consumer: AuthConsumer } = Context;
  */
 
 interface Props {
-  postDatas: any;
+  setPostDatas: any;
+  setLoading: any;
 }
 interface State {
-  isOpen: boolean;
+  isModal: boolean;
   isLogin: boolean;
-  loading: boolean;
 }
 
 class AuthProvider extends Component<Props, State> {
   state: State = {
-    isOpen: false,
-    isLogin: false,
-    loading: false
+    isModal: false,
+    isLogin: false
   };
 
   actions = {
     onModal: () => {
       this.setState({
-        isOpen: !this.state.isOpen
+        isModal: !this.state.isModal
       });
     },
     onLogin: () => {
-      return this.state.isLogin;
+      this.login();
     },
     onLogOut: async () => {
+      this.props.setLoading();
       await window.Kakao.Auth.logout();
       this.getLoginStatus();
     }
@@ -56,18 +56,17 @@ class AuthProvider extends Component<Props, State> {
     //Kakao SDK를 초기화합니다.
     window.Kakao.init(KAKAO_API_KEY);
 
+    this.props.setLoading();
     this.getLoginStatus();
-    this.login();
   }
 
   /**
    * kakao 로그인
    */
   login = () => {
-    window.Kakao.Auth.createLoginButton({
-      container: ".kakao-login-btn",
+    this.props.setLoading();
+    window.Kakao.Auth.login({
       success: authObj => {
-        this.setState({ loading: true });
         axios
           .post("https://mad-server.herokuapp.com/kakaologin", {
             headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -75,7 +74,7 @@ class AuthProvider extends Component<Props, State> {
           })
           .then(res => {
             this.getLoginStatus();
-            this.setState({ isOpen: false, loading: false });
+            this.setState({ isModal: false });
           })
           .catch(err => console.log(err));
       },
@@ -114,9 +113,10 @@ class AuthProvider extends Component<Props, State> {
    */
   getPostDatas = async () => {
     const postDatas = await this.callPostDatasApi();
+    this.props.setLoading();
     if (!postDatas) return false;
     // 권한에 따른 전역 postDatas 업데이트
-    this.props.postDatas(postDatas.post);
+    this.props.setPostDatas(postDatas.post);
   };
 
   /**

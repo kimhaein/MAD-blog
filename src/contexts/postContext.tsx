@@ -23,6 +23,7 @@ const { Provider, Consumer: PostConsumer } = Context;
 
 interface Props {
   postDatas: Array<object>;
+  setLoading: any;
 }
 
 interface State {
@@ -42,6 +43,7 @@ class PostProvider extends Component<Props, State> {
 
   actions = {
     onDelete: pno => {
+      this.props.setLoading();
       axios
         .post("https://mad-server.herokuapp.com/api/post/del", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -55,6 +57,7 @@ class PostProvider extends Component<Props, State> {
         .catch(err => console.log(err));
     },
     onLike: pno => {
+      this.props.setLoading();
       axios
         .post("https://mad-server.herokuapp.com/api/like", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -67,7 +70,7 @@ class PostProvider extends Component<Props, State> {
         .catch(err => console.log(err));
     },
     offLike: pno => {
-      // console.log("@offLike");
+      this.props.setLoading();
       axios
         .post("https://mad-server.herokuapp.com/api/unlike", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -80,6 +83,7 @@ class PostProvider extends Component<Props, State> {
         .catch(err => console.log(err));
     },
     onMore: () => {
+      this.props.setLoading();
       this.setState(
         {
           postCnt: this.state.postCnt + 4
@@ -90,6 +94,7 @@ class PostProvider extends Component<Props, State> {
       );
     },
     onSearch: e => {
+      this.props.setLoading();
       const target = e.target;
       const keyword = target.value ? target.value : target.dataset.keyword;
       this.setState({ keyword }, () => {
@@ -111,6 +116,7 @@ class PostProvider extends Component<Props, State> {
    */
   getPostDatas = async () => {
     const postDatas = await this.callPostDatasApi();
+    this.props.setLoading();
     if (!postDatas) return false;
     this.setState({
       postDatas: postDatas.post,
