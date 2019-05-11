@@ -7,14 +7,16 @@
 
 ### Client
 
-- React 
+- React
 - Next
+- Now
 - TypeScript
-- antd 
-- axios
-- react-codemirror2
-- prismjs
-- moment
+- Antd
+- Axios
+- React-codemirror2
+- Marked
+- Prismjs
+- Moment
 
 ## ref
 
@@ -27,3 +29,8 @@
 
 1. https://poiemaweb.com/typescript-introduction
 2. https://github.com/velopert/typescript-react-sample
+
+## Plan
+
+- 1st : 2019-03-31 ~ 2019-04-27
+- 2nd : 2019-05-11 ~ 2019-06-01

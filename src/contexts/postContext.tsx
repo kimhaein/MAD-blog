@@ -90,14 +90,11 @@ class PostProvider extends Component<Props, State> {
       );
     },
     onSearch: e => {
-      this.setState(
-        {
-          keyword: e.target.value
-        },
-        () => {
-          this.getPostDatas();
-        }
-      );
+      const target = e.target;
+      const keyword = target.value ? target.value : target.dataset.keyword;
+      this.setState({ keyword }, () => {
+        this.getPostDatas();
+      });
     }
   };
 
@@ -130,7 +127,7 @@ class PostProvider extends Component<Props, State> {
       .post("https://mad-server.herokuapp.com/api/post/list", {
         headers: { "Content-type": "application/x-www-form-urlencoded" },
         userId: localStorage.getItem("loginId"),
-        postCnt: this.state.postCnt,
+        page: this.state.postCnt,
         search: this.state.keyword
       })
       .then(res => {
