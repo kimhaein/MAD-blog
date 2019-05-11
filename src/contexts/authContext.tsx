@@ -1,27 +1,38 @@
+/**
+ * 권한 관련 context
+ */
 import React, { Component, createContext } from "react";
 import { KAKAO_API_KEY } from "../key/API_KEY";
 import axios from "axios";
 
-const Context = createContext({}); // Context 를 만듭니다.
+//Context 생성
+const Context = createContext({});
 const { Provider, Consumer: AuthConsumer } = Context;
+
+/**
+ * postDatas: post 관련 json 데이터
+ * isOpen: 모달 open 여부
+ * isLogin: 로그인 여부
+ * loading: 로딩 display 여부
+ * onModal: 모달 이벤트
+ * onLogin: 로그인 이벤트
+ * onLogout: 로그아웃 이벤트
+ */
 
 interface Props {
   postDatas: any;
 }
-
 interface State {
   isOpen: boolean;
   isLogin: boolean;
   loading: boolean;
-  postDatas: Array<object>;
 }
 
 class AuthProvider extends Component<Props, State> {
   state: State = {
     isOpen: false,
     isLogin: false,
-    loading: false,
-    postDatas: []
+    loading: false
   };
 
   actions = {
@@ -45,34 +56,26 @@ class AuthProvider extends Component<Props, State> {
     //Kakao SDK를 초기화합니다.
     window.Kakao.init(KAKAO_API_KEY);
 
-    // 토큰 연결 여부
     this.getLoginStatus();
-
-    //로그인
     this.login();
   }
 
+  /**
+   * kakao 로그인
+   */
   login = () => {
     window.Kakao.Auth.createLoginButton({
       container: ".kakao-login-btn",
       success: authObj => {
-        this.setState({
-          loading: true
-        });
+        this.setState({ loading: true });
         axios
           .post("https://mad-server.herokuapp.com/kakaologin", {
             headers: { "Content-type": "application/x-www-form-urlencoded" },
             Authorization: `Bearer ${authObj.access_token}`
           })
           .then(res => {
-            // console.log("@KakaoLogin", res);
-            // 토큰 연결 여부
             this.getLoginStatus();
-            //모달 및 로딩 제거
-            this.setState({
-              isOpen: false,
-              loading: false
-            });
+            this.setState({ isOpen: false, loading: false });
           })
           .catch(err => console.log(err));
       },
@@ -82,7 +85,9 @@ class AuthProvider extends Component<Props, State> {
     });
   };
 
-  // 로그인 상태 체크
+  /**
+   * 로그인 토큰 연결 여부 확인
+   */
   getLoginStatus = () => {
     window.Kakao.Auth.getStatus(
       function(statusObj) {
@@ -104,15 +109,19 @@ class AuthProvider extends Component<Props, State> {
     );
   };
 
-  //post 데이터 가져오기
+  /**
+   * posts 관련 json 데이터 state 저장
+   */
   getPostDatas = async () => {
-    // console.log("2.getPostDatas - userId :", localStorage.getItem("loginId"));
     const postDatas = await this.callPostDatasApi();
     if (!postDatas) return false;
+    // 권한에 따른 전역 postDatas 업데이트
     this.props.postDatas(postDatas.post);
   };
 
-  //post API 호출
+  /**
+   * posts 관련 데이터 조회
+   */
   callPostDatasApi = () => {
     return axios
       .post("https://mad-server.herokuapp.com/api/post/list", {
@@ -120,7 +129,6 @@ class AuthProvider extends Component<Props, State> {
         userId: localStorage.getItem("loginId")
       })
       .then(res => {
-        // console.log("3.callPostDatasApi :", res.data);
         return res.data;
       })
       .catch(err => console.log(err));
