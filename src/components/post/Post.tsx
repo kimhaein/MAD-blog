@@ -84,9 +84,10 @@ const PostItem = ({ postData }: PostItem) => {
       <div className="postListfooter">
         <Tags tagDatas={hashArry} styleClass="tagWrap" />
         <Likes
-          likeDatas={postData.likes}
+          like={postData.likes}
           love={postData.love}
           pno={postData.pno}
+          ㄴ
         />
       </div>
     </div>
