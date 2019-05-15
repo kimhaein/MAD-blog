@@ -22,7 +22,7 @@
   width: 100%;
   height: 10px;
   background: #40a9ff;
-  animation-duration: 2s;
+  animation-duration: 8s;
   animation-name: loading;
   z-index: 10000000000;
 }

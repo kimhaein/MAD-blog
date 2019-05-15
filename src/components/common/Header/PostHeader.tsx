@@ -5,7 +5,7 @@ const confirm = Modal.confirm;
 import "./header.css";
 
 // confirm
-const showConfirm = (content: string, onOk: any) => {
+const showConfirm = (content: string, onOk: () => void) => {
   confirm({
     title: "mad-blog",
     content: content,

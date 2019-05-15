@@ -21,8 +21,8 @@ const { Provider, Consumer: AuthConsumer } = Context;
  */
 
 interface Props {
-  setPostDatas: any;
-  setLoading: any;
+  setPostDatas: () => void;
+  setLoading: () => void;
 }
 interface State {
   isModal: boolean;
@@ -77,9 +77,9 @@ class AuthProvider extends Component<Props, State> {
             this.getLoginStatus();
             this.setState({ isModal: false });
           })
-          .catch(err => console.log(err));
+          .catch((err: object) => console.log(err));
       },
-      fail: err => {
+      fail: (err: object) => {
         console.log(err);
       }
     });
@@ -128,7 +128,7 @@ class AuthProvider extends Component<Props, State> {
       .then(({ data }) => {
         return data;
       })
-      .catch(err => console.log(err));
+      .catch((err: object) => console.log(err));
   };
 
   render() {

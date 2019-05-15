@@ -5,7 +5,7 @@ const confirm = Modal.confirm;
 import "./header.css";
 
 // confirm
-const showConfirm = (content: string, onOk: any) => {
+const showConfirm = (content: string, onOk: () => void) => {
   confirm({
     title: "mad-blog",
     content: content,
@@ -15,7 +15,7 @@ const showConfirm = (content: string, onOk: any) => {
   });
 };
 
-const Login = ({ onModal }) => {
+const Login = ({ onModal }: any) => {
   return (
     <div className="login" onClick={onModal}>
       login
@@ -23,7 +23,7 @@ const Login = ({ onModal }) => {
   );
 };
 
-const Logout = ({ onLogOut }) => {
+const Logout = ({ onLogOut }: any) => {
   return (
     <div
       className="login"

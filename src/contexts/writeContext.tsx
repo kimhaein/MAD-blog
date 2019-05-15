@@ -29,7 +29,7 @@ const { Provider, Consumer: WriteConsumer } = Context;
 interface Props {
   mode: string;
   pno: string;
-  setLoading: any;
+  setLoading: () => void;
 }
 
 interface State {

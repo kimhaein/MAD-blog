@@ -4,7 +4,6 @@ import { PostConsumer } from "../../contexts/postContext";
 import Search from "../../components/common/Search";
 import Post from "../../components/post";
 import { MoreBtn } from "../../components/common/Button";
-import { message } from "antd";
 
 interface State {
   hashLank: Array<string>;
@@ -35,7 +34,7 @@ class PostContainer extends Component<{}, State> {
       .then(({ data }) => {
         return data.rankHash.rankHash;
       })
-      .catch(err => console.log(err));
+      .catch((err: object) => console.log(err));
   };
 
   render() {
