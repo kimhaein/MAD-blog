@@ -28,12 +28,12 @@ const { Provider, Consumer: WriteConsumer } = Context;
 
 interface Props {
   mode: string;
-  pno: string;
+  pno: number;
   setLoading: () => void;
 }
 
 interface State {
-  pno: string;
+  pno: number;
   isEdit: boolean;
   title: string;
   contents: string;
@@ -43,7 +43,7 @@ interface State {
 
 class WriteProvider extends Component<Props, State> {
   state: State = {
-    pno: "",
+    pno: 0,
     isEdit: false,
     title: "",
     contents: "",
@@ -67,13 +67,13 @@ class WriteProvider extends Component<Props, State> {
   }
 
   actions = {
-    setTitle: title => {
+    setTitle: (title: string) => {
       this.setState({ title });
     },
-    setContents: contents => {
+    setContents: (contents: string) => {
       this.setState({ contents });
     },
-    setHash: hash => {
+    setHash: (hash: Array<string>) => {
       this.setState({ hash });
     },
     onSubmitPost: () => {
@@ -127,7 +127,7 @@ class WriteProvider extends Component<Props, State> {
    * [수정] 해당 post 데이터 조회
    * @param {string} pno 게시글 id
    */
-  getPostData = pno => {
+  getPostData = (pno: number) => {
     this.props.setLoading();
     axios
       .post("https://mad-server.herokuapp.com/api/post/contents", {

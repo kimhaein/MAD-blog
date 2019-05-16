@@ -10,7 +10,7 @@ import { Code } from "../common/CodeView/CodeView";
 
 import "./post.css";
 
-const PostMenu = ({ pno }) => {
+const PostMenu = ({ pno }: any) => {
   return (
     <div className="postMenuBtn">
       <Icon type="more" />
@@ -83,19 +83,14 @@ const PostItem = ({ postData }: PostItem) => {
       </div>
       <div className="postListfooter">
         <Tags tagDatas={hashArry} styleClass="tagWrap" />
-        <Likes
-          like={postData.likes}
-          love={postData.love}
-          pno={postData.pno}
-          ㄴ
-        />
+        <Likes like={postData.likes} love={postData.love} pno={postData.pno} />
       </div>
     </div>
   );
 };
 
 const Post = ({ postDatas }) => {
-  let postList = postDatas.map((postData, index) => {
+  let postList = postDatas.map((postData: object, index: number) => {
     return (
       <Col xs={24} md={24} lg={24} xl={12} key={index}>
         <PostItem postData={postData} />

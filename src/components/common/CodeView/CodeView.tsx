@@ -12,9 +12,9 @@ require("prismjs/components/prism-jsx.min.js");
 require("prismjs/components/prism-css.min.js");
 
 interface Props {
-  type: string;
   markdown: string;
-  setContents(): void;
+  type: string;
+  setContents?: () => void;
 }
 interface State {
   html: string;

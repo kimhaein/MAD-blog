@@ -1,10 +1,19 @@
 import { PostConsumer } from "../../../contexts/postContext";
 import { Statistic, Icon, message } from "antd";
 import "./likes.css";
+interface likes {
+  like: number;
+  love: number;
+  pno: number;
+}
 
-const Likes = ({ like, love, pno }) => {
+interface Actions {
+  offLike: () => void;
+  onLike: () => void;
+}
+const Likes = ({ like, love, pno }: likes) => {
   const color = love === 1 ? "#f5222d" : "#ccc";
-  const likeEvt = actions => {
+  const likeEvt = (actions: Actions) => {
     if (localStorage.getItem("loginId")) {
       return love === 1 ? actions.offLike(pno) : actions.onLike(pno);
     } else {

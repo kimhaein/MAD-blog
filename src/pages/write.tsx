@@ -6,7 +6,7 @@ import LoadingBar from "../components/common/LoadingBar";
 
 interface Props {
   mode: string;
-  pno: string;
+  pno: number;
 }
 interface State {
   loading: boolean;
