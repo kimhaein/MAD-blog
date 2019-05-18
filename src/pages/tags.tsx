@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import Router from "next/router";
 import { AuthProvider } from "../contexts/authContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import LoadingBar from "../components/common/LoadingBar";
@@ -10,20 +9,11 @@ interface State {
   loading: boolean;
 }
 
-class Chart extends Component<{}, State> {
+class Tags extends Component<{}, State> {
   state: State = {
     isLogin: false,
     loading: false
   };
-
-  componentDidMount() {
-    // 로그인 없이 접근시 메인 화면으로 이동
-    if (!localStorage.getItem("loginId")) {
-      alert("해당 페이지의 권한이 없습니다");
-      Router.replace("/");
-      return false;
-    }
-  }
 
   setIsLogin = (isLogin: boolean = false) => {
     this.setState({ isLogin });
@@ -34,12 +24,13 @@ class Chart extends Component<{}, State> {
   };
 
   render() {
-    const { isLogin, loading } = this.state;
+    const { loading } = this.state;
     return (
       <Fragment>
         <AuthProvider setIsLogin={this.setIsLogin} setLoading={this.setLoading}>
           {loading ? <LoadingBar /> : null}
           <HeaderContainer type="common" />
+          여기는 태그
           <LoginModal />
         </AuthProvider>
       </Fragment>
@@ -47,4 +38,4 @@ class Chart extends Component<{}, State> {
   }
 }
 
-export default Chart;
+export default Tags;

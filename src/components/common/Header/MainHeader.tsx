@@ -68,13 +68,13 @@ const MainHeader = ({ state, actions }) => {
       </div>
       <div className="logo">
         <Link href="/">
-          <a>MAD;</a>
+          <span>MAD;</span>
         </Link>
       </div>
       <div className="postBtn">
         {state.isLogin ? (
           <Link href="/write">
-            <a>Post</a>
+            <span>Post</span>
           </Link>
         ) : (
           <PostBtn />

@@ -28,13 +28,17 @@ interface State {
   isModal: boolean;
   isLogin: boolean;
   isMenu: boolean;
+  userName: string;
+  userImg: string;
 }
 
 class AuthProvider extends Component<Props, State> {
   state: State = {
     isModal: false,
     isLogin: false,
-    isMenu: false
+    isMenu: false,
+    userName: "",
+    userImg: ""
   };
 
   actions = {
@@ -103,17 +107,20 @@ class AuthProvider extends Component<Props, State> {
         if (statusObj.status === "connected") {
           // 고객 데이터 localStorage 저장
           localStorage.setItem("loginId", statusObj.user.id);
-          localStorage.setItem("userName", statusObj.user.properties.nickname);
-          localStorage.setItem(
-            "userImg",
-            statusObj.user.properties.profile_image
-          );
-          this.setState({ isLogin: true });
+          this.setState({
+            isLogin: true,
+            userName: statusObj.user.properties.nickname,
+            userImg: statusObj.user.properties.profile_image
+          });
           this.props.setIsLogin(true);
         } else {
           // localStorage 삭제
           localStorage.clear();
-          this.setState({ isLogin: false });
+          this.setState({
+            isLogin: false,
+            userName: "",
+            userImg: ""
+          });
           this.props.setIsLogin(false);
         }
       }.bind(this)
