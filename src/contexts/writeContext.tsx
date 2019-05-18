@@ -52,12 +52,6 @@ class WriteProvider extends Component<Props, State> {
   };
 
   componentDidMount() {
-    // 로그인 없이 접근시 메인 화면으로 이동
-    if (!localStorage.getItem("loginId")) {
-      Router.replace("/");
-      return false;
-    }
-
     // 수정 모드 일 경우 해당 게시글 데이터 조회
     const { mode, pno } = this.props;
     if (mode == "edit") {

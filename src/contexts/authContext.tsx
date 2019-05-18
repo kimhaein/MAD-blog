@@ -10,7 +10,6 @@ const Context = createContext({});
 const { Provider, Consumer: AuthConsumer } = Context;
 
 /**
- * setPostDatas: post 권한 적용 이벤트
  * setLoading : 로딩 처리 이벤트
  * isModal: 모달 open 여부
  * isLogin: 로그인 여부
@@ -28,12 +27,14 @@ interface Props {
 interface State {
   isModal: boolean;
   isLogin: boolean;
+  isMenu: boolean;
 }
 
 class AuthProvider extends Component<Props, State> {
   state: State = {
     isModal: false,
-    isLogin: false
+    isLogin: false,
+    isMenu: false
   };
 
   actions = {
@@ -50,6 +51,11 @@ class AuthProvider extends Component<Props, State> {
       await window.Kakao.Auth.logout();
       this.getLoginStatus();
       this.props.setLoading();
+    },
+    onMenu: () => {
+      this.setState({
+        isMenu: !this.state.isMenu
+      });
     }
   };
 
@@ -86,7 +92,6 @@ class AuthProvider extends Component<Props, State> {
       }
     });
   };
-
   /**
    * 로그인 토큰 연결 여부 확인
    */
@@ -96,43 +101,24 @@ class AuthProvider extends Component<Props, State> {
       function(statusObj) {
         console.log("1.getLoginStatus", statusObj);
         if (statusObj.status === "connected") {
+          // 고객 데이터 localStorage 저장
           localStorage.setItem("loginId", statusObj.user.id);
+          localStorage.setItem("userName", statusObj.user.properties.nickname);
+          localStorage.setItem(
+            "userImg",
+            statusObj.user.properties.profile_image
+          );
           this.setState({ isLogin: true });
           this.props.setIsLogin(true);
         } else {
-          localStorage.removeItem("loginId");
+          // localStorage 삭제
+          localStorage.clear();
           this.setState({ isLogin: false });
           this.props.setIsLogin(false);
         }
       }.bind(this)
     );
   };
-
-  // /**
-  //  * posts 관련 json 데이터 state 저장
-  //  */
-  // getPostDatas = async () => {
-  //   const postDatas: object[] = await this.callPostDatasApi();
-  //   this.props.setLoading();
-  //   if (!postDatas) return false;
-  //   // 권한에 따른 전역 postDatas 업데이트
-  //   this.props.setPostDatas(postDatas.post);
-  // };
-
-  // /**
-  //  * posts 관련 데이터 조회
-  //  */
-  // callPostDatasApi = () => {
-  //   return axios
-  //     .post("https://mad-server.herokuapp.com/api/post/list", {
-  //       headers: { "Content-type": "application/x-www-form-urlencoded" },
-  //       userId: localStorage.getItem("loginId")
-  //     })
-  //     .then(({ data }) => {
-  //       return data;
-  //     })
-  //     .catch((err: object) => console.log(err));
-  // };
 
   render() {
     const { state, actions } = this;

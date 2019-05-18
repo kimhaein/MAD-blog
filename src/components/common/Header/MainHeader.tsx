@@ -15,6 +15,14 @@ const showConfirm = (content: string, onOk: () => void) => {
   });
 };
 
+const MenuBtn = ({ onMenu }) => {
+  return (
+    <div className="LeftBtn" onClick={onMenu}>
+      MENU
+    </div>
+  );
+};
+
 const Login = ({ onModal }: any) => {
   return (
     <div className="login" onClick={onModal}>
@@ -50,7 +58,7 @@ const PostBtn = () => {
 const MainHeader = ({ state, actions }) => {
   return (
     <header>
-      <div className="LeftBtn">MENU</div>
+      <MenuBtn onMenu={actions.onMenu} />
       <div className="LeftBtn">
         {state.isLogin ? (
           <Logout onLogOut={actions.onLogOut} />
