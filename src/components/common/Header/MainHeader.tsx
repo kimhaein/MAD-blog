@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AuthConsumer } from "../../../contexts/authContext";
+
 import { Modal, message } from "antd";
 const confirm = Modal.confirm;
 import "./header.css";
@@ -47,36 +47,32 @@ const PostBtn = () => {
   );
 };
 
-const MainHeader = () => {
+const MainHeader = ({ state, actions }) => {
   return (
-    <AuthConsumer>
-      {({ state, actions }: any) => (
-        <header>
-          <div className="LeftBtn">MENU</div>
-          <div className="LeftBtn">
-            {state.isLogin ? (
-              <Logout onLogOut={actions.onLogOut} />
-            ) : (
-              <Login onModal={actions.onModal} />
-            )}
-          </div>
-          <div className="logo">
-            <Link href="/">
-              <a>MAD;</a>
-            </Link>
-          </div>
-          <div className="postBtn">
-            {state.isLogin ? (
-              <Link href="/write">
-                <a>Post</a>
-              </Link>
-            ) : (
-              <PostBtn />
-            )}
-          </div>
-        </header>
-      )}
-    </AuthConsumer>
+    <header>
+      <div className="LeftBtn">MENU</div>
+      <div className="LeftBtn">
+        {state.isLogin ? (
+          <Logout onLogOut={actions.onLogOut} />
+        ) : (
+          <Login onModal={actions.onModal} />
+        )}
+      </div>
+      <div className="logo">
+        <Link href="/">
+          <a>MAD;</a>
+        </Link>
+      </div>
+      <div className="postBtn">
+        {state.isLogin ? (
+          <Link href="/write">
+            <a>Post</a>
+          </Link>
+        ) : (
+          <PostBtn />
+        )}
+      </div>
+    </header>
   );
 };
 

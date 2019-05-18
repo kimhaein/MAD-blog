@@ -23,20 +23,21 @@ const { Provider, Consumer: PostConsumer } = Context;
  */
 
 interface Props {
-  postDatas: Array<object>;
+  isLogin: boolean;
   setLoading: any;
 }
 
 interface State {
-  postDatas: Array<object>;
+  postDatas: object[];
+  isLogin: Boolean;
   postCnt: number;
   isMoreBtn: Boolean;
   keyword: string;
 }
-
 class PostProvider extends Component<Props, State> {
   state: State = {
     postDatas: [],
+    isLogin: false,
     postCnt: 4,
     isMoreBtn: false,
     keyword: ""
@@ -104,18 +105,23 @@ class PostProvider extends Component<Props, State> {
     }
   };
 
-  //componentWillReceiveProps:컴포넌트가 prop 을 새로 받았을 때 실행
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      postDatas: nextProps.postDatas,
-      isMoreBtn: true
-    });
+  componentDidMount() {
+    this.props.setLoading();
+    this.getPostDatas();
+    console.log("getPostDatas");
   }
 
-  //shouldComponentUpdate:prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드, true일때 만 리렌더링
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return nextProps.postDatas === this.state.postDatas;
-  // }
+  //componentWillReceiveProps:컴포넌트가 prop 을 새로 받았을 때 실행
+  componentWillReceiveProps(nextProps) {
+    //islogin 값이 변경 됐을 때 만 실행
+    if (this.props.isLogin !== nextProps.isLogin) {
+      this.setState({
+        isLogin: nextProps.isLogin
+      });
+      this.props.setLoading();
+      this.getPostDatas();
+    }
+  }
 
   /**
    * posts 관련 json 데이터 state 저장

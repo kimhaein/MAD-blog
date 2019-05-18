@@ -21,7 +21,8 @@ const { Provider, Consumer: AuthConsumer } = Context;
  */
 
 interface Props {
-  setPostDatas: () => void;
+  setPostDatas?: () => void;
+  setIsLogin: () => void;
   setLoading: () => void;
 }
 interface State {
@@ -48,6 +49,7 @@ class AuthProvider extends Component<Props, State> {
       this.props.setLoading();
       await window.Kakao.Auth.logout();
       this.getLoginStatus();
+      this.props.setLoading();
     }
   };
 
@@ -56,8 +58,7 @@ class AuthProvider extends Component<Props, State> {
     window.Kakao.cleanup();
     //Kakao SDK를 초기화합니다.
     window.Kakao.init(KAKAO_API_KEY);
-
-    this.props.setLoading();
+    //현재 로그인 상태 체크
     this.getLoginStatus();
   }
 
@@ -67,7 +68,7 @@ class AuthProvider extends Component<Props, State> {
   login = () => {
     this.props.setLoading();
     window.Kakao.Auth.login({
-      success: authObj => {
+      success: (authObj: object) => {
         axios
           .post("https://mad-server.herokuapp.com/kakaologin", {
             headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -76,6 +77,7 @@ class AuthProvider extends Component<Props, State> {
           .then(res => {
             this.getLoginStatus();
             this.setState({ isModal: false });
+            this.props.setLoading();
           })
           .catch((err: object) => console.log(err));
       },
@@ -89,47 +91,48 @@ class AuthProvider extends Component<Props, State> {
    * 로그인 토큰 연결 여부 확인
    */
   getLoginStatus = () => {
+    console.log("getLoginStatus");
     window.Kakao.Auth.getStatus(
       function(statusObj) {
         console.log("1.getLoginStatus", statusObj);
         if (statusObj.status === "connected") {
           localStorage.setItem("loginId", statusObj.user.id);
           this.setState({ isLogin: true });
+          this.props.setIsLogin(true);
         } else {
           localStorage.removeItem("loginId");
           this.setState({ isLogin: false });
+          this.props.setIsLogin(false);
         }
-        //post 데이터 가져오기
-        this.getPostDatas();
       }.bind(this)
     );
   };
 
-  /**
-   * posts 관련 json 데이터 state 저장
-   */
-  getPostDatas = async () => {
-    const postDatas = await this.callPostDatasApi();
-    this.props.setLoading();
-    if (!postDatas) return false;
-    // 권한에 따른 전역 postDatas 업데이트
-    this.props.setPostDatas(postDatas.post);
-  };
+  // /**
+  //  * posts 관련 json 데이터 state 저장
+  //  */
+  // getPostDatas = async () => {
+  //   const postDatas: object[] = await this.callPostDatasApi();
+  //   this.props.setLoading();
+  //   if (!postDatas) return false;
+  //   // 권한에 따른 전역 postDatas 업데이트
+  //   this.props.setPostDatas(postDatas.post);
+  // };
 
-  /**
-   * posts 관련 데이터 조회
-   */
-  callPostDatasApi = () => {
-    return axios
-      .post("https://mad-server.herokuapp.com/api/post/list", {
-        headers: { "Content-type": "application/x-www-form-urlencoded" },
-        userId: localStorage.getItem("loginId")
-      })
-      .then(({ data }) => {
-        return data;
-      })
-      .catch((err: object) => console.log(err));
-  };
+  // /**
+  //  * posts 관련 데이터 조회
+  //  */
+  // callPostDatasApi = () => {
+  //   return axios
+  //     .post("https://mad-server.herokuapp.com/api/post/list", {
+  //       headers: { "Content-type": "application/x-www-form-urlencoded" },
+  //       userId: localStorage.getItem("loginId")
+  //     })
+  //     .then(({ data }) => {
+  //       return data;
+  //     })
+  //     .catch((err: object) => console.log(err));
+  // };
 
   render() {
     const { state, actions } = this;
