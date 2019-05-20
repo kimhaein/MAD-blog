@@ -1,0 +1,26 @@
+.userInfo {
+  margin: 80px 0 30px;
+  text-align: center;
+}
+
+.userInfo > p {
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.menuList {
+  margin: 50px 0;
+  font-size: 16px;
+}
+
+.menuList li {
+  margin: 15px 0;
+  cursor: pointer;
+}
+.menuList li:hover {
+  color: #40a9ff;
+}
+
+.menuList li .icon {
+  margin-right: 10px;
+}

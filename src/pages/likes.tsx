@@ -9,7 +9,7 @@ interface State {
   loading: boolean;
 }
 
-class Tags extends Component<{}, State> {
+class likes extends Component<{}, State> {
   state: State = {
     isLogin: false,
     loading: false
@@ -30,7 +30,7 @@ class Tags extends Component<{}, State> {
         <AuthProvider setIsLogin={this.setIsLogin} setLoading={this.setLoading}>
           {loading ? <LoadingBar /> : null}
           <HeaderContainer type="common" />
-          여기는 태그
+          여기는 likes
           <LoginModal />
         </AuthProvider>
       </Fragment>
@@ -38,4 +38,4 @@ class Tags extends Component<{}, State> {
   }
 }
 
-export default Tags;
+export default likes;

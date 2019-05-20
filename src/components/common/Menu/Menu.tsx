@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Drawer, Avatar, Icon } from "antd";
+import "./menu.css";
 
 const Menu = ({ state, actions }) => {
   return (
     <Drawer
-      title="MAD-BLOG"
       placement={"left"}
       closable={true}
       onClose={actions.onMenu}
@@ -21,21 +21,28 @@ const Menu = ({ state, actions }) => {
           </Avatar>
           <p>{state.userName}</p>
         </div>
-      ) : null}
-      <ul className="menuLisr">
+      ) : (
+        <div className="userInfo">
+          <Avatar size={100} style={{ backgroundColor: "#000" }}>
+            MAD
+          </Avatar>
+          <p>MAD BLOG</p>
+        </div>
+      )}
+      <ul className="menuList">
         <li>
           <Link href="/trend">
             <span>
-              <Icon type="dot-chart" />
+              <Icon type="rise" className="icon" />
               트랜딩 차트
             </span>
           </Link>
         </li>
         <li>
-          <Link href="/tags">
+          <Link href="/likes">
             <span>
-              <Icon type="tag" />
-              태그 차트
+              <Icon type="bar-chart" className="icon" />
+              좋아요 랭킹
             </span>
           </Link>
         </li>
