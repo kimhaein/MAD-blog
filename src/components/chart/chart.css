@@ -1,0 +1,28 @@
+.gutter-example {
+  box-sizing: border-box;
+  padding: 24px 0;
+}
+.gutter-example h2 {
+  margin-bottom: 16px;
+  color: #fff;
+}
+.gutter-example > * {
+  width: 80%;
+  margin: 0 auto;
+}
+.gutter-example .ant-row > div {
+  background: transparent;
+  border: 0;
+}
+.gutter-box {
+  margin-bottom: 24px;
+  padding: 5px 0;
+  background: #fff;
+  border-radius: 5px;
+}
+.totalChart .gutter-box {
+  height: 150px;
+}
+.tagChart .gutter-box {
+  height: 600px;
+}

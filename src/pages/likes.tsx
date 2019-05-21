@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import Chart from "../components/chart";
 import { AuthProvider } from "../contexts/authContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import LoadingBar from "../components/common/LoadingBar";
@@ -30,7 +31,7 @@ class likes extends Component<{}, State> {
         <AuthProvider setIsLogin={this.setIsLogin} setLoading={this.setLoading}>
           {loading ? <LoadingBar /> : null}
           <HeaderContainer type="common" />
-          여기는 likes
+          <Chart />
           <LoginModal />
         </AuthProvider>
       </Fragment>
