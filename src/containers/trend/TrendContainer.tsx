@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Trend from "../../components/trend";
 import axios from "axios";
 import TagCloud from "react-tag-cloud";
 import randomcolor from "randomcolor";
@@ -40,49 +41,18 @@ class TrendContainer extends Component<{}, State> {
       .catch(err => console.log(err));
   };
 
-  click = hashTag => {
+  onClick = (hashTag: string) => {
     alert(hashTag + " Click");
   };
 
-  renderWords = () => {
-    const { trendDatas } = this.state;
-    const result = trendDatas.map((v: object, i) => {
-      const fontSize = v.cnt <= 1 ? 20 : v.cnt * 20;
-      return (
-        <div
-          key={i}
-          onClick={() => this.click(v.hashTag)}
-          style={{
-            fontSize
-          }}
-        >
-          {v.hashTag}
-        </div>
-      );
-    });
-
-    return (
-      <TagCloud
-        style={{
-          fontFamily: "sans-serif",
-          fontWeight: "bold",
-          fontStyle: "italic",
-          padding: 10,
-          width: "100%",
-          height: "100%",
-          color: () => randomcolor({ hue: "blue" })
-        }}
-      >
-        {result}
-      </TagCloud>
-    );
-  };
-
   render() {
+    const { trendDatas } = this.state;
     return (
       <div className="contentsWrap trendWrap">
         <div className="app-outer">
-          <div className="app-inner">{this.renderWords()}</div>
+          <div className="app-inner">
+            <Trend trendDatas={trendDatas} onClick={this.onClick} />
+          </div>
         </div>
       </div>
     );
