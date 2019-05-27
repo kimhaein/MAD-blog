@@ -38,12 +38,12 @@ class PostContainer extends Component<{}, State> {
       .catch((err: object) => console.log(err));
   };
 
-  //TEST getPrams
+  // TEST getPrams
   // callTest = () => {
   //   return axios
-  //     .get("https://mad-server.herokuapp.com/api/user", {
+  //     .post("https://mad-server.herokuapp.com/api/user", {
   //       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  //       data: { userId: 2 }
+  //       userId: 2
   //     })
   //     .then(({ data }) => {
   //       console.log(data);
@@ -56,10 +56,12 @@ class PostContainer extends Component<{}, State> {
     return (
       <PostConsumer>
         {({ state }: any) => (
-          <div className="contentsWrap postWrap" style={style}>
-            <Search tagDatas={this.state.hashLank} />
-            <Post postDatas={state.postDatas} />
-            <MoreBtn />
+          <div className="contentsWrap mainWrap" style={style}>
+            <div className="postWrap">
+              <Search tagDatas={this.state.hashLank} />
+              <Post postDatas={state.postDatas} />
+              <MoreBtn />
+            </div>
           </div>
         )}
       </PostConsumer>

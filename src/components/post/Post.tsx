@@ -99,7 +99,7 @@ const Post = ({ postDatas }) => {
   });
 
   return (
-    <Row type="flex" justify="space-between" gutter={32} className="posthWrap">
+    <Row type="flex" justify="space-between" gutter={32} className="postWrap">
       {postList}
     </Row>
   );

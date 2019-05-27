@@ -7,12 +7,15 @@ interface Props {
   trendDatas: object[];
   onClick: (hashTag: string) => void;
 }
-interface State {}
+interface trendDatas {
+  cnt: number;
+  hashTag: string;
+}
 
-class Trend extends Component<Props, State> {
+class Trend extends Component<Props, {}> {
   renderWords = () => {
     const { trendDatas, onClick } = this.props;
-    const result = trendDatas.map((v: object, i: number) => {
+    const result = trendDatas.map((v: trendDatas, i: number) => {
       const fontSize = v.cnt <= 1 ? 20 : v.cnt * 20;
       return (
         <div key={i} onClick={() => onClick(v.hashTag)} style={{ fontSize }}>
@@ -32,7 +35,7 @@ class Trend extends Component<Props, State> {
           fontStyle: "italic",
           padding: 10,
           height: "calc(100% - 40px)",
-          color: () => randomcolor({ hue: "blue" })
+          color: () => randomcolor({ luminosity: "light", hue: "monochrome%" })
         }}
       >
         {this.renderWords()}

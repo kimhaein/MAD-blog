@@ -49,11 +49,14 @@ p {
   min-height: calc(100% - 80px);
   margin-top: 80px;
 }
-.postWrap {
+.contentsWrap * {
+  z-index: 10;
+}
+.mainWrap {
   background-size: cover;
   background-repeat: no-repeat;
 }
-.postWrap::after {
+.mainWrap::after {
   content: "";
   display: block;
   position: absolute;
@@ -83,10 +86,6 @@ p {
   height: 100%;
   max-width: 1000px;
   width: 100%;
-}
-
-.trendWrap div {
-  transition: 1.4s;
 }
 
 /* error page */

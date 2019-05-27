@@ -34,6 +34,12 @@ interface State {
   isMoreBtn: Boolean;
   keyword: string;
 }
+interface SearchVal {
+  value: string;
+  dataset: {
+    keyword: string;
+  };
+}
 class PostProvider extends Component<Props, State> {
   state: State = {
     postDatas: [],
@@ -44,7 +50,7 @@ class PostProvider extends Component<Props, State> {
   };
 
   actions = {
-    onDelete: pno => {
+    onDelete: (pno: number) => {
       this.props.setLoading();
       axios
         .post("https://mad-server.herokuapp.com/api/post/del", {
@@ -58,7 +64,7 @@ class PostProvider extends Component<Props, State> {
         })
         .catch(err => console.log(err));
     },
-    onLike: pno => {
+    onLike: (pno: number) => {
       this.props.setLoading();
       axios
         .post("https://mad-server.herokuapp.com/api/like", {
@@ -71,7 +77,7 @@ class PostProvider extends Component<Props, State> {
         })
         .catch(err => console.log(err));
     },
-    offLike: pno => {
+    offLike: (pno: number) => {
       this.props.setLoading();
       axios
         .post("https://mad-server.herokuapp.com/api/unlike", {
@@ -95,9 +101,9 @@ class PostProvider extends Component<Props, State> {
         }
       );
     },
-    onSearch: e => {
+    onSearch: (e: Event) => {
       this.props.setLoading();
-      const target = e.target;
+      const target: SearchVal = e.target;
       const keyword = target.value ? target.value : target.dataset.keyword;
       this.setState({ keyword }, () => {
         this.getPostDatas();
