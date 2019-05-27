@@ -1,0 +1,33 @@
+.trendWrap {
+  box-sizing: border-box;
+  padding: 24px 0;
+}
+.trendWrap h2 {
+  margin-bottom: 16px;
+  color: #fff;
+}
+.trendWrap > * {
+  width: 80%;
+  margin: 0 auto;
+}
+.trendWrap .ant-row > div {
+  background: transparent;
+  border: 0;
+}
+.trendWrap .trendBox {
+  margin-bottom: 24px;
+  padding: 24px;
+  background: #fff;
+  border-radius: 5px;
+}
+.trendWrap .trendBox h3 {
+  margin-left: 24px;
+  font-size: 18px;
+  /* text-align: center; */
+}
+.trendWrap .totalChart .trendBox {
+  height: 150px;
+}
+.trendWrap .tagChart .trendBox {
+  height: 600px;
+}

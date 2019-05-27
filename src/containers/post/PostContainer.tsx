@@ -16,6 +16,7 @@ class PostContainer extends Component<{}, State> {
 
   componentDidMount() {
     this.getHashLank();
+    // this.callTest();
   }
 
   //post 데이터 가져오기
@@ -36,6 +37,19 @@ class PostContainer extends Component<{}, State> {
       })
       .catch((err: object) => console.log(err));
   };
+
+  //TEST getPrams
+  // callTest = () => {
+  //   return axios
+  //     .get("https://mad-server.herokuapp.com/api/user", {
+  //       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  //       data: { userId: 2 }
+  //     })
+  //     .then(({ data }) => {
+  //       console.log(data);
+  //     })
+  //     .catch((err: object) => console.log(err));
+  // };
 
   render() {
     const style = { backgroundImage: `url(/static/images/bg06.jpg)` };

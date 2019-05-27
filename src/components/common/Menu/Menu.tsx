@@ -38,14 +38,6 @@ const Menu = ({ state, actions }) => {
             </span>
           </Link>
         </li>
-        <li>
-          <Link href="/likes">
-            <span>
-              <Icon type="bar-chart" className="icon" />
-              좋아요 랭킹
-            </span>
-          </Link>
-        </li>
       </ul>
     </Drawer>
   );

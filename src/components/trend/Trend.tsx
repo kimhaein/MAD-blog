@@ -31,8 +31,7 @@ class Trend extends Component<Props, State> {
           fontWeight: "bold",
           fontStyle: "italic",
           padding: 10,
-          width: "100%",
-          height: "100%",
+          height: "calc(100% - 40px)",
           color: () => randomcolor({ hue: "blue" })
         }}
       >
