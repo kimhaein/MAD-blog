@@ -35,7 +35,7 @@ class Trend extends Component<Props, {}> {
           fontStyle: "italic",
           padding: 10,
           height: "calc(100% - 40px)",
-          color: () => randomcolor({ luminosity: "light", hue: "monochrome%" })
+          color: () => randomcolor({ luminosity: "light", hue: "blue" })
         }}
       >
         {this.renderWords()}

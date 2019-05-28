@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Drawer, Avatar, Icon } from "antd";
+import { Drawer, Avatar } from "antd";
 import "./menu.css";
 
 const Menu = ({ state, actions }) => {
@@ -14,7 +14,7 @@ const Menu = ({ state, actions }) => {
         <div className="userInfo">
           <Avatar
             src={state.userImg}
-            size={100}
+            size={150}
             style={{ backgroundColor: "#000" }}
           >
             {state.userName.substring(0, 1).toUpperCase()}
@@ -23,7 +23,7 @@ const Menu = ({ state, actions }) => {
         </div>
       ) : (
         <div className="userInfo">
-          <Avatar size={100} style={{ backgroundColor: "#000" }}>
+          <Avatar size={150} style={{ backgroundColor: "#000" }}>
             MAD
           </Avatar>
           <p>MAD BLOG</p>
@@ -32,13 +32,29 @@ const Menu = ({ state, actions }) => {
       <ul className="menuList">
         <li>
           <Link href="/trend">
-            <span>
-              <Icon type="rise" className="icon" />
-              트랜딩 차트
-            </span>
+            <span>트렌딩 차트</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/myInfo">
+            <span>마이페이지</span>
           </Link>
         </li>
       </ul>
+      <div className="menuFooter">
+        <div className="catImg" />
+        <Link href="/">
+          <h3>프로젝트 소개</h3>
+        </Link>
+        <div className="gitHub">
+          <p>GitHub</p>
+          <ul>
+            <li>황윤지 /</li>
+            <li> 김혜인 /</li>
+            <li>유윤선</li>
+          </ul>
+        </div>
+      </div>
     </Drawer>
   );
 };

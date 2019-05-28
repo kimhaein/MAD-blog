@@ -31,3 +31,16 @@
 .trendWrap .trendBox .hashBox div {
   transition: 1.4s;
 }
+.listWrap {
+  position: relative;
+}
+.listWrap * {
+  color: #fff;
+}
+.listWrap .hotChart {
+  position: absolute;
+  display: block;
+  background: #40a9ff;
+  height: 100%;
+  z-index: -1;
+}
