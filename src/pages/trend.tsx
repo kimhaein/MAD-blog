@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import { AuthProvider } from "../contexts/authContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import TrendContainer from "../containers/trend/TrendContainer";
@@ -10,7 +10,7 @@ interface State {
   loading: boolean;
 }
 
-class Trend extends Component<{}, State> {
+class Trend extends PureComponent<{}, State> {
   state: State = {
     isLogin: false,
     loading: false

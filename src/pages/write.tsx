@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Router from "next/router";
 import { WriteProvider } from "../contexts/writeContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
@@ -12,7 +12,7 @@ interface Props {
 interface State {
   loading: boolean;
 }
-class Write extends Component<Props, {}> {
+class Write extends PureComponent<Props, {}> {
   static async getInitialProps({ query }) {
     return { mode: query.mode, pno: query.pno };
   }

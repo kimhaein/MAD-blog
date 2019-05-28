@@ -1,7 +1,7 @@
 /**
  * 권한 관련 context
  */
-import React, { Component, createContext } from "react";
+import React, { PureComponent, createContext } from "react";
 import { KAKAO_API_KEY } from "../key/API_KEY";
 import axios from "axios";
 
@@ -32,7 +32,7 @@ interface State {
   userImg: string;
 }
 
-class AuthProvider extends Component<Props, State> {
+class AuthProvider extends PureComponent<Props, State> {
   state: State = {
     isModal: false,
     isLogin: false,

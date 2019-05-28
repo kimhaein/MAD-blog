@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import axios from "axios";
 import { PostConsumer } from "../../contexts/postContext";
 import Search from "../../components/common/Search";
-import Post from "../../components/post";
+import Post from "../../components/Post";
 import { MoreBtn } from "../../components/common/Button";
 
 interface State {
   hashLank: Array<string>;
 }
 
-class PostContainer extends Component<{}, State> {
+class PostContainer extends PureComponent<{}, State> {
   state: State = {
     hashLank: []
   };

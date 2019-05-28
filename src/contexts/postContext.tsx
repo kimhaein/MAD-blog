@@ -1,7 +1,7 @@
 /**
  * 게시글 관련 context
  */
-import React, { Component, createContext } from "react";
+import React, { PureComponent, createContext } from "react";
 import moment from "moment";
 import axios from "axios";
 
@@ -40,7 +40,7 @@ interface SearchVal {
     keyword: string;
   };
 }
-class PostProvider extends Component<Props, State> {
+class PostProvider extends PureComponent<Props, State> {
   state: State = {
     postDatas: [],
     isLogin: false,

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 
 import { AuthProvider } from "../contexts/authContext";
 import { PostProvider } from "../contexts/postContext";
@@ -14,7 +14,7 @@ interface State {
   loading: boolean;
 }
 
-class Index extends Component<{}, State> {
+class Index extends PureComponent<{}, State> {
   state: State = {
     isLogin: false,
     loading: false
