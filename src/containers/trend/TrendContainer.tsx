@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import Trend from "../../components/trend";
+import Trend from "../../components/Trend";
 import axios from "axios";
 import moment from "moment";
 import { Row, Col, List, Avatar } from "antd";
