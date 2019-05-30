@@ -1,6 +1,5 @@
 import { PostConsumer } from "../../../contexts/postContext";
 import { Tag, Tooltip } from "antd";
-import Router from "next/router";
 import "./tags.css";
 
 interface TagItem {
@@ -33,7 +32,7 @@ const Tags = ({ tagDatas, styleClass }) => {
         <Tag
           color="#40a9ff"
           onClick={() => {
-            window.location.reload();
+            window.location.href = "/";
           }}
         >
           ALL

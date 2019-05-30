@@ -15,6 +15,9 @@ interface State {
 }
 
 class Index extends PureComponent<{}, State> {
+  static async getInitialProps({ query }) {
+    return { keyword: query.keyword };
+  }
   state: State = {
     isLogin: false,
     loading: false
@@ -30,14 +33,18 @@ class Index extends PureComponent<{}, State> {
 
   render() {
     const { isLogin, loading } = this.state;
-    console.log("isLogin :", isLogin, "loading :", loading);
+    // console.log("isLogin :", isLogin, "loading :", loading);
     return (
       <Fragment>
         <AuthProvider setIsLogin={this.setIsLogin} setLoading={this.setLoading}>
           {loading ? <LoadingBar /> : null}
           <HeaderContainer type="common" />
           <LoginModal />
-          <PostProvider isLogin={isLogin} setLoading={this.setLoading}>
+          <PostProvider
+            isLogin={isLogin}
+            setLoading={this.setLoading}
+            keyword={this.props.keyword}
+          >
             <PostContainer />
           </PostProvider>
         </AuthProvider>

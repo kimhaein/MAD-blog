@@ -1,7 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    // "strict": true,
+    "strict": true,
+    "strictBindCallApply": false,
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",

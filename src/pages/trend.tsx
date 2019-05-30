@@ -32,9 +32,7 @@ class Trend extends PureComponent<{}, State> {
         <AuthProvider setIsLogin={this.setIsLogin} setLoading={this.setLoading}>
           {loading ? <LoadingBar /> : null}
           <HeaderContainer type="common" />
-          <PostProvider isLogin={isLogin} setLoading={this.setLoading}>
-            <TrendContainer />
-          </PostProvider>
+          <TrendContainer />
           <LoginModal />
         </AuthProvider>
       </Fragment>

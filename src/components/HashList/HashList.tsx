@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import TagCloud from "react-tag-cloud";
 import randomcolor from "randomcolor";
+import Router from "next/router";
 import "./hashList.css";
 
 interface Props {
   trendDatas: object[];
-  onSearch: () => void;
 }
 interface trendDatas {
   cnt: number;
@@ -14,11 +14,17 @@ interface trendDatas {
 
 class HashList extends Component<Props, {}> {
   renderWords = () => {
-    const { trendDatas, onSearch } = this.props;
+    const { trendDatas } = this.props;
     const result = trendDatas.map((v: trendDatas, i: number) => {
       const fontSize = v.cnt <= 1 ? 20 : v.cnt * 20;
       return (
-        <div key={i} onClick={onSearch} style={{ fontSize }}>
+        <div
+          key={i}
+          onClick={() => {
+            Router.push(`/?keyword=${v.hashTag}`);
+          }}
+          style={{ fontSize }}
+        >
           {v.hashTag}
         </div>
       );

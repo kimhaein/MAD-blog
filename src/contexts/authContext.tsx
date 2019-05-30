@@ -21,7 +21,7 @@ const { Provider, Consumer: AuthConsumer } = Context;
 
 interface Props {
   setPostDatas?: () => void;
-  setIsLogin: () => void;
+  setIsLogin: (type: boolean) => void;
   setLoading: () => void;
 }
 interface State {
@@ -31,6 +31,8 @@ interface State {
   userName: string;
   userImg: string;
 }
+
+declare var Kakao: any;
 
 class AuthProvider extends PureComponent<Props, State> {
   state: State = {
@@ -52,7 +54,7 @@ class AuthProvider extends PureComponent<Props, State> {
     },
     onLogOut: async () => {
       this.props.setLoading();
-      await window.Kakao.Auth.logout();
+      await Kakao.Auth.logout();
       await this.getLoginStatus();
       this.props.setLoading();
     },
@@ -65,9 +67,9 @@ class AuthProvider extends PureComponent<Props, State> {
 
   componentDidMount() {
     //Kakao SDK에서 사용한 리소스를 해제합니다.
-    window.Kakao.cleanup();
+    Kakao.cleanup();
     //Kakao SDK를 초기화합니다.
-    window.Kakao.init(KAKAO_API_KEY);
+    Kakao.init(KAKAO_API_KEY);
     //현재 로그인 상태 체크
     this.getLoginStatus();
   }
@@ -77,7 +79,7 @@ class AuthProvider extends PureComponent<Props, State> {
    */
   login = () => {
     this.props.setLoading();
-    window.Kakao.Auth.login({
+    Kakao.Auth.login({
       success: (authObj: object) => {
         axios
           .post("https://mad-server.herokuapp.com/kakaologin", {
@@ -101,30 +103,28 @@ class AuthProvider extends PureComponent<Props, State> {
    */
   getLoginStatus = () => {
     console.log("getLoginStatus");
-    window.Kakao.Auth.getStatus(
-      function(statusObj) {
-        console.log("1.getLoginStatus", statusObj);
-        if (statusObj.status === "connected") {
-          // 고객 데이터 localStorage 저장
-          localStorage.setItem("loginId", statusObj.user.id);
-          this.setState({
-            isLogin: true,
-            userName: statusObj.user.properties.nickname,
-            userImg: statusObj.user.properties.profile_image
-          });
-          this.props.setIsLogin(true);
-        } else {
-          // localStorage 삭제
-          localStorage.clear();
-          this.setState({
-            isLogin: false,
-            userName: "",
-            userImg: ""
-          });
-          this.props.setIsLogin(false);
-        }
-      }.bind(this)
-    );
+    Kakao.Auth.getStatus((authStatus: object) => {
+      console.log("1.getLoginStatus", authStatus);
+      if (authStatus.status === "connected") {
+        // 고객 데이터 localStorage 저장
+        localStorage.setItem("loginId", authStatus.user.id);
+        this.setState({
+          isLogin: true,
+          userName: authStatus.user.properties.nickname,
+          userImg: authStatus.user.properties.profile_image
+        });
+        this.props.setIsLogin(true);
+      } else {
+        // localStorage 삭제
+        localStorage.clear();
+        this.setState({
+          isLogin: false,
+          userName: "",
+          userImg: ""
+        });
+        this.props.setIsLogin(false);
+      }
+    });
   };
 
   render() {

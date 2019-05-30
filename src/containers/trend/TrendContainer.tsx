@@ -1,11 +1,8 @@
 import React, { PureComponent } from "react";
-import { PostConsumer } from "../../contexts/postContext";
 import HashList from "../../components/HashList";
 import HotPost from "../../components/HotPost";
-import Post from "../../components/Post";
 import axios from "axios";
-import moment from "moment";
-import { Row, Col, List, Avatar } from "antd";
+import { Row, Col } from "antd";
 interface State {
   trendDatas: object[];
   hotPostDatas: object[];
@@ -52,8 +49,8 @@ class TrendContainer extends PureComponent<{}, State> {
       .catch(err => console.log(err));
   };
 
-  onClick = (hashTag: string) => {
-    alert(hashTag + " Click");
+  onClick = () => {
+    alert(" Click");
   };
 
   render() {
@@ -65,14 +62,7 @@ class TrendContainer extends PureComponent<{}, State> {
             <Col span={16}>
               <h2>HASH CLOUD</h2>
               <div className="box hashBox">
-                <PostConsumer>
-                  {({ actions }: any) => (
-                    <HashList
-                      trendDatas={trendDatas}
-                      onSearch={actions.onSearch}
-                    />
-                  )}
-                </PostConsumer>
+                <HashList trendDatas={trendDatas} />
               </div>
             </Col>
             <Col span={8}>
@@ -86,9 +76,6 @@ class TrendContainer extends PureComponent<{}, State> {
             </Col>
           </Row>
         </div>
-        <PostConsumer>
-          {({ state }: any) => <Post postDatas={state.postDatas} />}
-        </PostConsumer>
       </div>
     );
   }

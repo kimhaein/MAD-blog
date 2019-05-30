@@ -5,7 +5,15 @@ import "./hotPost.css";
 
 interface Props {
   dataSource: object[];
-  onSearch: (hashTag: string) => void;
+  onClick: () => void;
+}
+
+interface Item {
+  title: string;
+  thumbnail_image: string;
+  nickname: string;
+  wrDate: string;
+  likeCnt: number;
 }
 
 class HotPost extends Component<Props, {}> {
@@ -14,11 +22,11 @@ class HotPost extends Component<Props, {}> {
       <List
         itemLayout="horizontal"
         dataSource={this.props.dataSource}
-        renderItem={item => (
+        renderItem={(item: Item) => (
           <List.Item
             className="listWrap"
             onClick={() => {
-              this.props.onSearch(item.title);
+              console.log("aa");
             }}
           >
             <List.Item.Meta
