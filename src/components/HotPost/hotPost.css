@@ -2,10 +2,6 @@
   box-sizing: border-box;
   padding-top: 24px;
 }
-.trendWrap h2 {
-  margin-bottom: 16px;
-  color: #fff;
-}
 .trendWrap > * {
   width: 85%;
   margin: 0 auto;
@@ -19,6 +15,10 @@
   padding: 24px;
   border: 1px solid #fff;
   border-radius: 5px;
+}
+.trendBox h2 {
+  margin-bottom: 16px;
+  color: #fff;
 }
 
 .trendWrap .totalBox .box {

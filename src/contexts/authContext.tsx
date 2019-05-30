@@ -53,7 +53,7 @@ class AuthProvider extends PureComponent<Props, State> {
     onLogOut: async () => {
       this.props.setLoading();
       await window.Kakao.Auth.logout();
-      this.getLoginStatus();
+      await this.getLoginStatus();
       this.props.setLoading();
     },
     onMenu: () => {
@@ -84,9 +84,9 @@ class AuthProvider extends PureComponent<Props, State> {
             headers: { "Content-type": "application/x-www-form-urlencoded" },
             Authorization: `Bearer ${authObj.access_token}`
           })
-          .then(res => {
-            this.getLoginStatus();
-            this.setState({ isModal: false });
+          .then(async res => {
+            await this.getLoginStatus();
+            await this.setState({ isModal: false });
             this.props.setLoading();
           })
           .catch((err: object) => console.log(err));

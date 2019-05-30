@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import TagCloud from "react-tag-cloud";
 import randomcolor from "randomcolor";
-import "./trend.css";
+import "./hashList.css";
 
 interface Props {
   trendDatas: object[];
-  onClick: (hashTag: string) => void;
+  onSearch: () => void;
 }
 interface trendDatas {
   cnt: number;
   hashTag: string;
 }
 
-class Trend extends Component<Props, {}> {
+class HashList extends Component<Props, {}> {
   renderWords = () => {
-    const { trendDatas, onClick } = this.props;
+    const { trendDatas, onSearch } = this.props;
     const result = trendDatas.map((v: trendDatas, i: number) => {
       const fontSize = v.cnt <= 1 ? 20 : v.cnt * 20;
       return (
-        <div key={i} onClick={() => onClick(v.hashTag)} style={{ fontSize }}>
+        <div key={i} onClick={onSearch} style={{ fontSize }}>
           {v.hashTag}
         </div>
       );
@@ -44,4 +44,4 @@ class Trend extends Component<Props, {}> {
   }
 }
 
-export default Trend;
+export default HashList;

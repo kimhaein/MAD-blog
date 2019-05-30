@@ -1,5 +1,8 @@
 import React, { PureComponent } from "react";
-import Trend from "../../components/Trend";
+import { PostConsumer } from "../../contexts/postContext";
+import HashList from "../../components/HashList";
+import HotPost from "../../components/HotPost";
+import Post from "../../components/Post";
 import axios from "axios";
 import moment from "moment";
 import { Row, Col, List, Avatar } from "antd";
@@ -15,12 +18,6 @@ class TrendContainer extends PureComponent<{}, State> {
 
   componentWillMount() {
     this.setDatas();
-  }
-
-  componentDidMount() {
-    setInterval(() => {
-      this.forceUpdate();
-    }, 10000);
   }
 
   setDatas = async () => {
@@ -68,43 +65,30 @@ class TrendContainer extends PureComponent<{}, State> {
             <Col span={16}>
               <h2>HASH CLOUD</h2>
               <div className="box hashBox">
-                <Trend trendDatas={trendDatas} onClick={this.onClick} />
+                <PostConsumer>
+                  {({ actions }: any) => (
+                    <HashList
+                      trendDatas={trendDatas}
+                      onSearch={actions.onSearch}
+                    />
+                  )}
+                </PostConsumer>
               </div>
             </Col>
             <Col span={8}>
               <h2>TOP 10 POST</h2>
               <div className="box hotPostBox">
-                <List
-                  itemLayout="horizontal"
+                <HotPost
                   dataSource={this.state.hotPostDatas}
-                  renderItem={item => (
-                    <List.Item
-                      className="listWrap"
-                      onClick={() => {
-                        alert(item.title);
-                      }}
-                    >
-                      <List.Item.Meta
-                        avatar={<Avatar src={item.thumbnail_image} />}
-                        title={item.title}
-                        description={`${item.nickname} (${moment(
-                          item.wrDate
-                        ).format("YYYY-MM-DD")})`}
-                      />
-                      <span>{item.likeCnt}</span>
-                      <span
-                        className="hotChart"
-                        style={{
-                          width: `${item.likeCnt}%`
-                        }}
-                      />
-                    </List.Item>
-                  )}
+                  onClick={this.onClick}
                 />
               </div>
             </Col>
           </Row>
         </div>
+        <PostConsumer>
+          {({ state }: any) => <Post postDatas={state.postDatas} />}
+        </PostConsumer>
       </div>
     );
   }

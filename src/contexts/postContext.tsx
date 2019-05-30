@@ -104,7 +104,11 @@ class PostProvider extends PureComponent<Props, State> {
     onSearch: (e: Event) => {
       this.props.setLoading();
       const target: SearchVal = e.target;
-      const keyword = target.value ? target.value : target.dataset.keyword;
+      const keyword = target.value
+        ? target.value
+        : target.dataset.keyword
+        ? target.dataset.keyword
+        : target.innerHTML;
       this.setState({ keyword }, () => {
         this.getPostDatas();
       });

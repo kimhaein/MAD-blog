@@ -38,19 +38,6 @@ class PostContainer extends PureComponent<{}, State> {
       .catch((err: object) => console.log(err));
   };
 
-  // TEST getPrams
-  // callTest = () => {
-  //   return axios
-  //     .post("https://mad-server.herokuapp.com/api/user", {
-  //       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  //       userId: 2
-  //     })
-  //     .then(({ data }) => {
-  //       console.log(data);
-  //     })
-  //     .catch((err: object) => console.log(err));
-  // };
-
   render() {
     const style = { backgroundImage: `url(/static/images/bg06.jpg)` };
     return (
