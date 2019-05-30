@@ -36,7 +36,7 @@ const Menu = ({ state, actions }) => {
           </Link>
         </li>
         <li>
-          <Link href="/myInfo">
+          <Link href="/mypage">
             <span>마이페이지</span>
           </Link>
         </li>
