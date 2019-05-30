@@ -24,15 +24,18 @@ const { Provider, Consumer: MypageConsumer } = Context;
  * setHash: post 해시태그 설정 이벤트 (등록)
  * onSubmitPost: post 등록 이벤트 (등록)
  * onEdit: post 수정 이벤트 (수정)
+ * onLike: post 좋아요 이벤트 (pno : post id)
+ * offLike: post 좋아요 취소 이벤트 (pno : post id)
  */
 
 interface Props {
-  postDatas: Array<object>;
+  isLogin: boolean;
   setLoading: any;
 }
 
 interface State {
-  postDatas: Array<object>;
+  postDatas: object[];
+  isLogin: Boolean;
   postCnt: number;
   isMoreBtn: Boolean;
   keyword: string;
@@ -41,6 +44,7 @@ interface State {
 class MypageProvider extends Component<Props, State> {
   state: State = {
     postDatas: [],
+    isLogin: false,
     postCnt: 4,
     isMoreBtn: false,
     keyword: ""
