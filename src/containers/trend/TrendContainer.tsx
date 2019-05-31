@@ -63,12 +63,11 @@ class TrendContainer extends PureComponent<{}, State> {
     await this.setState({
       isOpen: !this.state.isOpen
     });
-
     if (!this.state.isOpen) return false;
     const postDatas = await this.callPostDatasApi(pno, userId);
-    // this.setState({
-    //   postDatas: postDatas.getContent
-    // });
+    this.setState({
+      postDatas: postDatas.getContent
+    });
   };
 
   // 좋아요 TOP 10

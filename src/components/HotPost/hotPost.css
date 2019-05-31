@@ -30,9 +30,11 @@
 }
 .trendWrap .trendBox .hashBox div {
   transition: 1.4s;
+  cursor: pointer;
 }
 .listWrap {
   position: relative;
+  cursor: pointer;
 }
 .listWrap * {
   color: #fff;

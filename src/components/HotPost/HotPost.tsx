@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import moment from "moment";
 import { List, Avatar } from "antd";
 import "./hotPost.css";
@@ -10,8 +10,9 @@ interface Props {
 
 interface Item {
   pno: number;
+  userid: number;
   title: string;
-  thumbnail_image: string;
+  thumbnail: string;
   nickname: string;
   wrDate: string;
   likeCnt: number;
@@ -26,11 +27,11 @@ const HotPost = ({ hotPostDatas, openModal }: Props) => {
         <List.Item
           className="listWrap"
           onClick={() => {
-            openModal(item.pno, 1065974454);
+            openModal(item.pno, item.userid);
           }}
         >
           <List.Item.Meta
-            avatar={<Avatar src={item.thumbnail_image} />}
+            avatar={<Avatar src={item.thumbnail} />}
             title={item.title}
             description={`${item.nickname} (${moment(item.wrDate).format(
               "YYYY-MM-DD"

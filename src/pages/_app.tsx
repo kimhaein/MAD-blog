@@ -25,7 +25,7 @@ export default class MyApp extends Component<Props> {
     return (
       <Container>
         <Head>
-          <title>My new cool app</title>
+          <title>MAD-BLOG</title>
         </Head>
         <Component {...pageProps} />
       </Container>

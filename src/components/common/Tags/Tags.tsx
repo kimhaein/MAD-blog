@@ -12,7 +12,11 @@ const TagItem = ({ tagList }: TagItem) => {
     <PostConsumer>
       {({ actions }: any) => (
         <Tooltip title={tagList}>
-          <Tag color="#000" onClick={actions.onSearch} data-keyword={tagList}>
+          <Tag
+            color="#000"
+            onClick={actions ? actions.onSearch : null}
+            data-keyword={tagList}
+          >
             {isLongTag ? `${tagList.slice(0, 6)}...` : tagList}
           </Tag>
         </Tooltip>

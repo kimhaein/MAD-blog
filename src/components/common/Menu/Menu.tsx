@@ -43,7 +43,7 @@ const Menu = ({ state, actions }) => {
       </ul>
       <div className="menuFooter">
         <div className="catImg" />
-        <Link href="/">
+        <Link href="/readme">
           <h3>프로젝트 소개</h3>
         </Link>
         <div className="gitHub">
