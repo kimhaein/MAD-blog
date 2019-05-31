@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
 import { AuthProvider } from "../contexts/authContext";
-import { PostProvider } from "../contexts/postContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import TrendContainer from "../containers/trend/TrendContainer";
 import LoadingBar from "../components/common/LoadingBar";
@@ -32,8 +31,8 @@ class Trend extends PureComponent<{}, State> {
         <AuthProvider setIsLogin={this.setIsLogin} setLoading={this.setLoading}>
           {loading ? <LoadingBar /> : null}
           <HeaderContainer type="common" />
-          <TrendContainer />
           <LoginModal />
+          <TrendContainer />
         </AuthProvider>
       </Fragment>
     );

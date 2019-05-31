@@ -125,15 +125,15 @@ class PostProvider extends PureComponent<Props, State> {
   componentDidMount() {
     this.props.setLoading();
     this.getPostDatas();
-    console.log("getPostDatas");
   }
 
   //componentWillReceiveProps:컴포넌트가 prop 을 새로 받았을 때 실행
-  componentWillReceiveProps(nextProps) {
+  async componentWillReceiveProps(nextProps) {
     //islogin 값이 변경 됐을 때 만 실행
     if (this.props.isLogin !== nextProps.isLogin) {
-      this.setState({
-        isLogin: nextProps.isLogin
+      await this.setState({
+        isLogin: nextProps.isLogin,
+        keyword: nextProps.keyword
       });
       this.props.setLoading();
       this.getPostDatas();
@@ -150,8 +150,7 @@ class PostProvider extends PureComponent<Props, State> {
     this.setState({
       isMoreBtn:
         this.state.postCnt >= postDatas.totalPost.totalCnt ? false : true,
-      postDatas: postDatas.post,
-      keyword: ""
+      postDatas: postDatas.post
     });
   };
 

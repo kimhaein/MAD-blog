@@ -7,15 +7,11 @@ import "./hashList.css";
 interface Props {
   trendDatas: object[];
 }
-interface trendDatas {
-  cnt: number;
-  hashTag: string;
-}
 
-class HashList extends Component<Props, {}> {
+class HashList extends Component<Props, trendDatas> {
   renderWords = () => {
     const { trendDatas } = this.props;
-    const result = trendDatas.map((v: trendDatas, i: number) => {
+    const result = trendDatas.map((v: object, i: number) => {
       const fontSize = v.cnt <= 1 ? 20 : v.cnt * 20;
       return (
         <div
