@@ -120,15 +120,13 @@ class PostProvider extends PureComponent<Props, State> {
   constructor(props) {
     super(props);
     this.state = { ...this.state, keyword: this.props.keyword };
-    this.props.setLoading();
-    this.getPostDatas();
   }
 
-  // componentDidMount() {
-  //   this.props.setLoading();
-  //   this.getPostDatas();
-  //   console.log("getPostDatas");
-  // }
+  componentDidMount() {
+    this.props.setLoading();
+    this.getPostDatas();
+    console.log("getPostDatas");
+  }
 
   //componentWillReceiveProps:컴포넌트가 prop 을 새로 받았을 때 실행
   componentWillReceiveProps(nextProps) {
@@ -162,7 +160,6 @@ class PostProvider extends PureComponent<Props, State> {
    */
   callPostDatasApi = () => {
     const { postCnt, keyword } = this.state;
-    console.log("callPostDatasApi", keyword);
     return axios
       .post("https://mad-server.herokuapp.com/api/post/list", {
         headers: { "Content-type": "application/x-www-form-urlencoded" },

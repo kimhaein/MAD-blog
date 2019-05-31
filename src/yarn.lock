@@ -809,6 +809,11 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.0.tgz#4c48fed958d6dcf9487195a0ef6456d5f6e0163a"
   integrity sha512-eItQyV43bj4rR3JPV0Skpl1SncRCdziTEK9/v8VwXmV6d/qOUO8/EuWeHBbCZcsfSHfzI5UyMJLCSXtxxznyZg==
 
+"@types/randomcolor@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@types/randomcolor/-/randomcolor-0.5.2.tgz#857a648e72b9de98cfb0fdbc720acb5dae4a67b5"
+  integrity sha512-S7gerHMLULrBqTL0RdMHqsAg1HJ+bphA8FSnDL72eIYf+DyVB4nhOOnoyaNdLX7xsQd3Psye784LEpb0muCjmg==
+
 "@types/react-dom@^16.8.3":
   version "16.8.3"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.3.tgz#6131b7b6158bc7ed1925a3374b88b7c00481f0cb"
