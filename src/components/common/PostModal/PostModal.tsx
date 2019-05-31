@@ -1,6 +1,6 @@
 import { Icon } from "antd";
 import "./modal.css";
-import Post from "../../post";
+import Post from "../../Post";
 
 const PostModal = (data, isOpen, fn) => {
   const returnToParents = () => {
