@@ -6,9 +6,9 @@ const TabPane = Tabs.TabPane;
 // }
 
 const Tab = ({ my_prop, key, userFavoriteList, ...restProps }) => {
-  const returnToParents = d => {
+  const returnToParents = (pno, writer) => {
     // 클릭된 녀석의 pno 값을 부모에게 리턴
-    my_prop(d);
+    my_prop(pno, writer);
   };
   return (
     <TabPane key={key} {...restProps}>
@@ -20,7 +20,7 @@ const Tab = ({ my_prop, key, userFavoriteList, ...restProps }) => {
             <List.Item.Meta
               title={<span>{item.title}</span>}
               description={item.contents}
-              onClick={returnToParents.bind(this, item.pno)}
+              onClick={returnToParents.bind(this, item.pno, item.writer)}
             />
           </List.Item>
         )}
