@@ -38,6 +38,7 @@ class MypageContainer extends Component<{}, State> {
         userId: localStorage.getItem("loginId")
       })
       .then(data => {
+        console.log("작성한 글", data);
         if (data) {
           this.setState({
             myPageContentList: data.data.writedList,
@@ -55,6 +56,7 @@ class MypageContainer extends Component<{}, State> {
         userId: localStorage.getItem("loginId")
       })
       .then(data => {
+        console.log("좋아요 한 글", data);
         if (data) {
           this.setState({
             myPageContentList: data.data.likeList
@@ -74,6 +76,26 @@ class MypageContainer extends Component<{}, State> {
         if (data) {
           this.setState({
             userInfo: data.userInfo
+          });
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
+  //글 상세 정보 불러오기
+  callPostDetailApi = (pno, writer) => {
+    axios
+      .post("https://mad-server.herokuapp.com/api/post/contents", {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        pno,
+        userId: writer
+      })
+      .then(data => {
+        console.log("글 상세", data.data.getContent);
+        if (data) {
+          this.setState({
+            showOnModal: data.data.getContent,
+            modalIsOpen: true
           });
         }
       })
@@ -112,18 +134,16 @@ class MypageContainer extends Component<{}, State> {
       "분)"
     );
   }
-  getPnoFromChild = dataFromChild => {
-    console.log(dataFromChild, "CLICKED!!");
-    let findValue = this.state.myPageContentList.filter(
-      d => d.pno === dataFromChild
-    );
+  getPnoFromChild = (pno, writer) => {
+    console.log(pno, writer, "CLICKED!!");
+    let findValue = this.callPostDetailApi(pno, writer);
 
-    if (findValue) {
-      this.setState({
-        showOnModal: findValue,
-        modalIsOpen: true
-      });
-    }
+    // if (findValue) {
+    //   this.setState({
+    //     showOnModal: findValue,
+    //     modalIsOpen: true
+    //   });
+    // }
   };
   closeTheModalByBtn = fromChild => {
     console.log("lets close", fromChild);
@@ -189,7 +209,6 @@ class MypageContainer extends Component<{}, State> {
                         key={"2"}
                         my_prop={this.getPnoFromChild}
                         userFavoriteList={this.state.myPageContentList}
-                        callbackFromParent={this.myCallback}
                       />
                     </Tabs>
                   </div>

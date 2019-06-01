@@ -101,12 +101,12 @@ class MypageProvider extends Component<Props, State> {
   };
 
   //componentWillReceiveProps:컴포넌트가 prop 을 새로 받았을 때 실행
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      postDatas: nextProps.postDatas,
-      isMoreBtn: true
-    });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     postDatas: nextProps.postDatas,
+  //     isMoreBtn: true
+  //   });
+  // }
 
   //shouldComponentUpdate:prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드, true일때 만 리렌더링
   // shouldComponentUpdate(nextProps, nextState) {
