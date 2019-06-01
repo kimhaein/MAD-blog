@@ -19,7 +19,17 @@ const PostModal = (data, isOpen, fn) => {
         </div>
         <div className="modalBody">
           <div>
-            <Post postDatas={data} />
+            {data.length === 0 ? (
+              <div className="content_no_data">
+                <h4>삭제된 글입니다.</h4>
+                <p>
+                  해당 글은 글쓴이가 삭제함으로써 상세보기를 확인하실 수
+                  없습니다.
+                </p>
+              </div>
+            ) : (
+              <Post postDatas={data} />
+            )}
           </div>
         </div>
       </div>
