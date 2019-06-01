@@ -174,3 +174,7 @@ p {
     font-size: 112px;
   }
 }
+
+.modalBody div.ant-col {
+  width: 100% !important;
+}

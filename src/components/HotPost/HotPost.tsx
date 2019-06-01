@@ -10,7 +10,7 @@ interface Props {
 
 interface Item {
   pno: number;
-  userid: number;
+  userId: number;
   title: string;
   thumbnail: string;
   nickname: string;
@@ -27,7 +27,7 @@ const HotPost = ({ hotPostDatas, openModal }: Props) => {
         <List.Item
           className="listWrap"
           onClick={() => {
-            openModal(item.pno, item.userid);
+            openModal(item.pno, item.userId);
           }}
         >
           <List.Item.Meta
