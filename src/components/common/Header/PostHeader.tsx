@@ -34,10 +34,15 @@ const BackBtn = () => {
   );
 };
 
+interface TitleInput {
+  value: string;
+  setTitle: (value: string) => {};
+}
 // title 작성
-const TitleInput = ({ value, setTitle }) => {
-  const onChangeTitle = e => {
-    setTitle(e.target.value);
+const TitleInput = ({ value, setTitle }: TitleInput) => {
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    setTitle(target.value);
   };
 
   return (
@@ -51,8 +56,12 @@ const TitleInput = ({ value, setTitle }) => {
   );
 };
 
+interface PostBtn {
+  onSubmitPost: () => {};
+}
+
 // 글 등록
-const PostBtn = ({ onSubmitPost }) => {
+const PostBtn = ({ onSubmitPost }: PostBtn) => {
   return (
     <div
       className="postBtn"
@@ -67,8 +76,12 @@ const PostBtn = ({ onSubmitPost }) => {
   );
 };
 
+interface EditBtn {
+  onEdit: () => {};
+}
+
 // 글 수정
-const EditBtn = ({ onEdit }) => {
+const EditBtn = ({ onEdit }: EditBtn) => {
   return (
     <div
       className="postBtn"
@@ -83,7 +96,19 @@ const EditBtn = ({ onEdit }) => {
   );
 };
 
-const PostHeader = ({ state, actions }) => {
+interface Context {
+  state: {
+    title: string;
+    isEdit: Boolean;
+  };
+  actions: {
+    setTitle: () => {};
+    onEdit: () => {};
+    onSubmitPost: () => {};
+  };
+}
+
+const PostHeader = ({ state, actions }: Context) => {
   return (
     <header className="postHeader">
       <BackBtn />

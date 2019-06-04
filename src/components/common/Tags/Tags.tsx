@@ -3,7 +3,7 @@ import { Tag, Tooltip } from "antd";
 import "./tags.css";
 
 interface TagItem {
-  tagList: Array<number>;
+  tagList: string;
 }
 
 const TagItem = ({ tagList }: TagItem) => {
@@ -26,7 +26,12 @@ const TagItem = ({ tagList }: TagItem) => {
   return tag;
 };
 
-const Tags = ({ tagDatas, styleClass }) => {
+interface tagDatas {
+  tagDatas: string[];
+  styleClass: string;
+}
+
+const Tags = ({ tagDatas, styleClass }: tagDatas) => {
   const tagList = tagDatas.map((tagData, index) => {
     return <TagItem tagList={tagData} key={index} />;
   });

@@ -15,7 +15,7 @@ const showConfirm = (content: string, onOk: () => void) => {
   });
 };
 
-const MenuBtn = ({ onMenu }) => {
+const MenuBtn = ({ onMenu }: any) => {
   return (
     <div className="LeftBtn" onClick={onMenu}>
       MENU
@@ -55,7 +55,18 @@ const PostBtn = () => {
   );
 };
 
-const MainHeader = ({ state, actions }) => {
+interface Context {
+  state: {
+    isLogin: boolean;
+  };
+  actions: {
+    onMenu: () => {};
+    onLogOut: () => {};
+    onModal: () => {};
+  };
+}
+
+const MainHeader = ({ state, actions }: Context) => {
   return (
     <header>
       <MenuBtn onMenu={actions.onMenu} />

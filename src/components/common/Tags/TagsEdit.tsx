@@ -3,11 +3,11 @@ import { Tag, Icon, Input, message } from "antd";
 import "./tags.css";
 
 interface Props {
-  hash: Array<string>;
-  setHash: () => void;
+  hash: string[];
+  setHash: (tags: string[]) => void;
 }
 interface State {
-  tags: Array<string>;
+  tags: string[];
   inputVisible: boolean;
   inputValue: string;
 }
@@ -43,8 +43,9 @@ class TagsEdit extends Component<Props, State> {
   };
 
   // 인풋값 변경
-  handleInputChange = e => {
-    this.setState({ inputValue: e.target.value });
+  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState({ inputValue: target.value });
   };
 
   // 인풋 값 저장
@@ -66,8 +67,8 @@ class TagsEdit extends Component<Props, State> {
     );
   };
 
-  input;
-  saveInputRef = input => (this.input = input);
+  input: any;
+  saveInputRef = (input: any) => (this.input = input);
 
   render() {
     return (

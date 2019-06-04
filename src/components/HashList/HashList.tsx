@@ -7,11 +7,15 @@ import "./hashList.css";
 interface Props {
   trendDatas: object[];
 }
+interface TrendData {
+  cnt: number;
+  hashTag: string;
+}
 
-class HashList extends Component<Props, trendDatas> {
+class HashList extends Component<Props> {
   renderWords = () => {
     const { trendDatas } = this.props;
-    const result = trendDatas.map((v: object, i: number) => {
+    const result = trendDatas.map((v: TrendData, i: number) => {
       const fontSize = v.cnt <= 1 ? 20 : v.cnt * 20;
       return (
         <div
@@ -37,7 +41,7 @@ class HashList extends Component<Props, trendDatas> {
           fontStyle: "italic",
           padding: 10,
           height: "calc(100% - 40px)",
-          color: () => randomcolor({ luminosity: "light", hue: "blue" })
+          color: () => randomcolor({ luminosity: "light", hue: "blue" });
         }}
       >
         {this.renderWords()}

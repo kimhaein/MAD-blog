@@ -3,7 +3,11 @@ import { Input, Icon } from "antd";
 import { Tags } from "../Tags";
 import "./search.css";
 
-const Search = ({ tagDatas }) => {
+interface tagDatas {
+  tagDatas: string[];
+}
+
+const Search = ({ tagDatas }: tagDatas) => {
   return (
     <div className="searchWrap">
       <Tags styleClass="topTagWrap" tagDatas={tagDatas} />

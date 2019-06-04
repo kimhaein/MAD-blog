@@ -25,7 +25,7 @@ const { Provider, Consumer: PostConsumer } = Context;
 interface Props {
   isLogin: boolean;
   setLoading: any;
-  keyword: string;
+  keyword: string | undefined;
 }
 
 interface State {
@@ -33,15 +33,9 @@ interface State {
   isLogin: Boolean;
   postCnt: number;
   isMoreBtn: Boolean;
-  keyword: string;
+  keyword: string | undefined;
 }
-interface SearchVal {
-  value?: string;
-  dataset?: {
-    keyword: string;
-  };
-  innerHTML?: string;
-}
+
 class PostProvider extends PureComponent<Props, State> {
   state: State = {
     postDatas: [],
@@ -87,7 +81,7 @@ class PostProvider extends PureComponent<Props, State> {
           pno,
           userId: localStorage.getItem("loginId")
         })
-        .then(res => {
+        .then(() => {
           this.getPostDatas();
         })
         .catch(err => console.log(err));
@@ -105,8 +99,8 @@ class PostProvider extends PureComponent<Props, State> {
     },
     onSearch: (e: Event) => {
       this.props.setLoading();
-      const target: SearchVal = e.target;
-      const keyword = target.value
+      const target = e.target as HTMLInputElement;
+      const keyword: string | undefined = target.value
         ? target.value
         : target.dataset.keyword
         ? target.dataset.keyword
@@ -117,7 +111,7 @@ class PostProvider extends PureComponent<Props, State> {
     }
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = { ...this.state, keyword: this.props.keyword };
   }
@@ -128,13 +122,14 @@ class PostProvider extends PureComponent<Props, State> {
   }
 
   //componentWillReceiveProps:컴포넌트가 prop 을 새로 받았을 때 실행
-  async componentWillReceiveProps(nextProps) {
+  async componentWillReceiveProps(nextProps: Props) {
     //islogin 값이 변경 됐을 때 만 실행
     if (this.props.isLogin !== nextProps.isLogin) {
       await this.setState({
         isLogin: nextProps.isLogin,
         keyword: nextProps.keyword
       });
+
       this.props.setLoading();
       this.getPostDatas();
     }
