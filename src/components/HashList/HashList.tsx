@@ -15,7 +15,7 @@ interface TrendData {
 class HashList extends Component<Props> {
   renderWords = () => {
     const { trendDatas } = this.props;
-    const result = trendDatas.map((v: TrendData, i: number) => {
+    const result = trendDatas.map((v:TrendData |{}) => {
       const fontSize = v.cnt <= 1 ? 20 : v.cnt * 20;
       return (
         <div

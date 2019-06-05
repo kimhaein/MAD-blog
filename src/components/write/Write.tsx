@@ -8,7 +8,7 @@ import "codemirror/theme/material.css";
 
 interface Props {
   contents: string;
-  setContents: () => void;
+  setContents: (value: string) => void;
 }
 interface State {}
 

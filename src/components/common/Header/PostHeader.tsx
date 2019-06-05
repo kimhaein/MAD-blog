@@ -108,7 +108,7 @@ interface Context {
   };
 }
 
-const PostHeader = ({ state, actions }: Context) => {
+const PostHeader: React.FC<Context> = ({ state, actions }) => {
   return (
     <header className="postHeader">
       <BackBtn />

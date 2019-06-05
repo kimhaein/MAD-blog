@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Drawer, Avatar } from "antd";
 import "./menu.css";
 
-const Menu = ({ state, actions }) => {
+const Menu: React.FC = ({ state, actions }: any) => {
   return (
     <Drawer
       placement={"left"}

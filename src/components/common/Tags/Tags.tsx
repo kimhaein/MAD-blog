@@ -26,12 +26,12 @@ const TagItem = ({ tagList }: TagItem) => {
   return tag;
 };
 
-interface tagDatas {
+interface Props {
   tagDatas: string[];
   styleClass: string;
 }
 
-const Tags = ({ tagDatas, styleClass }: tagDatas) => {
+const Tags: React.FC<Props> = ({ tagDatas, styleClass }) => {
   const tagList = tagDatas.map((tagData, index) => {
     return <TagItem tagList={tagData} key={index} />;
   });

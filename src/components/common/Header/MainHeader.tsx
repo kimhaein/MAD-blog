@@ -66,7 +66,7 @@ interface Context {
   };
 }
 
-const MainHeader = ({ state, actions }: Context) => {
+const MainHeader: React.FC<Context> = ({ state, actions }) => {
   return (
     <header>
       <MenuBtn onMenu={actions.onMenu} />

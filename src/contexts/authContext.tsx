@@ -34,6 +34,20 @@ interface State {
 
 declare var Kakao: any;
 
+interface Auth {
+  access_token: string;
+}
+interface AuthStatus {
+  status: string;
+  user: {
+    id: string;
+    properties: {
+      nickname: string;
+      profile_image: string;
+    };
+  };
+}
+
 class AuthProvider extends PureComponent<Props, State> {
   state: State = {
     isModal: false,
@@ -80,7 +94,7 @@ class AuthProvider extends PureComponent<Props, State> {
   login = () => {
     this.props.setLoading();
     Kakao.Auth.login({
-      success: (authObj: object) => {
+      success: (authObj: Auth) => {
         axios
           .post("https://mad-server.herokuapp.com/kakaologin", {
             headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -103,7 +117,7 @@ class AuthProvider extends PureComponent<Props, State> {
    */
   getLoginStatus = () => {
     console.log("getLoginStatus");
-    Kakao.Auth.getStatus((authStatus: object) => {
+    Kakao.Auth.getStatus((authStatus: AuthStatus) => {
       console.log("1.getLoginStatus", authStatus);
       if (authStatus.status === "connected") {
         // 고객 데이터 localStorage 저장

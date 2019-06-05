@@ -18,7 +18,7 @@ interface Item {
   likeCnt: number;
 }
 
-const HotPost = ({ hotPostDatas, openModal }: Props) => {
+const HotPost: React.FC<Props> = ({ hotPostDatas, openModal }) => {
   return (
     <List
       itemLayout="horizontal"

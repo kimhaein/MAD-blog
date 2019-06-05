@@ -68,7 +68,7 @@ export class Code extends Component<Props, State> {
   }
 }
 
-const CodeView = () => (
+const CodeView: React.FC = () => (
   <WriteConsumer>
     {({ state, actions }: any) => {
       return (

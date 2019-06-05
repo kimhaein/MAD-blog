@@ -3,11 +3,11 @@ import { Input, Icon } from "antd";
 import { Tags } from "../Tags";
 import "./search.css";
 
-interface tagDatas {
+interface Props {
   tagDatas: string[];
 }
 
-const Search = ({ tagDatas }: tagDatas) => {
+const Search: React.FC<Props> = ({ tagDatas }) => {
   return (
     <div className="searchWrap">
       <Tags styleClass="topTagWrap" tagDatas={tagDatas} />

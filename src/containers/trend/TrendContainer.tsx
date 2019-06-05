@@ -59,7 +59,7 @@ class TrendContainer extends PureComponent<{}, State> {
   };
 
   // 모달 이벤트
-  openModal = async (pno: number, userId: number) => {
+  openModal = async (pno?: number, userId?: number) => {
     await this.setState({
       isOpen: !this.state.isOpen
     });
@@ -71,7 +71,7 @@ class TrendContainer extends PureComponent<{}, State> {
   };
 
   // 좋아요 TOP 10
-  callPostDatasApi = (pno, userId) => {
+  callPostDatasApi = (pno?: number, userId?: number) => {
     return axios
       .post("https://mad-server.herokuapp.com/api/post/contents", {
         headers: { "Content-type": "application/x-www-form-urlencoded" },

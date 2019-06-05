@@ -1,6 +1,6 @@
 import "./loadingBar.css";
 
-const LoadingBar = () => {
+const LoadingBar: React.FC = () => {
   return (
     <div className="loadingBarWrap">
       <div className="loadingBar" />

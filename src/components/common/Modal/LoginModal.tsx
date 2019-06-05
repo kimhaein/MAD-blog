@@ -2,7 +2,7 @@ import { Icon } from "antd";
 import { AuthConsumer } from "../../../contexts/authContext";
 import "./modal.css";
 
-const LoginModal = () => {
+const LoginModal: React.FC = () => {
   return (
     <AuthConsumer>
       {({ state, actions }: any) => (

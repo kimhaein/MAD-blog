@@ -1,17 +1,17 @@
 import { PostConsumer } from "../../../contexts/postContext";
 import { Statistic, Icon, message } from "antd";
 import "./likes.css";
-interface likes {
+interface Props {
   like: number;
   love: number;
   pno: number;
 }
 
 interface Actions {
-  offLike: () => void;
-  onLike: () => void;
+  offLike: (pno: number) => void;
+  onLike: (pno: number) => void;
 }
-const Likes = ({ like, love, pno }: likes) => {
+const Likes: React.FC<Props> = ({ like, love, pno }) => {
   const color = love === 1 ? "#f5222d" : "#ccc";
   const likeEvt = (actions: Actions) => {
     if (localStorage.getItem("loginId")) {

@@ -37,8 +37,8 @@ interface State {
   isEdit: boolean;
   title: string;
   contents: string;
-  hash: Array<string>;
-  beforeHash: Array<string>;
+  hash: string[];
+  beforeHash: string[];
 }
 
 class WriteProvider extends PureComponent<Props, State> {

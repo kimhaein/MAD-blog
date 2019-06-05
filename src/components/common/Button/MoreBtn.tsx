@@ -1,7 +1,7 @@
 import { PostConsumer } from "../../../contexts/postContext";
 import "./button.css";
 
-const MoreBtn = () => {
+const MoreBtn: React.FC = () => {
   return (
     <PostConsumer>
       {({ state, actions }: any) => (
