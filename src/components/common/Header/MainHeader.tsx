@@ -55,26 +55,22 @@ const PostBtn = () => {
   );
 };
 
-interface Context {
-  state: {
-    isLogin: boolean;
-  };
-  actions: {
-    onMenu: () => {};
-    onLogOut: () => {};
-    onModal: () => {};
-  };
+interface Props {
+  isLogin: boolean;
+  onMenu(): void;
+  onLogOut(): void;
+  onModal(): void;
 }
 
-const MainHeader: React.FC<Context> = ({ state, actions }) => {
+const MainHeader: React.FC<Props> = props => {
   return (
     <header>
-      <MenuBtn onMenu={actions.onMenu} />
+      <MenuBtn onMenu={props.onMenu} />
       <div className="LeftBtn">
-        {state.isLogin ? (
-          <Logout onLogOut={actions.onLogOut} />
+        {props.isLogin ? (
+          <Logout onLogOut={props.onLogOut} />
         ) : (
-          <Login onModal={actions.onModal} />
+          <Login onModal={props.onModal} />
         )}
       </div>
       <div className="logo">
@@ -83,7 +79,7 @@ const MainHeader: React.FC<Context> = ({ state, actions }) => {
         </Link>
       </div>
       <div className="postBtn">
-        {state.isLogin ? (
+        {props.isLogin ? (
           <Link href="/write">
             <span>Post</span>
           </Link>

@@ -5,18 +5,23 @@ import Search from "../../components/common/Search";
 import Post from "../../components/Post";
 import { MoreBtn } from "../../components/common/Button";
 
+interface Props {
+  postDatas: object[];
+  getPostDatas(): void;
+}
+
 interface State {
   hashLank: Array<string>;
 }
 
-class PostContainer extends PureComponent<{}, State> {
+class PostWrap extends PureComponent<Props, State> {
   state: State = {
     hashLank: []
   };
 
   componentDidMount() {
     this.getHashLank();
-    // this.callTest();
+    this.props.getPostDatas();
   }
 
   //post 데이터 가져오기
@@ -41,19 +46,26 @@ class PostContainer extends PureComponent<{}, State> {
   render() {
     const style = { backgroundImage: `url(/static/images/bg06.jpg)` };
     return (
-      <PostConsumer>
-        {({ state }: any) => (
-          <div className="contentsWrap mainWrap" style={style}>
-            <div className="postWrap">
-              <Search tagDatas={this.state.hashLank} />
-              <Post postDatas={state.postDatas} />
-              <MoreBtn />
-            </div>
-          </div>
-        )}
-      </PostConsumer>
+      <div className="contentsWrap mainWrap" style={style}>
+        <div className="postWrap">
+          <Search tagDatas={this.state.hashLank} />
+          <Post postDatas={this.props.postDatas} />
+          <MoreBtn />
+        </div>
+      </div>
     );
   }
 }
+
+const PostContainer = () => (
+  <PostConsumer>
+    {({ state, actions }: any) => (
+      <PostWrap
+        postDatas={state.postDatas}
+        getPostDatas={actions.getPostDatas}
+      />
+    )}
+  </PostConsumer>
+);
 
 export default PostContainer;

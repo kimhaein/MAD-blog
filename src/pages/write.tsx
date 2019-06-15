@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, Fragment } from "react";
 import Router from "next/router";
-import { WriteProvider } from "../contexts/writeContext";
+import { WriteProvider, WriteConsumer } from "../contexts/writeContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import WriteConatiner from "../containers/write/WriteConatiner";
 import LoadingBar from "../components/common/LoadingBar";
@@ -13,7 +13,7 @@ interface State {
   loading: boolean;
 }
 class Write extends PureComponent<Props, {}> {
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ query }: any) {
     return { mode: query.mode, pno: query.pno };
   }
   state: State = {
@@ -35,9 +35,15 @@ class Write extends PureComponent<Props, {}> {
     const { mode, pno } = this.props;
     return (
       <WriteProvider mode={mode} pno={pno} setLoading={this.setLoading}>
-        {this.state.loading ? <LoadingBar /> : null}
-        <HeaderContainer type="post" />
-        <WriteConatiner />
+        <WriteConsumer>
+          {({ state, actions }: any) => (
+            <Fragment>
+              {state.isLoading ? <LoadingBar /> : null}
+              <HeaderContainer state={state} actions={actions} />
+              <WriteConatiner state={state} actions={actions} />
+            </Fragment>
+          )}
+        </WriteConsumer>
       </WriteProvider>
     );
   }

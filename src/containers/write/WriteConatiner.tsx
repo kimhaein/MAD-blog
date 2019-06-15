@@ -4,17 +4,22 @@ import Write from "../../components/Write";
 import CodeView from "../../components/common/CodeView";
 import { TagsEdit } from "../../components/common/Tags";
 
-class WriteConatiner extends PureComponent {
+interface Props {
+  state: {
+    hash: string[];
+  };
+  actions: {
+    setHash(): void;
+  };
+}
+class WriteConatiner extends PureComponent<Props, {}> {
   render() {
+    const { state, actions } = this.props;
     return (
       <div className="contentsWrap">
         <Write />
         <CodeView />
-        <WriteConsumer>
-          {({ state, actions }: any) => (
-            <TagsEdit hash={state.hash} setHash={actions.setHash} />
-          )}
-        </WriteConsumer>
+        <TagsEdit hash={state.hash} setHash={actions.setHash} />
       </div>
     );
   }

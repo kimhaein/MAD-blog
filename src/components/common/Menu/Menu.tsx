@@ -2,24 +2,31 @@ import Link from "next/link";
 import { Drawer, Avatar } from "antd";
 import "./menu.css";
 
-const Menu: React.FC = ({ state, actions }: any) => {
+interface Props {
+  isMenu: boolean;
+  userName: string;
+  userImg: string;
+  onMenu(): void;
+}
+
+const Menu: React.FC<Props> = props => {
   return (
     <Drawer
       placement={"left"}
       closable={true}
-      onClose={actions.onMenu}
-      visible={state.isMenu}
+      onClose={props.onMenu}
+      visible={props.isMenu}
     >
-      {state.userName ? (
+      {props.userName ? (
         <div className="userInfo">
           <Avatar
-            src={state.userImg}
+            src={props.userImg}
             size={150}
             style={{ backgroundColor: "#000" }}
           >
-            {state.userName.substring(0, 1).toUpperCase()}
+            {props.userName.substring(0, 1).toUpperCase()}
           </Avatar>
-          <p>{state.userName}</p>
+          <p>{props.userName}</p>
         </div>
       ) : (
         <div className="userInfo">

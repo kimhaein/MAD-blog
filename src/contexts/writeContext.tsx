@@ -98,7 +98,6 @@ class WriteProvider extends PureComponent<Props, State> {
       const { beforeHash, hash, pno, title, contents } = this.state;
       let delHash = beforeHash.filter(tag => !hash.includes(tag));
       let addHash = hash.filter(tag => !beforeHash.includes(tag));
-
       axios
         .post("https://mad-server.herokuapp.com/api/post/edit", {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -110,7 +109,7 @@ class WriteProvider extends PureComponent<Props, State> {
           delHash: delHash.toString(),
           addHash: addHash.toString()
         })
-        .then(res => {
+        .then(() => {
           // 수정 완료시 메인화면으로 이동
           Router.replace("/");
         });

@@ -15,19 +15,11 @@ class readme extends PureComponent<{}, State> {
     loading: false
   };
 
-  setIsLogin = (isLogin: boolean = false) => {
-    this.setState({ isLogin });
-  };
-
-  setLoading = () => {
-    this.setState({ loading: !this.state.loading });
-  };
-
   render() {
     const { isLogin, loading } = this.state;
     return (
       <Fragment>
-        <AuthProvider setIsLogin={this.setIsLogin} setLoading={this.setLoading}>
+        <AuthProvider>
           {loading ? <LoadingBar /> : null}
           <HeaderContainer type="common" />
           <LoginModal />

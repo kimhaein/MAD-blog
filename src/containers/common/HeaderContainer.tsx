@@ -1,31 +1,55 @@
 import React, { PureComponent, Fragment } from "react";
 import { MainHeader, PostHeader } from "../../components/common/Header";
-import { AuthConsumer } from "../../contexts/authContext";
-import { WriteConsumer } from "../../contexts/writeContext";
 import Menu from "../../components/common/Menu";
 
 interface Props {
-  type: string;
+  type?: string;
+  state: {
+    isLogin: boolean;
+    isMenu: boolean;
+    userName: string;
+    userImg: string;
+    title: string;
+    isEdit: Boolean;
+  };
+  actions: {
+    onLogOut(): void;
+    onModal(): void;
+    onMenu(): void;
+    setTitle(): void;
+    onEdit(): void;
+    onSubmitPost(): void;
+  };
 }
 
 class HeaderContainer extends PureComponent<Props, {}> {
   render() {
-    const { type } = this.props;
+    console.log(this.props);
+    const { type, state, actions } = this.props;
+
     return type === "common" ? (
-      <AuthConsumer>
-        {({ state, actions }: any) => (
-          <Fragment>
-            <MainHeader state={state} actions={actions} />
-            <Menu state={state} actions={actions} />
-          </Fragment>
-        )}
-      </AuthConsumer>
+      <Fragment>
+        <MainHeader
+          isLogin={state.isLogin}
+          onMenu={actions.onMenu}
+          onLogOut={actions.onLogOut}
+          onModal={actions.onModal}
+        />
+        <Menu
+          isMenu={state.isMenu}
+          userName={state.userName}
+          userImg={state.userImg}
+          onMenu={actions.onMenu}
+        />
+      </Fragment>
     ) : (
-      <WriteConsumer>
-        {({ state, actions }: any) => (
-          <PostHeader state={state} actions={actions} />
-        )}
-      </WriteConsumer>
+      <PostHeader
+        title={state.title}
+        isEdit={state.isEdit}
+        setTitle={actions.setTitle}
+        onEdit={actions.onEdit}
+        onSubmitPost={actions.onSubmitPost}
+      />
     );
   }
 }

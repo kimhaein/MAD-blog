@@ -96,27 +96,23 @@ const EditBtn = ({ onEdit }: EditBtn) => {
   );
 };
 
-interface Context {
-  state: {
-    title: string;
-    isEdit: Boolean;
-  };
-  actions: {
-    setTitle: () => {};
-    onEdit: () => {};
-    onSubmitPost: () => {};
-  };
+interface Props {
+  title: string;
+  isEdit: Boolean;
+  setTitle(): void;
+  onEdit(): void;
+  onSubmitPost(): void;
 }
 
-const PostHeader: React.FC<Context> = ({ state, actions }) => {
+const PostHeader: React.FC<Props> = ({ props }: any) => {
   return (
     <header className="postHeader">
       <BackBtn />
-      <TitleInput value={state.title} setTitle={actions.setTitle} />
-      {state.isEdit ? (
-        <EditBtn onEdit={actions.onEdit} />
+      <TitleInput value={props.title} setTitle={props.setTitle} />
+      {props.isEdit ? (
+        <EditBtn onEdit={props.onEdit} />
       ) : (
-        <PostBtn onSubmitPost={actions.onSubmitPost} />
+        <PostBtn onSubmitPost={props.onSubmitPost} />
       )}
     </header>
   );

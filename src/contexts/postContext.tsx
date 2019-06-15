@@ -23,14 +23,15 @@ const { Provider, Consumer: PostConsumer } = Context;
  */
 
 interface Props {
-  isLogin: boolean;
-  setLoading: any;
   keyword: string | undefined;
+  isLogin: boolean;
+  userId: string;
 }
 
 interface State {
   postDatas: object[];
   isLogin: Boolean;
+  userId: string;
   postCnt: number;
   isMoreBtn: Boolean;
   keyword: string | undefined;
@@ -40,6 +41,7 @@ class PostProvider extends PureComponent<Props, State> {
   state: State = {
     postDatas: [],
     isLogin: false,
+    userId: "",
     postCnt: 4,
     isMoreBtn: false,
     keyword: ""
@@ -47,7 +49,6 @@ class PostProvider extends PureComponent<Props, State> {
 
   actions = {
     onDelete: (pno: number) => {
-      this.props.setLoading();
       axios
         .post("https://mad-server.herokuapp.com/api/post/del", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -56,12 +57,11 @@ class PostProvider extends PureComponent<Props, State> {
           upDate: moment().format("YYYY-MM-DD H:mm:ss")
         })
         .then(res => {
-          this.getPostDatas();
+          this.actions.getPostDatas();
         })
         .catch(err => console.log(err));
     },
     onLike: (pno: number) => {
-      this.props.setLoading();
       axios
         .post("https://mad-server.herokuapp.com/api/like", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -69,12 +69,11 @@ class PostProvider extends PureComponent<Props, State> {
           userId: localStorage.getItem("loginId")
         })
         .then(res => {
-          this.getPostDatas();
+          this.actions.getPostDatas();
         })
         .catch(err => console.log(err));
     },
     offLike: (pno: number) => {
-      this.props.setLoading();
       axios
         .post("https://mad-server.herokuapp.com/api/unlike", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -82,23 +81,21 @@ class PostProvider extends PureComponent<Props, State> {
           userId: localStorage.getItem("loginId")
         })
         .then(() => {
-          this.getPostDatas();
+          this.actions.getPostDatas();
         })
         .catch(err => console.log(err));
     },
     onMore: () => {
-      this.props.setLoading();
       this.setState(
         {
           postCnt: this.state.postCnt + 4
         },
         () => {
-          this.getPostDatas();
+          this.actions.getPostDatas();
         }
       );
     },
     onSearch: (e: Event) => {
-      this.props.setLoading();
       const target = e.target as HTMLInputElement;
       const keyword: string | undefined = target.value
         ? target.value
@@ -106,8 +103,27 @@ class PostProvider extends PureComponent<Props, State> {
         ? target.dataset.keyword
         : target.innerHTML;
       this.setState({ keyword }, () => {
-        this.getPostDatas();
+        this.actions.getPostDatas();
       });
+    },
+    getPostDatas: async () => {
+      console.log("getPostDatas");
+      const { postCnt, keyword, userId } = this.state;
+      return axios
+        .post("https://mad-server.herokuapp.com/api/post/list", {
+          headers: { "Content-type": "application/x-www-form-urlencoded" },
+          userId: userId,
+          page: postCnt,
+          search: keyword
+        })
+        .then(({ data }) => {
+          this.setState({
+            isMoreBtn:
+              this.state.postCnt >= data.totalPost.totalCnt ? false : true,
+            postDatas: data.post
+          });
+        })
+        .catch(err => console.log(err));
     }
   };
 
@@ -116,56 +132,22 @@ class PostProvider extends PureComponent<Props, State> {
     this.state = { ...this.state, keyword: this.props.keyword };
   }
 
-  componentDidMount() {
-    this.props.setLoading();
-    this.getPostDatas();
-  }
-
   //componentWillReceiveProps:컴포넌트가 prop 을 새로 받았을 때 실행
   async componentWillReceiveProps(nextProps: Props) {
-    //islogin 값이 변경 됐을 때 만 실행
+    //isLogin 값이 변경 됐을 때 만 실행
     if (this.props.isLogin !== nextProps.isLogin) {
       await this.setState({
         isLogin: nextProps.isLogin,
+        userId: nextProps.userId
+      });
+    }
+    if (this.props.keyword !== nextProps.keyword) {
+      await this.setState({
         keyword: nextProps.keyword
       });
-
-      this.props.setLoading();
-      this.getPostDatas();
     }
+    this.actions.getPostDatas();
   }
-
-  /**
-   * posts 관련 json 데이터 state 저장
-   */
-  getPostDatas = async () => {
-    const postDatas = await this.callPostDatasApi();
-    this.props.setLoading();
-    if (!postDatas) return false;
-    this.setState({
-      isMoreBtn:
-        this.state.postCnt >= postDatas.totalPost.totalCnt ? false : true,
-      postDatas: postDatas.post
-    });
-  };
-
-  /**
-   * posts 관련 데이터 조회
-   */
-  callPostDatasApi = () => {
-    const { postCnt, keyword } = this.state;
-    return axios
-      .post("https://mad-server.herokuapp.com/api/post/list", {
-        headers: { "Content-type": "application/x-www-form-urlencoded" },
-        userId: localStorage.getItem("loginId"),
-        page: postCnt,
-        search: keyword
-      })
-      .then(({ data }) => {
-        return data;
-      })
-      .catch(err => console.log(err));
-  };
 
   render() {
     const { state, actions } = this;
