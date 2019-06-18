@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-import { AuthProvider } from "../contexts/authContext";
+import { AuthProvider, AuthConsumer } from "../contexts/authContext";
 import { MypageProvider } from "../contexts/mypageContext";
 
 // Container
@@ -15,32 +15,20 @@ interface State {
 }
 
 class mypage extends Component<{}, State> {
-  state: State = {
-    isLogin: false,
-    loading: false
-  };
-
-  setIsLogin = (isLogin: boolean = false) => {
-    this.setState({ isLogin });
-  };
-
-  setLoading = () => {
-    this.setState({ loading: !this.state.loading });
-  };
-
   render() {
-    const { isLogin, loading } = this.state;
     return (
-      <Fragment>
-        <AuthProvider setIsLogin={this.setIsLogin} setLoading={this.setLoading}>
-          {loading ? <LoadingBar /> : null}
-          <HeaderContainer type="common" />
-          <LoginModal />
-          <MypageProvider isLogin={isLogin} setLoading={this.setLoading}>
-            <MypageContainer />
-          </MypageProvider>
-        </AuthProvider>
-      </Fragment>
+      <AuthProvider>
+        <AuthConsumer>
+          {({ state, actions }: any) => (
+            <Fragment>
+              {state.isLoading ? <LoadingBar /> : null}
+              <HeaderContainer type="common" state={state} actions={actions} />
+              <LoginModal />
+              <MypageContainer />
+            </Fragment>
+          )}
+        </AuthConsumer>
+      </AuthProvider>
     );
   }
 }

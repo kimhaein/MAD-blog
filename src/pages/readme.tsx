@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
-import { AuthProvider } from "../contexts/authContext";
+import { AuthProvider, AuthConsumer } from "../contexts/authContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import LoadingBar from "../components/common/LoadingBar";
 import { LoginModal } from "../components/common/Modal";
@@ -10,22 +10,20 @@ interface State {
 }
 
 class readme extends PureComponent<{}, State> {
-  state: State = {
-    isLogin: false,
-    loading: false
-  };
-
   render() {
-    const { isLogin, loading } = this.state;
     return (
-      <Fragment>
-        <AuthProvider>
-          {loading ? <LoadingBar /> : null}
-          <HeaderContainer type="common" />
-          <LoginModal />
-          {`read ME`}
-        </AuthProvider>
-      </Fragment>
+      <AuthProvider>
+        <AuthConsumer>
+          {({ state, actions }: any) => (
+            <Fragment>
+              {state.isLoading ? <LoadingBar /> : null}
+              <HeaderContainer type="common" state={state} actions={actions} />
+              <LoginModal />
+              {`read ME`}
+            </Fragment>
+          )}
+        </AuthConsumer>
+      </AuthProvider>
     );
   }
 }

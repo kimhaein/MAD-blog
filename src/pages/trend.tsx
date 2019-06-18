@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
-import { AuthProvider } from "../contexts/authContext";
+import { AuthProvider, AuthConsumer } from "../contexts/authContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import TrendContainer from "../containers/trend/TrendContainer";
 import LoadingBar from "../components/common/LoadingBar";
@@ -11,30 +11,20 @@ interface State {
 }
 
 class Trend extends PureComponent<{}, State> {
-  state: State = {
-    isLogin: false,
-    loading: false
-  };
-
-  setIsLogin = (isLogin: boolean = false) => {
-    this.setState({ isLogin });
-  };
-
-  setLoading = () => {
-    this.setState({ loading: !this.state.loading });
-  };
-
   render() {
-    const { isLogin, loading } = this.state;
     return (
-      <Fragment>
-        <AuthProvider setIsLogin={this.setIsLogin} setLoading={this.setLoading}>
-          {loading ? <LoadingBar /> : null}
-          <HeaderContainer type="common" />
-          <LoginModal />
-          <TrendContainer />
-        </AuthProvider>
-      </Fragment>
+      <AuthProvider>
+        <AuthConsumer>
+          {({ state, actions }: any) => (
+            <Fragment>
+              {state.isLoading ? <LoadingBar /> : null}
+              <HeaderContainer type="common" state={state} actions={actions} />
+              <LoginModal />
+              <TrendContainer />
+            </Fragment>
+          )}
+        </AuthConsumer>
+      </AuthProvider>
     );
   }
 }
