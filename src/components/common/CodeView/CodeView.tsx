@@ -13,14 +13,14 @@ require("prismjs/components/prism-css.min.js");
 
 interface Props {
   markdown: string;
+  setContents?(value: string): void;
   type: string;
-  setContents?: () => void;
 }
 interface State {
   html: string;
 }
 
-export class Code extends Component<Props, State> {
+export class CodeView extends Component<Props, State> {
   state: State = {
     html: this.props.markdown
       ? marked(this.props.markdown, { breaks: true, sanitize: true })
@@ -67,19 +67,5 @@ export class Code extends Component<Props, State> {
     );
   }
 }
-
-const CodeView: React.FC = () => (
-  <WriteConsumer>
-    {({ state, actions }: any) => {
-      return (
-        <Code
-          markdown={state.contents}
-          setContents={actions.setContents}
-          type="write"
-        />
-      );
-    }}
-  </WriteConsumer>
-);
 
 export default CodeView;

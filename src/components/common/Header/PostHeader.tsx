@@ -104,7 +104,7 @@ interface Props {
   onSubmitPost(): void;
 }
 
-const PostHeader: React.FC<Props> = ({ props }: any) => {
+const PostHeader: React.FC<Props> = (props: any) => {
   return (
     <header className="postHeader">
       <BackBtn />

@@ -8,6 +8,7 @@ import { MoreBtn } from "../../components/common/Button";
 interface Props {
   postDatas: object[];
   getPostDatas(): void;
+  isLogin: boolean;
 }
 
 interface State {
@@ -49,7 +50,7 @@ class PostWrap extends PureComponent<Props, State> {
       <div className="contentsWrap mainWrap" style={style}>
         <div className="postWrap">
           <Search tagDatas={this.state.hashLank} />
-          <Post postDatas={this.props.postDatas} />
+          <Post postDatas={this.props.postDatas} isLogin={this.props.isLogin} />
           <MoreBtn />
         </div>
       </div>
@@ -63,6 +64,7 @@ const PostContainer = () => (
       <PostWrap
         postDatas={state.postDatas}
         getPostDatas={actions.getPostDatas}
+        isLogin={state.isLogin}
       />
     )}
   </PostConsumer>

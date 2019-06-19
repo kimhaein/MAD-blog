@@ -5,7 +5,7 @@ import "./modal.css";
 interface Props {
   isOpen: boolean;
   postDatas: object[];
-  openModal: () => void;
+  openModal(): void;
 }
 const PostModal: React.FC<Props> = ({ isOpen, postDatas, openModal }) => {
   return (

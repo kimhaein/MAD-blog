@@ -5,16 +5,17 @@ interface Props {
   like: number;
   love: number;
   pno: number;
+  nowUser: number;
 }
 
 interface Actions {
-  offLike: (pno: number) => void;
-  onLike: (pno: number) => void;
+  offLike(pno: number): void;
+  onLike(pno: number): void;
 }
-const Likes: React.FC<Props> = ({ like, love, pno }) => {
+const Likes: React.FC<Props> = ({ like, love, pno, nowUser }) => {
   const color = love === 1 ? "#f5222d" : "#ccc";
   const likeEvt = (actions: Actions) => {
-    if (localStorage.getItem("loginId")) {
+    if (!nowUser) {
       return love === 1 ? actions.offLike(pno) : actions.onLike(pno);
     } else {
       return message.warning("로그인 후 이용해 주세요");

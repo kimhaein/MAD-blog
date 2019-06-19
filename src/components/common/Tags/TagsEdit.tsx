@@ -4,7 +4,7 @@ import "./tags.css";
 
 interface Props {
   hash: string[];
-  setHash: (tags: string[]) => void;
+  setHash(tags: string[]): void;
 }
 interface State {
   tags: string[];

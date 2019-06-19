@@ -24,9 +24,7 @@ interface Props {
 
 class HeaderContainer extends PureComponent<Props, {}> {
   render() {
-    console.log(this.props);
     const { type, state, actions } = this.props;
-
     return type === "common" ? (
       <Fragment>
         <MainHeader

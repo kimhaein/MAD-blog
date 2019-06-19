@@ -19,7 +19,11 @@ class Trend extends PureComponent<{}, State> {
             <Fragment>
               {state.isLoading ? <LoadingBar /> : null}
               <HeaderContainer type="common" state={state} actions={actions} />
-              <LoginModal />
+              <LoginModal
+                isModal={state.isModal}
+                onModal={state.onModal}
+                onLogin={state.onLogin}
+              />
               <TrendContainer />
             </Fragment>
           )}

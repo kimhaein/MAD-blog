@@ -7,25 +7,26 @@ import "./hashList.css";
 interface Props {
   trendDatas: object[];
 }
-interface TrendData {
-  cnt: number;
-  hashTag: string;
-}
+// interface TrendData {
+//   cnt: number;
+//   hashTag: string;
+// }
 
 class HashList extends Component<Props> {
   renderWords = () => {
     const { trendDatas } = this.props;
-    const result = trendDatas.map((v:TrendData |{}) => {
-      const fontSize = v.cnt <= 1 ? 20 : v.cnt * 20;
+    const result = trendDatas.map((v, i) => {
+      const { cnt, hashTag }: any = v;
+      const fontSize = cnt <= 1 ? 20 : cnt * 20;
       return (
         <div
           key={i}
           onClick={() => {
-            Router.push(`/?keyword=${v.hashTag}`);
+            Router.push(`/?keyword=${hashTag}`);
           }}
           style={{ fontSize }}
         >
-          {v.hashTag}
+          {hashTag}
         </div>
       );
     });
@@ -41,7 +42,7 @@ class HashList extends Component<Props> {
           fontStyle: "italic",
           padding: 10,
           height: "calc(100% - 40px)",
-          color: () => randomcolor({ luminosity: "light", hue: "blue" });
+          color: () => randomcolor({ luminosity: "light", hue: "blue" })
         }}
       >
         {this.renderWords()}

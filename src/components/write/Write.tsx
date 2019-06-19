@@ -8,11 +8,11 @@ import "codemirror/theme/material.css";
 
 interface Props {
   contents: string;
-  setContents: (value: string) => void;
+  setContents(value: string): void;
 }
 interface State {}
 
-class Editor extends Component<Props, State> {
+class Write extends Component<Props, State> {
   render() {
     const { contents, setContents } = this.props;
     return (
@@ -32,13 +32,5 @@ class Editor extends Component<Props, State> {
     );
   }
 }
-
-const Write = () => (
-  <WriteConsumer>
-    {({ state, actions }: any) => (
-      <Editor contents={state.contents} setContents={actions.setContents} />
-    )}
-  </WriteConsumer>
-);
 
 export default Write;

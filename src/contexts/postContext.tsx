@@ -23,8 +23,8 @@ const { Provider, Consumer: PostConsumer } = Context;
  */
 
 interface Props {
-  keyword: string | undefined;
   isLogin: boolean;
+  keyword: string | undefined;
   userId: string;
 }
 
@@ -39,11 +39,11 @@ interface State {
 
 class PostProvider extends PureComponent<Props, State> {
   state: State = {
-    postDatas: [],
     isLogin: false,
+    isMoreBtn: false,
+    postDatas: [],
     userId: "",
     postCnt: 4,
-    isMoreBtn: false,
     keyword: ""
   };
 
@@ -53,7 +53,7 @@ class PostProvider extends PureComponent<Props, State> {
         .post("https://mad-server.herokuapp.com/api/post/del", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
           pno,
-          writer: localStorage.getItem("loginId"),
+          writer: this.state.userId,
           upDate: moment().format("YYYY-MM-DD H:mm:ss")
         })
         .then(res => {
@@ -66,7 +66,7 @@ class PostProvider extends PureComponent<Props, State> {
         .post("https://mad-server.herokuapp.com/api/like", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
           pno,
-          userId: localStorage.getItem("loginId")
+          userId: this.state.userId
         })
         .then(res => {
           this.actions.getPostDatas();
@@ -78,7 +78,7 @@ class PostProvider extends PureComponent<Props, State> {
         .post("https://mad-server.herokuapp.com/api/unlike", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
           pno,
-          userId: localStorage.getItem("loginId")
+          userId: this.state.userId
         })
         .then(() => {
           this.actions.getPostDatas();

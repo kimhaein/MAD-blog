@@ -24,7 +24,6 @@ class Index extends PureComponent<Props, {}> {
           {({ state, actions }: any) => (
             <Fragment>
               <HeaderContainer type="common" state={state} actions={actions} />
-              <LoginModal />
               <PostProvider
                 keyword={this.props.keyword}
                 isLogin={state.isLogin}
@@ -32,6 +31,11 @@ class Index extends PureComponent<Props, {}> {
               >
                 <PostContainer />
               </PostProvider>
+              <LoginModal
+                isModal={state.isModal}
+                onModal={state.onModal}
+                onLogin={state.onLogin}
+              />
               {state.isLoading ? <LoadingBar /> : null}
             </Fragment>
           )}

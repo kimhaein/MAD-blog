@@ -6,7 +6,7 @@ import moment from "moment";
 // components
 import { Tags } from "../common/Tags";
 import Likes from "../common/Likes";
-import { Code } from "../common/CodeView/CodeView";
+import { CodeView } from "../common/CodeView/CodeView";
 
 import "./post.css";
 
@@ -66,10 +66,14 @@ const PostItem = ({ postData }: PostItem) => {
         <div className="postInfo">
           <span>
             <Avatar
-              src={postData.thumbnail_image}
+              src={
+                postData.thumbnail_image ? postData.thumbnail_image : undefined
+              }
               style={{ backgroundColor: "#000", marginRight: 10 }}
             >
-              {postData.writer.substring(0, 1).toUpperCase()}
+              {postData.writer
+                ? postData.writer.substring(0, 1).toUpperCase()
+                : null}
             </Avatar>
             <span>BY. {postData.writer}</span>
           </span>
@@ -79,11 +83,16 @@ const PostItem = ({ postData }: PostItem) => {
         </div>
       </div>
       <div className="postListBody">
-        <Code markdown={postData.contents} type="post" />
+        <CodeView markdown={postData.contents} type="post" />
       </div>
       <div className="postListfooter">
         <Tags tagDatas={hashArry} styleClass="tagWrap" />
-        <Likes like={postData.likes} love={postData.love} pno={postData.pno} />
+        <Likes
+          like={postData.likes}
+          love={postData.love}
+          pno={postData.pno}
+          nowUser={postData.nowUser}
+        />
       </div>
     </div>
   );
