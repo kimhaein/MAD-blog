@@ -38,7 +38,12 @@ const PostMenu = ({ pno }: any) => {
   );
 };
 
-interface PostItem {
+interface Props {
+  postDatas: object[];
+  type: string | null;
+}
+
+interface PostItemProps {
   postData: {
     pno: number;
     title: string;
@@ -52,9 +57,10 @@ interface PostItem {
     likes: number;
     love: number;
   };
+  type: string | null;
 }
 
-const PostItem = ({ postData }: PostItem) => {
+const PostItem: React.FC<PostItemProps> = ({ postData, type }) => {
   const hashArry = postData.hashes ? postData.hashes.split(",") : [];
   return (
     <div className="postList">
@@ -85,30 +91,37 @@ const PostItem = ({ postData }: PostItem) => {
       <div className="postListBody">
         <CodeView markdown={postData.contents} type="post" />
       </div>
-      <div className="postListfooter">
-        <Tags tagDatas={hashArry} styleClass="tagWrap" />
-        <Likes
-          like={postData.likes}
-          love={postData.love}
-          pno={postData.pno}
-          nowUser={postData.nowUser}
-        />
-      </div>
+      {type !== "detail" ? (
+        <div className="postListfooter">
+          <Tags tagDatas={hashArry} styleClass="tagWrap" />
+          <Likes
+            like={postData.likes}
+            love={postData.love}
+            pno={postData.pno}
+            nowUser={postData.nowUser}
+          />
+        </div>
+      ) : null}
     </div>
   );
 };
 
-const Post = ({ postDatas }) => {
-  let postList = postDatas.map((postData: object, index: number) => {
+const Post: React.FC<Props> = ({ postDatas, type = null }) => {
+  let postList = postDatas.map((postData: any, index: number) => {
     return (
       <Col xs={24} md={24} lg={24} xl={12} key={index}>
-        <PostItem postData={postData} />
+        <PostItem postData={postData} type={type} />
       </Col>
     );
   });
 
   return (
-    <Row type="flex" justify="space-between" gutter={32} className="postWrap">
+    <Row
+      type="flex"
+      justify="space-between"
+      gutter={32}
+      className={`postWrap ${type}`}
+    >
       {postList}
     </Row>
   );

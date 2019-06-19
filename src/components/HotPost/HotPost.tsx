@@ -4,8 +4,8 @@ import { List, Avatar } from "antd";
 import "./hotPost.css";
 
 interface Props {
-  hotPostDatas: object[];
-  openModal(pno: number, userId: number): void;
+  hotPostDatas: Item[];
+  openModal(pno: number, userId: string): void;
 }
 
 interface Item {

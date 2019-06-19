@@ -20,8 +20,8 @@ class readme extends PureComponent<{}, State> {
               <HeaderContainer type="common" state={state} actions={actions} />
               <LoginModal
                 isModal={state.isModal}
-                onModal={state.onModal}
-                onLogin={state.onLogin}
+                onModal={actions.onModal}
+                onLogin={actions.onLogin}
               />
               {`read ME`}
             </Fragment>

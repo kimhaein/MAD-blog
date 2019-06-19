@@ -1,7 +1,7 @@
 /**
  * 게시글 관련 context
  */
-import React, { PureComponent, createContext } from "react";
+import React, { Component, createContext } from "react";
 import moment from "moment";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ const { Provider, Consumer: PostConsumer } = Context;
 
 interface Props {
   isLogin: boolean;
-  keyword: string | undefined;
+  keyword?: string | undefined;
   userId: string;
 }
 
@@ -37,7 +37,7 @@ interface State {
   keyword: string | undefined;
 }
 
-class PostProvider extends PureComponent<Props, State> {
+class PostProvider extends Component<Props, State> {
   state: State = {
     isLogin: false,
     isMoreBtn: false,

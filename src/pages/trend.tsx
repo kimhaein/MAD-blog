@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
+import { PostProvider } from "../contexts/postContext";
 import { AuthProvider, AuthConsumer } from "../contexts/authContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import TrendContainer from "../containers/trend/TrendContainer";
@@ -21,8 +22,8 @@ class Trend extends PureComponent<{}, State> {
               <HeaderContainer type="common" state={state} actions={actions} />
               <LoginModal
                 isModal={state.isModal}
-                onModal={state.onModal}
-                onLogin={state.onLogin}
+                onModal={actions.onModal}
+                onLogin={actions.onLogin}
               />
               <TrendContainer />
             </Fragment>

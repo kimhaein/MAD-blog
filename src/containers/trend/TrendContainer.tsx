@@ -8,9 +8,10 @@ import { PostModal } from "../../components/common/Modal";
 interface State {
   isOpen: boolean;
   trendDatas: object[];
-  hotPostDatas: object[];
+  hotPostDatas: [];
   postDatas: object[];
 }
+
 class TrendContainer extends PureComponent<{}, State> {
   state: State = {
     isOpen: false,
@@ -59,7 +60,7 @@ class TrendContainer extends PureComponent<{}, State> {
   };
 
   // 모달 이벤트
-  openModal = async (pno?: number, userId?: number) => {
+  openModal = async (pno?: number, userId?: string) => {
     await this.setState({
       isOpen: !this.state.isOpen
     });
@@ -71,7 +72,7 @@ class TrendContainer extends PureComponent<{}, State> {
   };
 
   // 좋아요 TOP 10
-  callPostDatasApi = (pno?: number, userId?: number) => {
+  callPostDatasApi = (pno?: number, userId?: string) => {
     return axios
       .post("https://mad-server.herokuapp.com/api/post/contents", {
         headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -109,6 +110,7 @@ class TrendContainer extends PureComponent<{}, State> {
           </Row>
         </div>
         <PostModal
+          title="LIKE TOP 10 상세"
           postDatas={postDatas}
           openModal={this.openModal}
           isOpen={isOpen}

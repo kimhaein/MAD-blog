@@ -33,8 +33,8 @@ class Index extends PureComponent<Props, {}> {
               </PostProvider>
               <LoginModal
                 isModal={state.isModal}
-                onModal={state.onModal}
-                onLogin={state.onLogin}
+                onModal={actions.onModal}
+                onLogin={actions.onLogin}
               />
               {state.isLoading ? <LoadingBar /> : null}
             </Fragment>

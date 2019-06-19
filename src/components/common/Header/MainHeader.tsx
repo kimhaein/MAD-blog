@@ -15,7 +15,7 @@ const showConfirm = (content: string, onOk: () => void) => {
   });
 };
 
-const MenuBtn = ({ onMenu }: any) => {
+const MenuBtn: React.FC<{}> = ({ onMenu }: any) => {
   return (
     <div className="LeftBtn" onClick={onMenu}>
       MENU
@@ -23,7 +23,7 @@ const MenuBtn = ({ onMenu }: any) => {
   );
 };
 
-const Login = ({ onModal }: any) => {
+const Login: React.FC<{}> = ({ onModal }: any) => {
   return (
     <div className="login" onClick={onModal}>
       login
@@ -31,7 +31,7 @@ const Login = ({ onModal }: any) => {
   );
 };
 
-const Logout = ({ onLogOut }: any) => {
+const Logout: React.FC<{}> = ({ onLogOut }: any) => {
   return (
     <div
       className="login"
@@ -44,7 +44,7 @@ const Logout = ({ onLogOut }: any) => {
   );
 };
 
-const PostBtn = () => {
+const PostBtn: React.FC<{}> = () => {
   const alertEvt = () => {
     message.warning("로그인 후 이용해 주세요");
   };

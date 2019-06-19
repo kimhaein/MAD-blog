@@ -5,7 +5,7 @@ interface Props {
   like: number;
   love: number;
   pno: number;
-  nowUser: number;
+  nowUser?: number;
 }
 
 interface Actions {

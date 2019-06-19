@@ -1,7 +1,7 @@
 /**
  * 게시글 작성 및 수정 관련 context
  */
-import React, { PureComponent, createContext } from "react";
+import React, { Component, createContext } from "react";
 import Router from "next/router";
 import moment from "moment";
 import axios from "axios";
@@ -43,7 +43,7 @@ interface State {
   beforeHash: string[];
 }
 
-class WriteProvider extends PureComponent<Props, State> {
+class WriteProvider extends Component<Props, State> {
   state: State = {
     pno: 0,
     mode: "",

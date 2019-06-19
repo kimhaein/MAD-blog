@@ -25,7 +25,7 @@ class WriteConatiner extends PureComponent<Props, {}> {
   componentDidMount() {
     const { state, actions } = this.props;
     // 로그인 없이 접근시 메인 화면으로 이동
-    if (state.isLogin) {
+    if (!state.isLogin) {
       alert("해당페이지의 권한이 없습니다");
       Router.replace("/");
       return false;
