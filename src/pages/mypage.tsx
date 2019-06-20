@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 
 import { AuthProvider, AuthConsumer } from "../contexts/authContext";
-import { MypageProvider } from "../contexts/mypageContext";
+import { PostProvider } from "../contexts/postContext";
 
 // Container
 import HeaderContainer from "../containers/common/HeaderContainer";
@@ -18,7 +18,7 @@ class mypage extends Component {
             <Fragment>
               {state.isLoading ? <LoadingBar /> : null}
               <HeaderContainer type="common" state={state} actions={actions} />
-              <MypageContainer />
+              <MypageContainer isLogin={state.isLogin} userId={state.userId} />
               <LoginModal
                 isModal={state.isModal}
                 onModal={state.onModal}

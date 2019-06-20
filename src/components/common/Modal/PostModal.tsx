@@ -3,16 +3,23 @@ import Post from "../../Post";
 import "./modal.css";
 
 interface Props {
+  title: string;
   isOpen: boolean;
   postDatas: object[];
   openModal(): void;
 }
-const PostModal: React.FC<Props> = ({ isOpen, postDatas, openModal }) => {
+const PostModal: React.FC<Props> = ({
+  title,
+  isOpen,
+  postDatas,
+  openModal
+}) => {
   return (
     <div className={isOpen ? "modalWrap" : "modalWrap hidden"}>
       <div className="modal">
-        <div className="">
+        <div>
           <h2>
+            {title}
             <span
               className="modalClose"
               onClick={() => {
@@ -24,7 +31,7 @@ const PostModal: React.FC<Props> = ({ isOpen, postDatas, openModal }) => {
           </h2>
         </div>
         <div className="modalBody">
-          <Post postDatas={postDatas} />
+          <Post postDatas={postDatas} type="detail" />
         </div>
       </div>
     </div>
