@@ -1,26 +1,34 @@
 import { Tabs, List } from "antd";
 
 const TabPane = Tabs.TabPane;
-// interface TabsItem {
-//   tabList: Array<number>;
-// }
+interface Props {
+  tab: string;
+  openModal(pno?: number, userId?: number): void;
+  key: string;
+  dataSource: object[];
+}
 
-const Tab = ({ my_prop, key, userFavoriteList, ...restProps }) => {
-  const returnToParents = (pno, writer) => {
-    // 클릭된 녀석의 pno 값을 부모에게 리턴
-    my_prop(pno, writer);
-  };
+const Tab: React.FC<Props> = ({
+  tab,
+  openModal,
+  key,
+  dataSource,
+  ...restProps
+}) => {
   return (
     <TabPane key={key} {...restProps}>
       <List
         itemLayout="horizontal"
-        dataSource={userFavoriteList}
-        renderItem={item => (
-          <List.Item pno={item.pno}>
+        dataSource={dataSource}
+        renderItem={(item: any) => (
+          <List.Item
+            onClick={() => {
+              openModal(item.pno, item.writer);
+            }}
+          >
             <List.Item.Meta
               title={<span>{item.title}</span>}
               description={item.contents}
-              onClick={returnToParents.bind(this, item.pno, item.writer)}
             />
           </List.Item>
         )}

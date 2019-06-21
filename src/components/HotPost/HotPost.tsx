@@ -5,7 +5,7 @@ import "./hotPost.css";
 
 interface Props {
   hotPostDatas: Item[];
-  openModal(pno: number, userId: string): void;
+  openModal(pno: number, userId: number): void;
 }
 
 interface Item {

@@ -45,12 +45,11 @@ class PostWrap extends PureComponent<Props, State> {
   };
 
   render() {
-    const style = { backgroundImage: `url(/static/images/bg06.jpg)` };
     return (
-      <div className="contentsWrap mainWrap" style={style}>
+      <div className="contentsWrap mainWrap">
         <div className="postWrap">
           <Search tagDatas={this.state.hashLank} />
-          <Post postDatas={this.props.postDatas} isLogin={this.props.isLogin} />
+          <Post postDatas={this.props.postDatas} />
           <MoreBtn />
         </div>
       </div>

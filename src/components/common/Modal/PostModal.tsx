@@ -17,7 +17,7 @@ const PostModal: React.FC<Props> = ({
   return (
     <div className={isOpen ? "modalWrap" : "modalWrap hidden"}>
       <div className="modal">
-        <div>
+        <div className="modalHeader">
           <h2>
             {title}
             <span

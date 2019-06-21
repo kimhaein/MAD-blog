@@ -60,19 +60,19 @@ class TrendContainer extends PureComponent<{}, State> {
   };
 
   // 모달 이벤트
-  openModal = async (pno?: number, userId?: string) => {
+  openModal = async (pno?: number, userId?: number) => {
     await this.setState({
       isOpen: !this.state.isOpen
     });
-    if (!this.state.isOpen) return false;
+    if (!this.state.isOpen || !pno || !userId) return false;
     const postDatas = await this.callPostDatasApi(pno, userId);
     this.setState({
-      postDatas: postDatas.getContent
+      postDatas
     });
   };
 
   // 좋아요 TOP 10
-  callPostDatasApi = (pno?: number, userId?: string) => {
+  callPostDatasApi = (pno: number, userId: number) => {
     return axios
       .post("https://mad-server.herokuapp.com/api/post/contents", {
         headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -80,7 +80,7 @@ class TrendContainer extends PureComponent<{}, State> {
         userId
       })
       .then(({ data }) => {
-        return data;
+        return data.getContent;
       })
       .catch(err => console.log(err));
   };

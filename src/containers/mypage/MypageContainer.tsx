@@ -2,20 +2,24 @@ import React, { Component } from "react";
 import axios from "axios";
 import Router from "next/router";
 import { Tabs } from "antd";
-import { Tab } from "../../components/common/Tab";
-import "./mypage.css";
-import { PostModal } from "../../components/common/PostModal";
-import { PostConsumer } from "../../contexts/postContext";
 import moment from "moment";
+import { Tab } from "../../components/common/Tab";
+import { PostModal } from "../../components/common/Modal";
+import "./mypage.css";
 
 interface Props {
   isLogin: boolean;
   userId: string;
 }
+
 interface State {
   userId: string;
   activeKey: string;
-  userInfo: object[];
+  userInfo: {
+    thumbnail_image: string;
+    nickname: string;
+    update_day: string;
+  };
   myPageContentList: object[];
   isOpen: boolean;
   postDatas: object[];
@@ -25,7 +29,11 @@ class MypageContainer extends Component<Props, State> {
   state: State = {
     userId: "",
     activeKey: "1",
-    userInfo: [],
+    userInfo: {
+      thumbnail_image: "",
+      nickname: "",
+      update_day: ""
+    },
     myPageContentList: [],
     isOpen: false,
     postDatas: []
@@ -42,10 +50,6 @@ class MypageContainer extends Component<Props, State> {
       this.callUserDataApi();
       this.callUserPostList();
     });
-  }
-
-  componentWillMount() {
-    console.log(1);
   }
 
   // 작성한 글
@@ -91,24 +95,7 @@ class MypageContainer extends Component<Props, State> {
       .catch(err => console.log(err));
   };
 
-  //글 상세 정보 불러오기
-  callPostDetailApi = pno => {
-    axios
-      .post("https://mad-server.herokuapp.com/api/post/contents", {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        pno,
-        userId: this.state.userId
-      })
-      .then(({ data }) => {
-        console.log();
-        // this.setState({
-        //   postDatas: data
-        // });
-      })
-      .catch(err => console.log(err));
-  };
-
-  tabHandleChange = activeKey => {
+  tabHandleChange = (activeKey: string) => {
     // case 문으로 activeKey가 어떤 것이느냐에 따라서 api 콜
     // console.log("tab", activeKey);
     switch (activeKey) {
@@ -125,28 +112,30 @@ class MypageContainer extends Component<Props, State> {
     });
   };
 
-  getPnoFromChild = pno => {
-    console.log(pno, "CLICKED!!");
-    let findValue = this.callPostDetailApi(pno);
-  };
-
-  closeTheModalByBtn = fromChild => {
-    console.log("lets close", fromChild);
-    this.setState({
-      modalIsOpen: fromChild
-    });
-  };
-
   // 모달 이벤트
-  openModal = async (pno?: number, userId?: string) => {
+  openModal = async (pno?: number, userId?: number) => {
     await this.setState({
       isOpen: !this.state.isOpen
     });
-    if (!this.state.isOpen) return false;
+    if (!this.state.isOpen || !pno) return false;
     const postDatas = await this.callPostDetailApi(pno, userId);
-    // this.setState({
-    //   postDatas: postDatas.getContent
-    // });
+    this.setState({
+      postDatas
+    });
+  };
+
+  //글 상세 정보 불러오기
+  callPostDetailApi = (pno: number, userId?: number) => {
+    return axios
+      .post("https://mad-server.herokuapp.com/api/post/contents", {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        pno,
+        userId
+      })
+      .then(({ data }) => {
+        return data.getContent;
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -157,11 +146,9 @@ class MypageContainer extends Component<Props, State> {
       activeKey,
       myPageContentList
     } = this.state;
-    console.log(myPageContentList);
 
-    const style = { backgroundImage: `url(/static/images/bg06.jpg)` };
     return (
-      <div className="contentsWrap postWrap myPage" style={style}>
+      <div className="contentsWrap postWrap myPage">
         <div className="mypage_wrap">
           <div className="mypage_content">
             <div className="mypage_content_header">
@@ -192,30 +179,29 @@ class MypageContainer extends Component<Props, State> {
                   onChange={this.tabHandleChange}
                   activeKey={activeKey}
                 >
-                  {/* my_prop =>  tab 내부 컨텐츠*/}
                   <Tab
                     tab={"내가 쓴 글"}
                     key={"1"}
-                    my_prop={this.getPnoFromChild}
-                    userFavoriteList={myPageContentList}
+                    openModal={this.openModal}
+                    dataSource={myPageContentList}
                   />
                   <Tab
                     tab={"내가 좋아한 글"}
                     key={"2"}
-                    my_prop={this.getPnoFromChild}
-                    userFavoriteList={myPageContentList}
+                    openModal={this.openModal}
+                    dataSource={myPageContentList}
                   />
                 </Tabs>
               </div>
             </div>
           </div>
         </div>
-        {/* <PostModal
-          title="LIKE TOP 10 상세"
+        <PostModal
+          title="글 상세 보기"
           postDatas={postDatas}
           openModal={this.openModal}
           isOpen={isOpen}
-        /> */}
+        />
       </div>
     );
   }

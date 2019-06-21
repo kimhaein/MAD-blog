@@ -40,7 +40,7 @@ const PostMenu = ({ pno }: any) => {
 
 interface Props {
   postDatas: object[];
-  type: string | null;
+  type?: string | null;
 }
 
 interface PostItemProps {

@@ -55,6 +55,7 @@ p {
 .mainWrap {
   background-size: cover;
   background-repeat: no-repeat;
+  background-image: url("/static/images/bg06.jpg");
 }
 .mainWrap::after {
   content: "";
