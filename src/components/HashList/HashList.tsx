@@ -7,10 +7,6 @@ import "./hashList.css";
 interface Props {
   trendDatas: object[];
 }
-// interface TrendData {
-//   cnt: number;
-//   hashTag: string;
-// }
 
 class HashList extends Component<Props> {
   renderWords = () => {

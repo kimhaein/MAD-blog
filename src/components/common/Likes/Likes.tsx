@@ -5,7 +5,7 @@ interface Props {
   like: number;
   love: number;
   pno: number;
-  nowUser?: number;
+  nowUser?: number | undefined;
 }
 
 interface Actions {
@@ -15,9 +15,11 @@ interface Actions {
 const Likes: React.FC<Props> = ({ like, love, pno, nowUser }) => {
   const color = love === 1 ? "#f5222d" : "#ccc";
   const likeEvt = (actions: Actions) => {
-    if (!nowUser) {
+    if (nowUser === 1 || nowUser === 0) {
+      // 로그인 상태
       return love === 1 ? actions.offLike(pno) : actions.onLike(pno);
     } else {
+      // 비로그인 상태
       return message.warning("로그인 후 이용해 주세요");
     }
   };

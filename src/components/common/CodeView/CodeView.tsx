@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { WriteConsumer } from "../../../contexts/writeContext";
 import marked from "marked";
 import "./codeView.css";
 

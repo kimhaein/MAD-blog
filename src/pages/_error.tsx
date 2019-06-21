@@ -6,7 +6,7 @@ interface Props {
 }
 
 export default class Error extends React.Component<Props> {
-  static getInitialProps({ res, jsonPageRes }) {
+  static getInitialProps({ res, jsonPageRes }: any) {
     const statusCode = res
       ? res.statusCode
       : jsonPageRes

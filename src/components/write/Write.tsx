@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { WriteConsumer } from "../../contexts/writeContext";
 import { Controlled as CodeMirror } from "react-codemirror2";
 import "./write.css";
 // CodeMirror를 위한 CSS 스타일
@@ -24,7 +23,7 @@ class Write extends Component<Props, State> {
             theme: "material",
             lineNumbers: true
           }}
-          onBeforeChange={(editor, data, value) => {
+          onBeforeChange={({ value }: any) => {
             setContents(value);
           }}
         />

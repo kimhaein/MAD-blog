@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { WriteConsumer } from "../../contexts/writeContext";
 import Router from "next/router";
 import Write from "../../components/Write";
 import CodeView from "../../components/common/CodeView";

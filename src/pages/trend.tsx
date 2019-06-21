@@ -1,5 +1,4 @@
 import React, { PureComponent, Fragment } from "react";
-import { PostProvider } from "../contexts/postContext";
 import { AuthProvider, AuthConsumer } from "../contexts/authContext";
 import HeaderContainer from "../containers/common/HeaderContainer";
 import TrendContainer from "../containers/trend/TrendContainer";

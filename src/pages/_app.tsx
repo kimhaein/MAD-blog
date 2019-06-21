@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default class MyApp extends Component<Props> {
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps({ Component, ctx }: any) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
