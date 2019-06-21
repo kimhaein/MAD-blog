@@ -13,7 +13,7 @@ class HashList extends Component<Props> {
     const { trendDatas } = this.props;
     const result = trendDatas.map((v, i) => {
       const { cnt, hashTag }: any = v;
-      const fontSize = cnt <= 1 ? 20 : cnt * 20;
+      const fontSize = cnt <= 1 ? 15 : cnt * 10;
       return (
         <div
           key={i}

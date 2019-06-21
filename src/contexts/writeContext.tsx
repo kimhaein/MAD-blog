@@ -132,16 +132,23 @@ class WriteProvider extends Component<Props, State> {
 
   componentWillReceiveProps(nextProps: Props) {
     const { userId, pno, mode } = nextProps;
-    this.setState({ userId }, () => {
-      if (mode === "edit") {
-        this.actions.getPostData(pno);
-        this.setState({ isEdit: true, pno });
-      }
-    });
+    if (!userId) {
+      alert("해당페이지의 권한이 없습니다");
+      Router.replace("/");
+      return false;
+    } else {
+      this.setState({ userId }, () => {
+        if (mode === "edit") {
+          this.actions.getPostData(pno);
+          this.setState({ isEdit: true, pno });
+        }
+      });
+    }
   }
 
   render() {
     const { state, actions } = this;
+    console.log(state);
     const value = { state, actions };
     return <Provider value={value}>{this.props.children}</Provider>;
   }

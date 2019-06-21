@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Router from "next/router";
-import { Tabs } from "antd";
+import { Tabs, Avatar } from "antd";
 import moment from "moment";
 import { Tab } from "../../components/common/Tab";
 import { PostModal } from "../../components/common/Modal";
@@ -153,7 +153,11 @@ class MypageContainer extends Component<Props, State> {
           <div className="mypage_content">
             <div className="mypage_content_header">
               <div className="mypage_profile">
-                <img src={userInfo.thumbnail_image} alt="유저 프로필" />
+                <Avatar
+                  src={userInfo.thumbnail_image}
+                  size={88}
+                  style={{ backgroundColor: "#000" }}
+                />
               </div>
               <div className="mypage_title">
                 <h1>{userInfo.nickname}님의 마이페이지</h1>

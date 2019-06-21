@@ -34,6 +34,7 @@ class HeaderContainer extends PureComponent<Props, {}> {
           onModal={actions.onModal}
         />
         <Menu
+          isLogin={state.isLogin}
           isMenu={state.isMenu}
           userName={state.userName}
           userImg={state.userImg}

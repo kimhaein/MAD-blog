@@ -3,6 +3,7 @@ import { Drawer, Avatar } from "antd";
 import "./menu.css";
 
 interface Props {
+  isLogin: boolean;
   isMenu: boolean;
   userName: string;
   userImg: string;
@@ -42,11 +43,13 @@ const Menu: React.FC<Props> = props => {
             <span>트렌딩 차트</span>
           </Link>
         </li>
-        <li>
-          <Link href="/mypage">
-            <span>마이페이지</span>
-          </Link>
-        </li>
+        {props.isLogin ? (
+          <li>
+            <Link href="/mypage">
+              <span>마이페이지</span>
+            </Link>
+          </li>
+        ) : null}
       </ul>
       <div className="menuFooter">
         <div className="catImg" />

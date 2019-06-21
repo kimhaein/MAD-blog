@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import Router from "next/router";
 import Write from "../../components/Write";
 import CodeView from "../../components/common/CodeView";
 import { TagsEdit } from "../../components/common/Tags";
@@ -23,13 +22,6 @@ interface Props {
 class WriteConatiner extends PureComponent<Props, {}> {
   componentDidMount() {
     const { state, actions } = this.props;
-    // 로그인 없이 접근시 메인 화면으로 이동
-    if (!state.isLogin) {
-      alert("해당페이지의 권한이 없습니다");
-      Router.replace("/");
-      return false;
-    }
-
     if (state.isEdit) {
       actions.getPostData(state.pno);
     }

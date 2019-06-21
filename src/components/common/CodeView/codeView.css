@@ -5,7 +5,7 @@
   right: 0;
   padding: 16px;
   width: 50%;
-  height: 100%;
+  height: calc(100% - 36px);
   background: #f1f3f9;
 }
 .codeView h1 {
