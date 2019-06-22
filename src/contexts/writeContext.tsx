@@ -30,6 +30,7 @@ interface Props {
   pno: number;
   mode: string;
   userId: string;
+  onLoading(state: boolean): void;
 }
 
 interface State {
@@ -62,7 +63,7 @@ class WriteProvider extends Component<Props, State> {
     setContents: (contents: string) => {
       this.setState({ contents });
     },
-    setHash: (hash: Array<string>) => {
+    setHash: (hash: string[]) => {
       this.setState({ hash });
     },
     onSubmitPost: () => {
@@ -126,29 +127,43 @@ class WriteProvider extends Component<Props, State> {
             hash: hashArr,
             beforeHash: hashArr
           });
+          this.props.onLoading(false);
         });
     }
   };
+  constructor(props: Props) {
+    super(props);
+    this.state = { ...this.state, mode: this.props.mode, pno: this.props.pno };
+  }
+  componentWillMount() {
+    console.log(this.state.mode);
+  }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { userId, pno, mode } = nextProps;
-    if (!userId) {
-      alert("해당페이지의 권한이 없습니다");
-      Router.replace("/");
-      return false;
-    } else {
+    const { userId } = nextProps;
+    if (this.props.userId !== userId) {
       this.setState({ userId }, () => {
-        if (mode === "edit") {
-          this.actions.getPostData(pno);
-          this.setState({ isEdit: true, pno });
+        console.log(userId);
+        if (!userId) {
+          alert("해당페이지의 권한이 없습니다");
+          Router.replace("/");
+          return false;
+        } else {
+          if (this.state.mode === "edit" && !userId) {
+            this.actions.getPostData(this.state.pno);
+            this.setState({ isEdit: true, pno: this.state.pno });
+          } else {
+            this.props.onLoading(false);
+          }
         }
       });
+    } else {
+      console.log("no!!");
     }
   }
 
   render() {
     const { state, actions } = this;
-    console.log(state);
     const value = { state, actions };
     return <Provider value={value}>{this.props.children}</Provider>;
   }

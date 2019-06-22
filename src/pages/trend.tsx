@@ -24,7 +24,7 @@ class Trend extends PureComponent<{}, State> {
                 onModal={actions.onModal}
                 onLogin={actions.onLogin}
               />
-              <TrendContainer />
+              <TrendContainer onLoading={actions.onLoading} />
             </Fragment>
           )}
         </AuthConsumer>

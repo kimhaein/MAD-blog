@@ -5,6 +5,9 @@ import axios from "axios";
 import { Row, Col } from "antd";
 import { PostModal } from "../../components/common/Modal";
 
+interface Props {
+  onLoading(state: boolean): void;
+}
 interface State {
   isOpen: boolean;
   trendDatas: object[];
@@ -12,7 +15,7 @@ interface State {
   postDatas: object[];
 }
 
-class TrendContainer extends PureComponent<{}, State> {
+class TrendContainer extends PureComponent<Props, State> {
   state: State = {
     isOpen: false,
     trendDatas: [],
@@ -28,6 +31,7 @@ class TrendContainer extends PureComponent<{}, State> {
   setDatas = async () => {
     const trendDatas = await this.callTrendDatasApi();
     const hotPostDatas = await this.callHotPostDatasApi();
+    this.props.onLoading(false);
     if (!trendDatas || !hotPostDatas) return false;
     this.setState({
       trendDatas: trendDatas.chartHash,
@@ -71,8 +75,9 @@ class TrendContainer extends PureComponent<{}, State> {
     });
   };
 
-  // 좋아요 TOP 10
+  // 좋아요 post 상세
   callPostDatasApi = (pno: number, userId: number) => {
+    this.props.onLoading(true);
     return axios
       .post("https://mad-server.herokuapp.com/api/post/contents", {
         headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -80,6 +85,7 @@ class TrendContainer extends PureComponent<{}, State> {
         userId
       })
       .then(({ data }) => {
+        this.props.onLoading(false);
         return data.getContent;
       })
       .catch(err => console.log(err));

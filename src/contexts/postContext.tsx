@@ -26,6 +26,7 @@ interface Props {
   isLogin: boolean;
   keyword?: string | undefined;
   userId: string;
+  onLoading(state: boolean): void;
 }
 
 interface State {
@@ -49,6 +50,7 @@ class PostProvider extends Component<Props, State> {
 
   actions = {
     onDelete: (pno: number) => {
+      this.props.onLoading(true);
       axios
         .post("https://mad-server.herokuapp.com/api/post/del", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -62,6 +64,7 @@ class PostProvider extends Component<Props, State> {
         .catch(err => console.log(err));
     },
     onLike: (pno: number) => {
+      this.props.onLoading(true);
       axios
         .post("https://mad-server.herokuapp.com/api/like", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -74,6 +77,7 @@ class PostProvider extends Component<Props, State> {
         .catch(err => console.log(err));
     },
     offLike: (pno: number) => {
+      this.props.onLoading(true);
       axios
         .post("https://mad-server.herokuapp.com/api/unlike", {
           headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -86,6 +90,7 @@ class PostProvider extends Component<Props, State> {
         .catch(err => console.log(err));
     },
     onMore: () => {
+      this.props.onLoading(true);
       this.setState(
         {
           postCnt: this.state.postCnt + 4
@@ -96,6 +101,7 @@ class PostProvider extends Component<Props, State> {
       );
     },
     onSearch: (e: Event) => {
+      this.props.onLoading(true);
       const target = e.target as HTMLInputElement;
       const keyword: string | undefined = target.value
         ? target.value
@@ -122,6 +128,7 @@ class PostProvider extends Component<Props, State> {
               this.state.postCnt >= data.totalPost.totalCnt ? false : true,
             postDatas: data.post
           });
+          this.props.onLoading(false);
         })
         .catch(err => console.log(err));
     }
@@ -132,7 +139,11 @@ class PostProvider extends Component<Props, State> {
     this.state = { ...this.state, keyword: this.props.keyword };
   }
 
-  //componentWillReceiveProps:컴포넌트가 prop 을 새로 받았을 때 실행
+  componentWillMount() {
+    this.actions.getPostDatas();
+  }
+
+  // componentWillReceiveProps:컴포넌트가 prop 을 새로 받았을 때 실행
   async componentWillReceiveProps(nextProps: Props) {
     //isLogin 값이 변경 됐을 때 만 실행
     if (this.props.isLogin !== nextProps.isLogin) {
@@ -140,13 +151,8 @@ class PostProvider extends Component<Props, State> {
         isLogin: nextProps.isLogin,
         userId: nextProps.userId
       });
+      this.actions.getPostDatas();
     }
-    if (this.props.keyword !== nextProps.keyword) {
-      await this.setState({
-        keyword: nextProps.keyword
-      });
-    }
-    this.actions.getPostDatas();
   }
 
   render() {

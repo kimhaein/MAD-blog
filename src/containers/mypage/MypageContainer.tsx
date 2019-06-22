@@ -10,6 +10,7 @@ import "./mypage.css";
 interface Props {
   isLogin: boolean;
   userId: string;
+  onLoading(state: boolean): void;
 }
 
 interface State {
@@ -41,15 +42,17 @@ class MypageContainer extends Component<Props, State> {
 
   componentWillReceiveProps(nextProps: Props) {
     const { isLogin, userId } = nextProps;
-    if (!isLogin) {
-      alert("해당페이지의 권한이 없습니다");
-      Router.replace("/");
-      return false;
+    if (this.props.isLogin !== nextProps.isLogin) {
+      if (!isLogin) {
+        alert("해당페이지의 권한이 없습니다");
+        Router.replace("/");
+        return false;
+      }
+      this.setState({ userId }, () => {
+        this.callUserDataApi();
+        this.callUserPostList();
+      });
     }
-    this.setState({ userId }, () => {
-      this.callUserDataApi();
-      this.callUserPostList();
-    });
   }
 
   // 작성한 글
@@ -63,6 +66,7 @@ class MypageContainer extends Component<Props, State> {
         this.setState({
           myPageContentList: data.writedList
         });
+        this.props.onLoading(false);
       })
       .catch(err => console.log("userPostList", err));
   };
@@ -77,6 +81,7 @@ class MypageContainer extends Component<Props, State> {
         this.setState({
           myPageContentList: data.likeList
         });
+        this.props.onLoading(false);
       })
       .catch(err => console.log("userPostLike", err));
   };
@@ -98,6 +103,7 @@ class MypageContainer extends Component<Props, State> {
   tabHandleChange = (activeKey: string) => {
     // case 문으로 activeKey가 어떤 것이느냐에 따라서 api 콜
     // console.log("tab", activeKey);
+    this.props.onLoading(true);
     switch (activeKey) {
       case "1":
         this.callUserPostList();
@@ -126,6 +132,7 @@ class MypageContainer extends Component<Props, State> {
 
   //글 상세 정보 불러오기
   callPostDetailApi = (pno: number, userId?: number) => {
+    this.props.onLoading(true);
     return axios
       .post("https://mad-server.herokuapp.com/api/post/contents", {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -133,6 +140,7 @@ class MypageContainer extends Component<Props, State> {
         userId
       })
       .then(({ data }) => {
+        this.props.onLoading(false);
         return data.getContent;
       })
       .catch(err => console.log(err));

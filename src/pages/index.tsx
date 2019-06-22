@@ -28,6 +28,7 @@ class Index extends PureComponent<Props, {}> {
                 keyword={this.props.keyword}
                 isLogin={state.isLogin}
                 userId={state.userId}
+                onLoading={actions.onLoading}
               >
                 <PostContainer />
               </PostProvider>

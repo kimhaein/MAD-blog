@@ -23,8 +23,8 @@ class Write extends Component<Props, State> {
             theme: "material",
             lineNumbers: true
           }}
-          onBeforeChange={({ value }: any) => {
-            setContents(value);
+          onBeforeChange={(editor, data, value) => {
+            // setContents(value);
           }}
         />
       </div>

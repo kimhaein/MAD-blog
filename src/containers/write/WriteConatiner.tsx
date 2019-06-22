@@ -9,7 +9,7 @@ interface Props {
     isEdit: boolean;
     pno: number;
     contents: string;
-    isLogin: boolean;
+    userId: number;
   };
   actions: {
     setHash(): void;
@@ -20,12 +20,6 @@ interface Props {
   };
 }
 class WriteConatiner extends PureComponent<Props, {}> {
-  componentDidMount() {
-    const { state, actions } = this.props;
-    if (state.isEdit) {
-      actions.getPostData(state.pno);
-    }
-  }
   render() {
     const { state, actions } = this.props;
     return (

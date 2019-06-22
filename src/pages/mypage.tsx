@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 
 import { AuthProvider, AuthConsumer } from "../contexts/authContext";
-import { PostProvider } from "../contexts/postContext";
 
 // Container
 import HeaderContainer from "../containers/common/HeaderContainer";
@@ -16,9 +15,14 @@ class mypage extends Component {
         <AuthConsumer>
           {({ state, actions }: any) => (
             <Fragment>
+              {console.log(11111, state.isLogin)}
               {state.isLoading ? <LoadingBar /> : null}
               <HeaderContainer type="common" state={state} actions={actions} />
-              <MypageContainer isLogin={state.isLogin} userId={state.userId} />
+              <MypageContainer
+                isLogin={state.isLogin}
+                userId={state.userId}
+                onLoading={actions.onLoading}
+              />
               <LoginModal
                 isModal={state.isModal}
                 onModal={state.onModal}

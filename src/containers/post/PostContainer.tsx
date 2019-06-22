@@ -22,7 +22,6 @@ class PostWrap extends PureComponent<Props, State> {
 
   componentDidMount() {
     this.getHashLank();
-    this.props.getPostDatas();
   }
 
   //post 데이터 가져오기

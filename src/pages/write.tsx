@@ -21,22 +21,29 @@ class Write extends PureComponent<Props, {}> {
     return (
       <AuthProvider>
         <AuthConsumer>
-          {({ state }: any) => (
-            <WriteProvider userId={state.userId} mode={mode} pno={pno}>
-              <WriteConsumer>
-                {({ state, actions }: any) => (
-                  <Fragment>
-                    {state.isLoading ? <LoadingBar /> : null}
-                    <HeaderContainer
-                      state={state}
-                      actions={actions}
-                      type="write"
-                    />
-                    <WriteConatiner state={state} actions={actions} />
-                  </Fragment>
-                )}
-              </WriteConsumer>
-            </WriteProvider>
+          {({ state, actions }: any) => (
+            <Fragment>
+              <WriteProvider
+                userId={state.userId}
+                mode={mode}
+                pno={pno}
+                onLoading={actions.onLoading}
+              >
+                <WriteConsumer>
+                  {({ state, actions }: any) => (
+                    <Fragment>
+                      <HeaderContainer
+                        state={state}
+                        actions={actions}
+                        type="write"
+                      />
+                      <WriteConatiner state={state} actions={actions} />
+                    </Fragment>
+                  )}
+                </WriteConsumer>
+              </WriteProvider>
+              {state.isLoading ? <LoadingBar /> : null}
+            </Fragment>
           )}
         </AuthConsumer>
       </AuthProvider>
