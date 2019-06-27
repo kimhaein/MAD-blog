@@ -1,7 +1,7 @@
 import Link from "next/link";
-
 import { Modal, message } from "antd";
 const confirm = Modal.confirm;
+
 import "./header.css";
 
 // confirm
@@ -15,7 +15,7 @@ const showConfirm = (content: string, onOk: () => void) => {
   });
 };
 
-const MenuBtn: React.FC<{}> = ({ onMenu }: any) => {
+const MenuBtn: React.FC<Props> = ({ onMenu }) => {
   return (
     <div className="LeftBtn" onClick={onMenu}>
       MENU
@@ -23,7 +23,7 @@ const MenuBtn: React.FC<{}> = ({ onMenu }: any) => {
   );
 };
 
-const Login: React.FC<{}> = ({ onModal }: any) => {
+const Login: React.FC<Props> = ({ onModal }) => {
   return (
     <div className="login" onClick={onModal}>
       login
@@ -31,7 +31,7 @@ const Login: React.FC<{}> = ({ onModal }: any) => {
   );
 };
 
-const Logout: React.FC<{}> = ({ onLogOut }: any) => {
+const Logout: React.FC<Props> = ({ onLogOut }: any) => {
   return (
     <div
       className="login"
@@ -56,37 +56,34 @@ const PostBtn: React.FC<{}> = () => {
 };
 
 interface Props {
-  isLogin: boolean;
-  onMenu(): void;
-  onLogOut(): void;
-  onModal(): void;
+  isLogin?: boolean;
+  isMobile?: boolean;
+  onMenu?(): void;
+  onLogOut?(): void | undefined;
+  onModal?(): void;
 }
 
 const MainHeader: React.FC<Props> = props => {
   return (
     <header>
       <MenuBtn onMenu={props.onMenu} />
-      <div className="LeftBtn">
-        {props.isLogin ? (
-          <Logout onLogOut={props.onLogOut} />
-        ) : (
-          <Login onModal={props.onModal} />
-        )}
-      </div>
+      <div className="LeftBtn">{props.isLogin ? <Logout onLogOut={props.onLogOut} /> : <Login onModal={props.onModal} />}</div>
       <div className="logo">
         <Link href="/">
           <span>MAD;</span>
         </Link>
       </div>
-      <div className="postBtn">
-        {props.isLogin ? (
+      {props.isLogin ? (
+        <div className="postBtn">
           <Link href="/write">
             <span>Post</span>
           </Link>
-        ) : (
+        </div>
+      ) : props.isMobile ? null : (
+        <div className="postBtn">
           <PostBtn />
-        )}
-      </div>
+        </div>
+      )}
     </header>
   );
 };
