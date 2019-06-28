@@ -10,39 +10,43 @@ interface Props {
   pno: number;
   isLogin: boolean;
 }
+interface State {
+  isLoading: boolean;
+}
 
-class Write extends PureComponent<Props, {}> {
+class Write extends PureComponent<Props, State> {
   static async getInitialProps({ query }: any) {
     return { mode: query.mode, pno: query.pno };
   }
 
+  state: State = {
+    isLoading: false
+  };
+
+  onLoading = (state = !this.state.isLoading) => {
+    this.setState({
+      isLoading: state
+    });
+  };
+
   render() {
     const { mode, pno } = this.props;
     return (
-      <AuthProvider>
+      <AuthProvider onLoading={this.onLoading}>
         <AuthConsumer>
-          {({ state, actions }: any) => (
+          {({ state }: any) => (
             <Fragment>
-              <WriteProvider
-                userId={state.userId}
-                mode={mode}
-                pno={pno}
-                onLoading={actions.onLoading}
-              >
+              <WriteProvider userId={state.userId} mode={mode} pno={pno} onLoading={this.onLoading}>
                 <WriteConsumer>
                   {({ state, actions }: any) => (
                     <Fragment>
-                      <HeaderContainer
-                        state={state}
-                        actions={actions}
-                        type="write"
-                      />
+                      <HeaderContainer state={state} actions={actions} type="write" />
                       <WriteConatiner state={state} actions={actions} />
                     </Fragment>
                   )}
                 </WriteConsumer>
               </WriteProvider>
-              {state.isLoading ? <LoadingBar /> : null}
+              {this.state.isLoading ? <LoadingBar /> : null}
             </Fragment>
           )}
         </AuthConsumer>

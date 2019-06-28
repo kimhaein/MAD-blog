@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Modal, message } from "antd";
+import { Modal, message, Icon } from "antd";
 const confirm = Modal.confirm;
-
+import { BrowserView, MobileView } from "react-device-detect";
 import "./header.css";
 
 // confirm
@@ -13,14 +13,6 @@ const showConfirm = (content: string, onOk: () => void) => {
       onOk();
     }
   });
-};
-
-const MenuBtn: React.FC<Props> = ({ onMenu }) => {
-  return (
-    <div className="LeftBtn" onClick={onMenu}>
-      MENU
-    </div>
-  );
 };
 
 const Login: React.FC<Props> = ({ onModal }) => {
@@ -57,7 +49,6 @@ const PostBtn: React.FC<{}> = () => {
 
 interface Props {
   isLogin?: boolean;
-  isMobile?: boolean;
   onMenu?(): void;
   onLogOut?(): void | undefined;
   onModal?(): void;
@@ -66,24 +57,31 @@ interface Props {
 const MainHeader: React.FC<Props> = props => {
   return (
     <header>
-      <MenuBtn onMenu={props.onMenu} />
-      <div className="LeftBtn">{props.isLogin ? <Logout onLogOut={props.onLogOut} /> : <Login onModal={props.onModal} />}</div>
+      <BrowserView>
+        <div className="LeftBtn" onClick={props.onMenu}>
+          MENU
+        </div>
+        <div className="LeftBtn">{props.isLogin ? <Logout onLogOut={props.onLogOut} /> : <Login onModal={props.onModal} />}</div>
+      </BrowserView>
+      <MobileView>
+        <Icon type="menu-fold" style={{ padding: 25, fontSize: "25px" }} onClick={props.onMenu} />
+      </MobileView>
       <div className="logo">
         <Link href="/">
           <span>MAD;</span>
         </Link>
       </div>
-      {props.isLogin ? (
-        <div className="postBtn">
-          <Link href="/write">
-            <span>Post</span>
-          </Link>
-        </div>
-      ) : props.isMobile ? null : (
-        <div className="postBtn">
-          <PostBtn />
-        </div>
-      )}
+      <BrowserView>
+        {props.isLogin ? (
+          <div className="postBtn">
+            <Link href="/write">
+              <span>Post</span>
+            </Link>
+          </div>
+        ) : (
+          <div className="postBtn">{<PostBtn />}</div>
+        )}
+      </BrowserView>
     </header>
   );
 };

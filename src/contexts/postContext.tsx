@@ -103,11 +103,7 @@ class PostProvider extends Component<Props, State> {
     onSearch: (e: Event) => {
       this.props.onLoading(true);
       const target = e.target as HTMLInputElement;
-      const keyword: string | undefined = target.value
-        ? target.value
-        : target.dataset.keyword
-        ? target.dataset.keyword
-        : target.innerHTML;
+      const keyword: string | undefined = target.value ? target.value : target.dataset.keyword ? target.dataset.keyword : target.innerHTML;
       this.setState({ keyword }, () => {
         this.actions.getPostDatas();
       });
@@ -124,8 +120,7 @@ class PostProvider extends Component<Props, State> {
         })
         .then(({ data }) => {
           this.setState({
-            isMoreBtn:
-              this.state.postCnt >= data.totalPost.totalCnt ? false : true,
+            isMoreBtn: this.state.postCnt >= data.totalPost.totalCnt ? false : true,
             postDatas: data.post
           });
           this.props.onLoading(false);

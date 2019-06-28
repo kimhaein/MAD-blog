@@ -5,24 +5,28 @@ import LoadingBar from "../components/common/LoadingBar";
 import { LoginModal } from "../components/common/Modal";
 
 interface State {
-  isLogin: boolean;
-  loading: boolean;
+  isLoading: boolean;
 }
-
 class readme extends PureComponent<{}, State> {
+  state: State = {
+    isLoading: false
+  };
+
+  onLoading = (state = !this.state.isLoading) => {
+    this.setState({
+      isLoading: state
+    });
+  };
+
   render() {
     return (
-      <AuthProvider>
+      <AuthProvider onLoading={this.onLoading}>
         <AuthConsumer>
           {({ state, actions }: any) => (
             <Fragment>
-              {state.isLoading ? <LoadingBar /> : null}
+              {this.state.isLoading ? <LoadingBar /> : null}
               <HeaderContainer type="common" state={state} actions={actions} />
-              <LoginModal
-                isModal={state.isModal}
-                onModal={actions.onModal}
-                onLogin={actions.onLogin}
-              />
+              <LoginModal isModal={state.isModal} onModal={actions.onModal} onLogin={actions.onLogin} />
               {`read ME`}
             </Fragment>
           )}

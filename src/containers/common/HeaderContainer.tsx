@@ -22,24 +22,13 @@ interface Props {
     onSubmitPost(): void;
   };
 }
-interface State {
-  isMobile: boolean;
-}
-class HeaderContainer extends PureComponent<Props, State> {
-  state: State = {
-    isMobile: isMobile
-  };
+
+class HeaderContainer extends PureComponent<Props, {}> {
   render() {
     const { type, state, actions } = this.props;
     return type === "common" ? (
       <Fragment>
-        <MainHeader
-          isLogin={state.isLogin}
-          isMobile={this.state.isMobile}
-          onMenu={actions.onMenu}
-          onLogOut={actions.onLogOut}
-          onModal={actions.onModal}
-        />
+        <MainHeader isLogin={state.isLogin} onMenu={actions.onMenu} onLogOut={actions.onLogOut} onModal={actions.onModal} />
         <Menu isLogin={state.isLogin} isMenu={state.isMenu} userName={state.userName} userImg={state.userImg} onMenu={actions.onMenu} />
       </Fragment>
     ) : (

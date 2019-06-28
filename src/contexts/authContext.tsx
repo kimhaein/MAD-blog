@@ -20,6 +20,10 @@ const { Provider, Consumer: AuthConsumer } = Context;
  */
 declare var Kakao: any;
 
+interface Props {
+  onLoading(state: boolean): void;
+}
+
 interface State {
   isModal: boolean;
   isLogin: boolean;
@@ -41,7 +45,7 @@ interface AuthStatus {
   };
 }
 
-class AuthProvider extends Component<{}, State> {
+class AuthProvider extends Component<Props, State> {
   state: State = {
     isModal: false,
     isLogin: false,
@@ -58,15 +62,10 @@ class AuthProvider extends Component<{}, State> {
         isModal: !this.state.isModal
       });
     },
-    onLoading: (state: boolean = !this.state.isLoading) => {
-      this.setState({
-        isLoading: state
-      });
-    },
     onLogin: () => {
       Kakao.Auth.login({
         success: (authObj: { access_token: string }) => {
-          this.actions.onLoading(true);
+          this.props.onLoading(true);
           axios
             .post("https://mad-server.herokuapp.com/kakaologin", {
               headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -75,7 +74,7 @@ class AuthProvider extends Component<{}, State> {
             .then(async res => {
               await this.actions.getLoginStatus();
               await this.setState({ isModal: false });
-              this.actions.onLoading(false);
+              this.props.onLoading(true);
             })
             .catch((err: object) => console.log(err));
         },
@@ -122,7 +121,7 @@ class AuthProvider extends Component<{}, State> {
     //Kakao SDK를 초기화합니다.
     Kakao.init(KAKAO_API_KEY);
     //현재 로그인 상태 체크
-    this.actions.onLoading(true);
+    this.props.onLoading(true);
     this.actions.getLoginStatus();
   }
 

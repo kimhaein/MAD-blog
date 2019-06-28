@@ -12,23 +12,37 @@ import LoadingBar from "../components/common/LoadingBar";
 interface Props {
   keyword: string;
 }
+interface State {
+  isLoading: boolean;
+}
 
-class Index extends PureComponent<Props, {}> {
+class Index extends PureComponent<Props, State> {
   static async getInitialProps({ query }: any) {
     return { keyword: query.keyword };
   }
+
+  state: State = {
+    isLoading: false
+  };
+
+  onLoading = (state = !this.state.isLoading) => {
+    this.setState({
+      isLoading: state
+    });
+  };
+
   render() {
     return (
-      <AuthProvider>
+      <AuthProvider onLoading={this.onLoading}>
         <AuthConsumer>
           {({ state, actions }: any) => (
             <Fragment>
               <HeaderContainer type="common" state={state} actions={actions} />
-              <PostProvider keyword={this.props.keyword} isLogin={state.isLogin} userId={state.userId} onLoading={actions.onLoading}>
+              <PostProvider keyword={this.props.keyword} isLogin={state.isLogin} userId={state.userId} onLoading={this.onLoading}>
                 <PostContainer />
               </PostProvider>
               <LoginModal isModal={state.isModal} onModal={actions.onModal} onLogin={actions.onLogin} />
-              {state.isLoading ? <LoadingBar /> : null}
+              {this.state.isLoading ? <LoadingBar /> : null}
             </Fragment>
           )}
         </AuthConsumer>

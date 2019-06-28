@@ -12,19 +12,10 @@ interface Props {
 
 const Menu: React.FC<Props> = props => {
   return (
-    <Drawer
-      placement={"left"}
-      closable={true}
-      onClose={props.onMenu}
-      visible={props.isMenu}
-    >
+    <Drawer placement={"left"} closable={true} onClose={props.onMenu} visible={props.isMenu}>
       {props.userName ? (
         <div className="userInfo">
-          <Avatar
-            src={props.userImg}
-            size={150}
-            style={{ backgroundColor: "#000" }}
-          >
+          <Avatar src={props.userImg} size={150} style={{ backgroundColor: "#000" }}>
             {props.userName.substring(0, 1).toUpperCase()}
           </Avatar>
           <p>{props.userName}</p>
@@ -52,10 +43,10 @@ const Menu: React.FC<Props> = props => {
         ) : null}
       </ul>
       <div className="menuFooter">
-        <div className="catImg" />
+        {/* <div className="catImg" />
         <Link href="/readme">
           <h3>프로젝트 소개</h3>
-        </Link>
+        </Link> */}
         <div className="gitHub">
           <p>GitHub</p>
           <ul>
