@@ -22,14 +22,11 @@ interface Props {
 class WriteConatiner extends PureComponent<Props, {}> {
   render() {
     const { state, actions } = this.props;
+    console.log(1, state.contents);
     return (
       <div className="contentsWrap">
         <Write contents={state.contents} setContents={actions.setContents} />
-        <CodeView
-          markdown={state.contents}
-          setContents={actions.setContents}
-          type="write"
-        />
+        <CodeView markdown={state.contents} setContents={actions.setContents} type="write" />
         <TagsEdit hash={state.hash} setHash={actions.setHash} />
       </div>
     );

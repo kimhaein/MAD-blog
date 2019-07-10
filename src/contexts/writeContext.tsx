@@ -125,6 +125,7 @@ class WriteProvider extends Component<Props, State> {
             hash: hashArr,
             beforeHash: hashArr
           });
+          console.log(2, "getPostData");
           this.props.onLoading(false);
         });
     }
@@ -143,7 +144,7 @@ class WriteProvider extends Component<Props, State> {
           Router.replace("/");
           return false;
         } else {
-          if (this.state.mode === "edit" && !userId) {
+          if (this.state.mode === "edit" && userId) {
             this.actions.getPostData(this.state.pno);
             this.setState({ isEdit: true, pno: this.state.pno });
           } else {
@@ -151,10 +152,8 @@ class WriteProvider extends Component<Props, State> {
           }
         }
       });
-      return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
   render() {

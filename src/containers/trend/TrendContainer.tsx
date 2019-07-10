@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, Fragment } from "react";
 import HashList from "../../components/HashList";
 import HotPost from "../../components/HotPost";
 import axios from "axios";
@@ -95,33 +95,27 @@ class TrendContainer extends PureComponent<Props, State> {
     const { trendDatas, hotPostDatas, isOpen, postDatas } = this.state;
 
     return (
-      <div className="contentsWrap trendWrap" style={{ background: "#424242" }}>
-        <div className="trendBox">
-          <Row gutter={24}>
-            <Col span={16}>
-              <h2>HASH CLOUD</h2>
-              <div className="box hashBox">
-                <HashList trendDatas={trendDatas} />
-              </div>
-            </Col>
-            <Col span={8}>
-              <h2>TOP 10 POST</h2>
-              <div className="box hotPostBox">
-                <HotPost
-                  hotPostDatas={hotPostDatas}
-                  openModal={this.openModal}
-                />
-              </div>
-            </Col>
-          </Row>
+      <Fragment>
+        <div className="contentsWrap trendWrap" style={{ background: "#424242" }}>
+          <div className="trendBox">
+            <Row gutter={24}>
+              <Col span={16}>
+                <h2>HASH CLOUD</h2>
+                <div className="box hashBox">
+                  <HashList trendDatas={trendDatas} />
+                </div>
+              </Col>
+              <Col span={8}>
+                <h2>TOP 10 POST</h2>
+                <div className="box hotPostBox">
+                  <HotPost hotPostDatas={hotPostDatas} openModal={this.openModal} />
+                </div>
+              </Col>
+            </Row>
+          </div>
         </div>
-        <PostModal
-          title="LIKE TOP 10 상세"
-          postDatas={postDatas}
-          openModal={this.openModal}
-          isOpen={isOpen}
-        />
-      </div>
+        <PostModal title="LIKE TOP 10 상세" postDatas={postDatas} openModal={this.openModal} isOpen={isOpen} />
+      </Fragment>
     );
   }
 }

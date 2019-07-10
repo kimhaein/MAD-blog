@@ -14,6 +14,7 @@ interface State {}
 class Write extends Component<Props, State> {
   render() {
     const { contents, setContents } = this.props;
+    console.log(contents);
     return (
       <div className="codemirror">
         <CodeMirror

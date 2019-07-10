@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import axios from "axios";
 import Router from "next/router";
 import { Tabs, Avatar } from "antd";
@@ -149,40 +149,42 @@ class MypageContainer extends Component<Props, State> {
     const { postDatas, isOpen, userInfo, activeKey, myPageContentList } = this.state;
 
     return (
-      <div className="contentsWrap postWrap myPage">
-        <div className="mypage_wrap">
-          <div className="mypage_content">
-            <div className="mypage_content_header">
-              <div className="mypage_profile">
-                <Avatar src={userInfo.thumbnail_image} size={88} style={{ backgroundColor: "#000" }} />
-              </div>
-              <div className="mypage_title">
-                <h1>{userInfo.nickname}님의 마이페이지</h1>
-                <div className="user_status">
-                  <span>
-                    최근 방문일&nbsp;&nbsp;|&nbsp;&nbsp;
-                    {moment(userInfo.update_day).format("YYYY년 M월 DD일 (H시 MM분)")}
-                  </span>
+      <Fragment>
+        <div className="contentsWrap postWrap myPage">
+          <div className="mypage_wrap">
+            <div className="mypage_content">
+              <div className="mypage_content_header">
+                <div className="mypage_profile">
+                  <Avatar src={userInfo.thumbnail_image} size={88} style={{ backgroundColor: "#000" }} />
                 </div>
-                <div className="user_status">
-                  <span>
-                    작성된 글 <strong>{myPageContentList.length}</strong>개
-                  </span>
+                <div className="mypage_title">
+                  <h1>{userInfo.nickname}님의 마이페이지</h1>
+                  <div className="user_status">
+                    <span>
+                      최근 방문일&nbsp;&nbsp;|&nbsp;&nbsp;
+                      {moment(userInfo.update_day).format("YYYY년 M월 DD일 (H시 MM분)")}
+                    </span>
+                  </div>
+                  <div className="user_status">
+                    <span>
+                      작성된 글 <strong>{myPageContentList.length}</strong>개
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="mypage_content_body">
-              <div className="card-container">
-                <Tabs type="card" onChange={this.tabHandleChange} activeKey={activeKey}>
-                  <Tab tab={"내가 쓴 글"} key={"1"} openModal={this.openModal} dataSource={myPageContentList} />
-                  <Tab tab={"내가 좋아한 글"} key={"2"} openModal={this.openModal} dataSource={myPageContentList} />
-                </Tabs>
+              <div className="mypage_content_body">
+                <div className="card-container">
+                  <Tabs type="card" onChange={this.tabHandleChange} activeKey={activeKey}>
+                    <Tab tab={"내가 쓴 글"} key={"1"} openModal={this.openModal} dataSource={myPageContentList} />
+                    <Tab tab={"내가 좋아한 글"} key={"2"} openModal={this.openModal} dataSource={myPageContentList} />
+                  </Tabs>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <PostModal title="글 상세 보기" postDatas={postDatas} openModal={this.openModal} isOpen={isOpen} />
-      </div>
+      </Fragment>
     );
   }
 }

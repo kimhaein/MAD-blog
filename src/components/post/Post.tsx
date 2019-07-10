@@ -2,6 +2,7 @@ import { PostConsumer } from "../../contexts/postContext";
 import Router from "next/router";
 import { Col, Row, Avatar, Icon } from "antd";
 import moment from "moment";
+import { BrowserView } from "react-device-detect";
 
 // components
 import { Tags } from "../common/Tags";
@@ -12,16 +13,18 @@ import "./post.css";
 
 const PostMenu = ({ pno }: any) => {
   return (
+    <BrowserView>
     <div className="postMenuBtn">
       <Icon type="more" />
       <div className="postMenu">
-        <span
-          onClick={() => {
-            Router.replace(`/write?mode=edit&pno=${pno}`);
-          }}
-        >
-          수정
-        </span>
+
+          <span
+            onClick={() => {
+              Router.replace(`/write?mode=edit&pno=${pno}`);
+            }}
+          >
+            수정
+          </span>
         <PostConsumer>
           {({ actions }: any) => (
             <span
@@ -35,6 +38,7 @@ const PostMenu = ({ pno }: any) => {
         </PostConsumer>
       </div>
     </div>
+    </BrowserView>ㄴ
   );
 };
 
@@ -71,21 +75,12 @@ const PostItem: React.FC<PostItemProps> = ({ postData, type }) => {
         </div>
         <div className="postInfo">
           <span>
-            <Avatar
-              src={
-                postData.thumbnail_image ? postData.thumbnail_image : undefined
-              }
-              style={{ backgroundColor: "#000", marginRight: 10 }}
-            >
-              {postData.writer
-                ? postData.writer.substring(0, 1).toUpperCase()
-                : null}
+            <Avatar src={postData.thumbnail_image ? postData.thumbnail_image : undefined} style={{ backgroundColor: "#000", marginRight: 10 }}>
+              {postData.writer ? postData.writer.substring(0, 1).toUpperCase() : null}
             </Avatar>
             <span>BY. {postData.writer}</span>
           </span>
-          <span className="postDate">
-            {moment(postData.wrDate).format("ll")}
-          </span>
+          <span className="postDate">{moment(postData.wrDate).format("ll")}</span>
         </div>
       </div>
       <div className="postListBody">
@@ -94,12 +89,7 @@ const PostItem: React.FC<PostItemProps> = ({ postData, type }) => {
       {type !== "detail" ? (
         <div className="postListfooter">
           <Tags tagDatas={hashArry} styleClass="tagWrap" />
-          <Likes
-            like={postData.likes}
-            love={postData.love}
-            pno={postData.pno}
-            nowUser={postData.nowUser}
-          />
+          <Likes like={postData.likes} love={postData.love} pno={postData.pno} nowUser={postData.nowUser} />
         </div>
       ) : null}
     </div>
@@ -116,12 +106,7 @@ const Post: React.FC<Props> = ({ postDatas, type = null }) => {
   });
 
   return (
-    <Row
-      type="flex"
-      justify="space-between"
-      gutter={32}
-      className={`postWrap ${type}`}
-    >
+    <Row type="flex" justify="space-between" gutter={32} className={`postWrap ${type}`}>
       {postList}
     </Row>
   );
