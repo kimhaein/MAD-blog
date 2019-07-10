@@ -21,9 +21,7 @@ interface State {
 
 export class CodeView extends Component<Props, State> {
   state: State = {
-    html: this.props.markdown
-      ? marked(this.props.markdown, { breaks: true, sanitize: true })
-      : ""
+    html: this.props.markdown ? marked(this.props.markdown, { breaks: true, sanitize: true }) : ""
   };
   _renderMarkdown = () => {
     const { markdown } = this.props;
@@ -61,9 +59,7 @@ export class CodeView extends Component<Props, State> {
       __html: html
     };
 
-    return (
-      <div className={`codeView ${type}`} dangerouslySetInnerHTML={markup} />
-    );
+    return <div className={`codeView ${type}`} dangerouslySetInnerHTML={markup} />;
   }
 }
 

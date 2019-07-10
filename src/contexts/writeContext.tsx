@@ -117,9 +117,7 @@ class WriteProvider extends Component<Props, State> {
           userId: this.state.userId
         })
         .then(({ data }) => {
-          const hashArr = data.getContent[0].hashes
-            ? data.getContent[0].hashes.split(",")
-            : [];
+          const hashArr = data.getContent[0].hashes ? data.getContent[0].hashes.split(",") : [];
           this.setState({
             isEdit: true,
             title: data.getContent[0].title,
@@ -135,15 +133,11 @@ class WriteProvider extends Component<Props, State> {
     super(props);
     this.state = { ...this.state, mode: this.props.mode, pno: this.props.pno };
   }
-  componentWillMount() {
-    console.log(this.state.mode);
-  }
 
-  componentWillReceiveProps(nextProps: Props) {
+  shouldComponentUpdate(nextProps: Props) {
     const { userId } = nextProps;
     if (this.props.userId !== userId) {
       this.setState({ userId }, () => {
-        console.log(userId);
         if (!userId) {
           alert("해당페이지의 권한이 없습니다");
           Router.replace("/");
@@ -157,8 +151,9 @@ class WriteProvider extends Component<Props, State> {
           }
         }
       });
+      return false;
     } else {
-      console.log("no!!");
+      return true;
     }
   }
 

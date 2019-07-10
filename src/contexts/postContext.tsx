@@ -132,22 +132,23 @@ class PostProvider extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { ...this.state, keyword: this.props.keyword };
-  }
-
-  componentWillMount() {
     this.actions.getPostDatas();
   }
 
-  // componentWillReceiveProps:컴포넌트가 prop 을 새로 받았을 때 실행
-  async componentWillReceiveProps(nextProps: Props) {
+  shouldComponentUpdate(nextProps: Props) {
     //isLogin 값이 변경 됐을 때 만 실행
     if (this.props.isLogin !== nextProps.isLogin) {
-      await this.setState({
-        isLogin: nextProps.isLogin,
-        userId: nextProps.userId
-      });
-      this.actions.getPostDatas();
+      this.setState(
+        {
+          isLogin: nextProps.isLogin,
+          userId: nextProps.userId
+        },
+        () => {
+          this.actions.getPostDatas();
+        }
+      );
     }
+    return true;
   }
 
   render() {

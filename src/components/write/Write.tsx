@@ -24,7 +24,7 @@ class Write extends Component<Props, State> {
             lineNumbers: true
           }}
           onBeforeChange={(editor, data, value) => {
-            // setContents(value);
+            setContents(value);
           }}
         />
       </div>
