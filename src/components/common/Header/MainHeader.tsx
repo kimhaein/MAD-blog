@@ -79,9 +79,20 @@ const MainHeader: React.FC<Props> = props => {
             </Link>
           </div>
         ) : (
-          <div className="postBtn">{<PostBtn />}</div>
+          <div className="postBtn">
+            <PostBtn />
+          </div>
         )}
       </BrowserView>
+      <MobileView>
+        <div className="postBtn">
+          {props.isLogin ? (
+            <Icon type="logout" style={{ padding: 25, fontSize: "25px" }} onClick={props.onLogOut} />
+          ) : (
+            <Icon type="login" style={{ padding: 25, fontSize: "25px" }} onClick={props.onModal} />
+          )}
+        </div>
+      </MobileView>
     </header>
   );
 };

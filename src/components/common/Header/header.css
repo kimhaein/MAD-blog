@@ -11,6 +11,7 @@ header {
   z-index: 1000;
 }
 header > div {
+  display: inline;
   cursor: pointer;
 }
 header .LeftBtn {
@@ -84,4 +85,10 @@ header .postBtn a {
   margin: 16px 0;
   border: none;
   font-size: 30px;
+}
+
+@media only screen and (max-width: 767px) {
+  header .postBtn {
+    width: 80px;
+  }
 }
