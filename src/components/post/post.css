@@ -37,12 +37,7 @@
   background: #000;
   border-radius: 5px;
 }
-.postWrap
-  .postList
-  .postListHeader
-  .postListTitle
-  .postMenuBtn:hover
-  .postMenu {
+.postWrap .postList .postListHeader .postListTitle .postMenuBtn:hover .postMenu {
   display: block;
 }
 .postWrap .postList .postListHeader .postListTitle .postMenuBtn .postMenu span {
@@ -52,13 +47,7 @@
   text-align: center;
   color: #fff;
 }
-.postWrap
-  .postList
-  .postListHeader
-  .postListTitle
-  .postMenuBtn
-  .postMenu
-  span:hover {
+.postWrap .postList .postListHeader .postListTitle .postMenuBtn .postMenu span:hover {
   text-decoration: underline #fff;
 }
 .postWrap .postList .postListHeader .postInfo {
@@ -82,4 +71,10 @@
   overflow: hidden;
   padding: 8px 16px;
   border-top: 1px solid #ddd;
+}
+
+@media only screen and (max-width: 767px) {
+  .postWrap {
+    width: 100%;
+  }
 }

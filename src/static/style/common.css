@@ -266,3 +266,14 @@ p {
   font-weight: 600;
   color: #aaa;
 }
+
+@media only screen and (max-width: 767px) {
+  .ant-col-16,
+  .ant-col-8 {
+    width: 100%;
+  }
+  .mypage_wrap {
+    width: 90%;
+    padding: 60px 30px;
+  }
+}

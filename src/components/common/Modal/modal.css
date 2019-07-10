@@ -41,3 +41,9 @@
   background: yellow;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 767px) {
+  .modalWrap .modal {
+    width: 90%;
+  }
+}
