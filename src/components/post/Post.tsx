@@ -14,10 +14,9 @@ import "./post.css";
 const PostMenu = ({ pno }: any) => {
   return (
     <BrowserView>
-    <div className="postMenuBtn">
-      <Icon type="more" />
-      <div className="postMenu">
-
+      <div className="postMenuBtn">
+        <Icon type="more" />
+        <div className="postMenu">
           <span
             onClick={() => {
               Router.replace(`/write?mode=edit&pno=${pno}`);
@@ -25,20 +24,20 @@ const PostMenu = ({ pno }: any) => {
           >
             수정
           </span>
-        <PostConsumer>
-          {({ actions }: any) => (
-            <span
-              onClick={() => {
-                actions.onDelete(pno);
-              }}
-            >
-              삭제
-            </span>
-          )}
-        </PostConsumer>
+          <PostConsumer>
+            {({ actions }: any) => (
+              <span
+                onClick={() => {
+                  actions.onDelete(pno);
+                }}
+              >
+                삭제
+              </span>
+            )}
+          </PostConsumer>
+        </div>
       </div>
-    </div>
-    </BrowserView>ㄴ
+    </BrowserView>
   );
 };
 
