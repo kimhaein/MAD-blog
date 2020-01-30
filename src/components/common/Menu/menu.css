@@ -23,7 +23,7 @@
   width: 40px;
   height: 40px;
   margin: 20px auto;
-  background-image: url("/static/images/iconmonstr-cat-1-96.png");
+  background-image: url('/static/images/iconmonstr-cat-1-96.png');
   background-size: cover;
 }
 .menuFooter {
@@ -37,7 +37,7 @@
   width: 40px;
   height: 40px;
   margin: 10px auto;
-  background-image: url("/static/images/iconmonstr-cat-1-96.png");
+  background-image: url('/static/images/iconmonstr-cat-1-96.png');
   background-size: cover;
 }
 .menuFooter h3 {
@@ -52,7 +52,7 @@
 }
 .menuFooter ul {
   overflow: hidden;
-  width: 134px;
+  width: 138px;
   margin: 0 auto;
 }
 .menuFooter li {
