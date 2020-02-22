@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import Write from "../../components/Write";
+import Write from "../../components/write";
 import CodeView from "../../components/common/CodeView";
 import { TagsEdit } from "../../components/common/Tags";
 
