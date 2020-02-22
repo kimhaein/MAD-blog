@@ -1,5 +1,5 @@
 import { Icon } from "antd";
-import Post from "../../Post";
+import Post from "../../post";
 import "./modal.css";
 
 interface Props {
