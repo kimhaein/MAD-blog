@@ -93,7 +93,8 @@ class AuthProvider extends Component<Props, State> {
       });
     },
     getLoginStatus: () => {
-      Kakao.Auth.getStatus((authStatus: AuthStatus) => {
+      console.log(Kakao.Auth)
+      Kakao.Auth.getStatusInfo((authStatus: AuthStatus) => {
         console.log("1.getLoginStatus", authStatus);
         if (authStatus.status === "connected") {
           // 고객 데이터 localStorage 저장
