@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import axios from "axios";
 import { PostConsumer } from "../../contexts/postContext";
 import Search from "../../components/common/Search";
-import Post from "../../components/Post";
+import Post from "../../components/post";
 import { MoreBtn } from "../../components/common/Button";
 
 interface Props {
